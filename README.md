@@ -1,8 +1,12 @@
-<!-- DESCRIPTION -->
+<!-- PROJECT TITLE -->
 
 ## Course Selection Portal
 
 The Course Selection Portal is an online resource for a Self-financing multi-disciplinary university (SFMDU) and students looking for their programme of study.
+
+<p align="right">(<a href="#readme-top">back to top</a>)</p>
+
+<!-- PROJECT DESCRIPTION -->
 
 ## Project Description
 
@@ -19,10 +23,7 @@ Each SFMDU Faculty will be provided with a faculty account by the Students’ Ad
 
 ## Contributing
 
-Contributions are what make the open source community such an amazing place to learn, inspire, and create. Any contributions you make are **greatly appreciated**.
-
-If you have a suggestion that would make this better, please fork the repo and create a pull request. You can also simply open an issue with the tag "enhancement".
-Don't forget to give the project a star! Thanks again!
+If you have a suggestion that would make this better, please create a branch and open a pull request. You can also simply open an issue with the tag "enhancement".
 
 1. Create your Feature Branch (`git checkout -b feature/AmazingFeature`)
 2. Commit your Changes (`git commit -m 'Add some AmazingFeature'`)
