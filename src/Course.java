@@ -1,5 +1,3 @@
-import java.lang.reflect.Constructor;
-
 public class Course {
     private String courseId;
     private String courseName;
@@ -45,12 +43,12 @@ public class Course {
         this.courseDuration = courseDuration;
     }
 
-    public static void main(String[] args) {
+    public void displayCourseList() {
         Course c1 = new Course("DLM2948", "Object Oriented Programming & Analysis", 100, 14);
         Course c2 = new Course("ODN3829", "Software Engineering Fundamental", 120, 14);
         Course c3 = new Course("MPU1293", "Pengajian Islam", 80, 14);
 
-
+        System.out.print("\033[H\033[2J");
         System.out.println("\n===== COURSE INFORMATION =====\n");
         System.out.println("Course Id       : " + c1.getCourseId());
         System.out.println("Course Name     : " + c1.getCourseName());
@@ -67,7 +65,5 @@ public class Course {
         System.out.println("Maximum Student : " + c3.getMaximumStudent());
         System.out.println("Course Duration : " + c3.getCourseDuration());
         System.out.println("\n");
-
     }
-
 }
