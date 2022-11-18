@@ -33,7 +33,7 @@ public class Registration {
 
     public void menu() {
         Scanner input = new Scanner(System.in);
-        Course res = new Course(password, password, 0, 0);
+        Course res = new Course(password, password, 0, 0, MediumStudy.FOUNDATION);
 
         System.out.print("\033[H\033[2J");
         System.out.println("===== DASHBOARD =====");
@@ -46,7 +46,7 @@ public class Registration {
 
         if (choice == 1) {
             System.out.print("\033[H\033[2J");
-            System.out.println("===== STUDENT INFORMATION =====");
+            System.out.println("===== STUDENT INFORMATION");
             System.out.println("Student Name : " + stud1.getUsername());
             System.out.println("Password : " + stud1.getPassword());
             System.out.println("Student ID : " + stud1.getStudentId());
