@@ -1,42 +1,28 @@
 import java.util.*;
 
 public class User {
-    Student stud = new Student();
+    private String username;
+    private String password;
 
-    public void displayLogin() {
-        String username;
-        String password;
-
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("=====LOGIN=====");
-        System.out.print("Enter username: ");
-        username = input.nextLine();
-        System.out.print("Enter password: ");
-        password = input.nextLine();
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
     }
 
-    public void displayRegister() {
-        String username;
-        String password;
-        Scanner input = new Scanner(System.in);
-
-        System.out.println("===== REGISTER =====");
-        System.out.print("Enter username: ");
-        username = input.nextLine();
-        stud.setUsername(username);
-
-        System.out.print("Enter password: ");
-        password = input.nextLine();
-        stud.setPassword(password);
-
-        stud.setStudentId(11);
+    public String getUsername() {
+        return username;
     }
 
-    public void menu() {
-        System.out.print("\033[H\033[2J");
-        System.out.println("===== DASHBOARD =====");
-        System.out.println("Welcome " + stud.getUsername() + "!");
-        System.out.println("Student Id: " + stud.getStudentId());
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
 }
