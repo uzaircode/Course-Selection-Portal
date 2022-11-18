@@ -13,5 +13,12 @@ public class Student extends User {
 
     public void setStudentId(int studentId) {
         // set random number of student ID
+        this.studentId = studentId;
+    }
+
+    public void displayStudent() {
+        System.out.println(getUsername());
+        System.out.println(getPassword());
+        System.out.println(getStudentId());
     }
 }
