@@ -1,6 +1,7 @@
 public class Student extends User {
 
     private int studentId;
+    private MediumStudy MediumStudy;
 
     public Student(String username, String password, int studentId) {
         super(username, password);
@@ -14,6 +15,14 @@ public class Student extends User {
     public void setStudentId(int studentId) {
         // set random number of student ID
         this.studentId = studentId;
+    }
+
+    public MediumStudy getMediumStudy() {
+        return MediumStudy;
+    }
+
+    public void setMediumStudy(MediumStudy mediumStudy) {
+        this.MediumStudy = mediumStudy;
     }
 
     public void displayStudent() {
