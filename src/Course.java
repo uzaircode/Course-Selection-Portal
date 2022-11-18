@@ -1,14 +1,25 @@
+import java.util.ArrayList;
+
 public class Course {
     private String courseId;
     private String courseName;
     private int courseDuration;
     private int maximumStudent;
+    private MediumStudy mediumStudy;
 
-    Course(String courseId, String courseName, int maximumStudent, int courseDuration) {
+    Course(String courseId, String courseName, int maximumStudent, int courseDuration, MediumStudy mediumStudy) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.maximumStudent = maximumStudent;
         this.courseDuration = courseDuration;
+        this.mediumStudy = mediumStudy;
+    }
+
+    @Override
+    public String toString() {
+        return "Course Name : " + this.getCourseName() + "\n" + "Maximum Student : " + this.getMaximumStudent() + "\n"
+                + "Medium Study : " + this.getMediumStudy() + "\n" + "Course Duration : " + this.getCourseDuration()
+                + "\n";
     }
 
     public String getCourseId() {
@@ -43,27 +54,28 @@ public class Course {
         this.courseDuration = courseDuration;
     }
 
+    public MediumStudy getMediumStudy() {
+        return mediumStudy;
+    }
+
+    public void setMediumStudy(MediumStudy mediumStudy) {
+        this.mediumStudy = mediumStudy;
+    }
+
     public void displayCourseList() {
-        Course c1 = new Course("DLM2948", "Object Oriented Programming & Analysis", 100, 14);
-        Course c2 = new Course("ODN3829", "Software Engineering Fundamental", 120, 14);
-        Course c3 = new Course("MPU1293", "Pengajian Islam", 80, 14);
+        ArrayList<Course> course = new ArrayList<Course>();
+
+        course.add(new Course("DLM2948", "Diploma in 3D Modelling & Animation ", 100, 14, MediumStudy.DIPLOMA));
+        course.add(new Course("ODN3829", "Foundation in Arts ", 120, 14, MediumStudy.FOUNDATION));
+        course.add(new Course("MPU1293", "Master of Computer Science (Software Engineering) ",
+                80, 14, MediumStudy.POSTGRADUATE));
 
         System.out.print("\033[H\033[2J");
         System.out.println("\n===== COURSE INFORMATION =====\n");
-        System.out.println("Course Id       : " + c1.getCourseId());
-        System.out.println("Course Name     : " + c1.getCourseName());
-        System.out.println("Maximum Student : " + c1.getMaximumStudent());
-        System.out.println("Course Duration : " + c1.getCourseDuration());
-
-        System.out.println("\nCourse Id       : " + c2.getCourseId());
-        System.out.println("Course Name     : " + c2.getCourseName());
-        System.out.println("Maximum Student : " + c2.getMaximumStudent());
-        System.out.println("Course Duration : " + c2.getCourseDuration());
-
-        System.out.println("\nCourse Id       : " + c3.getCourseId());
-        System.out.println("Course Name     : " + c3.getCourseName());
-        System.out.println("Maximum Student : " + c3.getMaximumStudent());
-        System.out.println("Course Duration : " + c3.getCourseDuration());
+        System.out.println("Elements of ArrayList are:\n");
+        for (int i = 0; i < course.size(); i++) {
+            System.out.println(course.get(i).toString() + " ");
+        }
         System.out.println("\n");
     }
 }
