@@ -1,11 +1,14 @@
+import java.util.ArrayList;
+
 public class Student extends User {
 
     private int studentId;
-    private MediumStudy MediumStudy;
+    private MediumStudy mediumStudy;
 
-    public Student(String username, String password, int studentId) {
+    public Student(String username, String password, int studentId, MediumStudy mediumStudy) {
         super(username, password);
         this.studentId = studentId;
+        this.mediumStudy = mediumStudy;
     }
 
     public int getStudentId() {
@@ -13,21 +16,20 @@ public class Student extends User {
     }
 
     public void setStudentId(int studentId) {
-        // set random number of student ID
         this.studentId = studentId;
     }
 
     public MediumStudy getMediumStudy() {
-        return MediumStudy;
+        return mediumStudy;
     }
 
     public void setMediumStudy(MediumStudy mediumStudy) {
-        this.MediumStudy = mediumStudy;
+        this.mediumStudy = mediumStudy;
     }
 
-    public void displayStudent() {
-        System.out.println(getUsername());
-        System.out.println(getPassword());
-        System.out.println(getStudentId());
-    }
+    // public void displayStudent() {
+    // System.out.println(getUsername());
+    // System.out.println(getPassword());
+    // System.out.println(getStudentId());
+    // }
 }
