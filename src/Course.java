@@ -7,6 +7,10 @@ public class Course {
     private int maximumStudent;
     private MediumStudy mediumStudy;
 
+    // initialize empty constructor
+    public Course() {
+    }
+
     Course(String courseId, String courseName, int maximumStudent, int courseDuration, MediumStudy mediumStudy) {
         this.courseId = courseId;
         this.courseName = courseName;
@@ -20,6 +24,14 @@ public class Course {
         return "Course Name : " + this.getCourseName() + "\n" + "Maximum Student : " + this.getMaximumStudent() + "\n"
                 + "Medium Study : " + this.getMediumStudy() + "\n" + "Course Duration : " + this.getCourseDuration()
                 + "\n";
+    }
+
+    public void addCourse() {
+
+    }
+
+    public void withdrawCourse() {
+
     }
 
     public String getCourseId() {
