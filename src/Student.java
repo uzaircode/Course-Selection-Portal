@@ -26,10 +26,4 @@ public class Student extends User {
     public void setMediumStudy(MediumStudy mediumStudy) {
         this.mediumStudy = mediumStudy;
     }
-
-    // public void displayStudent() {
-    // System.out.println(getUsername());
-    // System.out.println(getPassword());
-    // System.out.println(getStudentId());
-    // }
 }
