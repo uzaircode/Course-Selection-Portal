@@ -4,11 +4,14 @@ public class Student extends User {
 
     private int studentId;
     private MediumStudy mediumStudy;
+    private String faculty;
 
-    public Student(String username, String password, int studentId, MediumStudy mediumStudy) {
-        super(username, password);
+    public Student(String username, String password, String emailAddress, int phoneNumber, int studentId,
+            MediumStudy mediumStudy, String faculty) {
+        super(username, password, emailAddress, phoneNumber);
         this.studentId = studentId;
         this.mediumStudy = mediumStudy;
+        this.faculty = faculty;
     }
 
     public int getStudentId() {
@@ -25,5 +28,13 @@ public class Student extends User {
 
     public void setMediumStudy(MediumStudy mediumStudy) {
         this.mediumStudy = mediumStudy;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 }
