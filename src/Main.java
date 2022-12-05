@@ -21,7 +21,7 @@ public class Main {
             res.menu();
         } else if (choice == 2) {
             System.out.print("\033[H\033[2J");
-            res.displayRegister();
+            // res.displayRegister();
             res.menu();
         }
     }
