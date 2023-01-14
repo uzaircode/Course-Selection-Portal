@@ -1,3 +1,8 @@
+// AddressInfo is part of Composition.
+// Definition : Composition Like Aggregation but the owned object is not
+// independent from the owner which means by deleting owner the owned object
+// will also be deleted.
+
 public class AddressInfo {
     private String street;
     private String city;
@@ -5,10 +10,6 @@ public class AddressInfo {
     private String postalCode;
     private String country;
 
-    // AddressInfo is Part of composition.
-    // Definition : Composition Like Aggregation but the owned object is not
-    // independent from the owner which means by deleting owner the owned object
-    // will also be deleted.
     public AddressInfo(String street, String city, String state, String postalCode, String country) {
         this.street = street;
         this.city = city;
