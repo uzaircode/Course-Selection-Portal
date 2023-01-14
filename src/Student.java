@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Student extends User {
 
@@ -7,11 +8,15 @@ public class Student extends User {
     private String faculty;
 
     public Student(String username, String password, String emailAddress, int phoneNumber, int studentId,
-            AddressInfo homeAddress, MediumStudy mediumStudy, String faculty) {
-        super(username, password, emailAddress, phoneNumber, homeAddress);
-        this.studentId = studentId;
+            AddressInfo addressInfo, MediumStudy mediumStudy, String faculty) {
+        super(username, password, emailAddress, phoneNumber, addressInfo);
+        this.studentId = (int) (Math.random() * 9000000) + 1000000;
         this.mediumStudy = mediumStudy;
         this.faculty = faculty;
+    }
+
+    public Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo) {
+        super(username, password, emailAddress, phoneNumber, addressInfo);
     }
 
     public int getStudentId() {
@@ -19,6 +24,7 @@ public class Student extends User {
     }
 
     public void setStudentId(int studentId) {
+        studentId = (int) (Math.random() * 9000000) + 1000000;
         this.studentId = studentId;
     }
 
