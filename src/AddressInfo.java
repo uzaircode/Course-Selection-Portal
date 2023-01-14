@@ -18,10 +18,14 @@ public class AddressInfo {
         this.country = country;
     }
 
+    public AddressInfo() {
+    }
+
     @Override
     public String toString() {
-        return "HomeAddress [street=" + street + ", city=" + city + ", state=" + state + ", postalCode=" + postalCode
-                + ", country=" + country + "]";
+        return "AddressInfo street = " + street + ", city = " + city + ", state = " + state + ", postalCode = "
+                + postalCode
+                + ", country = " + country;
     }
 
     public String getStreet() {
