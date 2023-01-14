@@ -5,12 +5,14 @@ public abstract class User {
     private String password;
     private String emailAddress;
     private int phoneNumber;
+    private AddressInfo homeAddress; // Composition
 
-    public User(String username, String password, String emailAddress, int phoneNumber) {
+    public User(String username, String password, String emailAddress, int phoneNumber, AddressInfo homeAddress) {
         this.username = username;
         this.password = password;
         this.emailAddress = emailAddress;
         this.phoneNumber = phoneNumber;
+        this.homeAddress = homeAddress;
     }
 
     public String getUsername() {
@@ -43,6 +45,14 @@ public abstract class User {
 
     public void setPhoneNumber(int phoneNumber) {
         this.phoneNumber = phoneNumber;
+    }
+
+    public AddressInfo getHomeAddress() {
+        return homeAddress;
+    }
+
+    public void SetHomeAddress(AddressInfo homeAddress) {
+        this.homeAddress = homeAddress;
     }
 
 }
