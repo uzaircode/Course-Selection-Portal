@@ -6,18 +6,15 @@
 public class Programme {
     public String programmeId;
     public String programmeName;
-    public String programmeDescription;
 
-    public Programme(String programmeId, String programmeName, String programeDescription) {
+    public Programme(String programmeId, String programmeName) {
         this.programmeId = programmeId;
         this.programmeName = programmeName;
-        this.programmeDescription = programeDescription;
     }
 
     @Override
     public String toString() {
-        return "Programme [programmeId=" + programmeId + ", programmeName=" + programmeName + ", programmeDescription="
-                + programmeDescription + "]";
+        return "Programme [programmeId=" + programmeId + ", programmeName=" + programmeName;
     }
 
     public String getProgrammeId() {
@@ -34,14 +31,6 @@ public class Programme {
 
     public void setProgrammeName(String programmeName) {
         this.programmeName = programmeName;
-    }
-
-    public String getProgrammeDescription() {
-        return programmeDescription;
-    }
-
-    public void setProgrammeDescription(String programmeDescription) {
-        this.programmeDescription = programmeDescription;
     }
 
 }

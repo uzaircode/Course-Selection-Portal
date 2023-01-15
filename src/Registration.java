@@ -56,17 +56,22 @@ public class Registration {
 
                 System.out.print("\033[H\033[2J");
                 System.out.println("===== STUDENT INFORMATION =====");
-                System.out.println("Student Name     : " + stud1.getUsername());
-                System.out.println("Password         : " + stud1.getPassword());
-                System.out.println("Student ID       : " + stud1.getStudentId());
-                System.out.println("Email Address    : " + stud1.getEmailAddress());
-                System.out.println("Phone Number     : " + stud1.getPhoneNumber());
-                System.out.println("Faculty          : " + stud1.getFaculty());
-                System.out.println("Home Address     : " + stud1.getAddressInfo().toString() + "\n\n");
+                System.out.println("Student Name : " + stud1.getUsername());
+                System.out.println("Password : " + stud1.getPassword());
+                System.out.println("Student ID : " + stud1.getStudentId());
+                System.out.println("Email Address : " + stud1.getEmailAddress());
+                System.out.println("Phone Number : " + stud1.getPhoneNumber());
+                System.out.println("Faculty : " + stud1.getFaculty());
+                System.out.println("Home Address : " + stud1.getAddressInfo().toString() +
+                                "\n\n");
 
                 System.out.println("===== DASHBOARD =====");
                 System.out.println("Welcome " + stud1.getUsername() + "!");
                 System.out.println("\n1. COURSE ENROLLMENT");
                 System.out.print("\nChoose 1 : ");
+
+                Course c = new Course();
+
+                c.displayCourseList();
         }
 }
