@@ -6,23 +6,27 @@ public class Course {
     private int courseDuration;
     private int maximumStudent;
     private MediumStudy mediumStudy;
+    private Programme programme; // Composition
 
     // initialize empty constructor
     public Course() {
     }
 
-    Course(String courseId, String courseName, int maximumStudent, int courseDuration, MediumStudy mediumStudy) {
+    Course(String courseId, String courseName, int maximumStudent, int courseDuration, MediumStudy mediumStudy,
+            Programme programme) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.maximumStudent = maximumStudent;
         this.courseDuration = courseDuration;
         this.mediumStudy = mediumStudy;
+        this.programme = programme;
     }
 
     @Override
     public String toString() {
         return "Course Name : " + this.getCourseName() + "\n" + "Maximum Student : " + this.getMaximumStudent() + "\n"
                 + "Medium Study : " + this.getMediumStudy() + "\n" + "Course Duration : " + this.getCourseDuration()
+                + "Programme : " + this.getProgramme()
                 + "\n";
     }
 
@@ -74,13 +78,23 @@ public class Course {
         this.mediumStudy = mediumStudy;
     }
 
+    public Programme getProgramme() {
+        return programme;
+    }
+
+    public void setProgramme(Programme programme) {
+        this.programme = programme;
+    }
+
     public void displayCourseList() {
         ArrayList<Course> course = new ArrayList<Course>();
 
-        course.add(new Course("DLM2948", "Diploma in 3D Modelling & Animation ", 100, 14, MediumStudy.DIPLOMA));
-        course.add(new Course("ODN3829", "Foundation in Arts ", 120, 14, MediumStudy.FOUNDATION));
+        Programme prg1 = new Programme("12345", "Calculus");
+        Programme prg2 = new Programme("123456", "Programming Fundamental");
+
+        course.add(new Course("ODN3829", "Foundation in Arts ", 120, 14, MediumStudy.FOUNDATION, prg1));
         course.add(new Course("MPU1293", "Master of Computer Science (Software Engineering) ",
-                80, 14, MediumStudy.POSTGRADUATE));
+                80, 14, MediumStudy.POSTGRADUATE, prg2));
 
         System.out.print("\033[H\033[2J");
         System.out.println("\n===== COURSE INFORMATION =====\n");
