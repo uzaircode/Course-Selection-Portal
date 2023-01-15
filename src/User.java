@@ -1,12 +1,19 @@
-import java.util.*;
-
 public abstract class User {
     private String username;
     private String password;
+    private String emailAddress;
+    private int phoneNumber;
+    private AddressInfo addressInfo; // Composition
 
-    public User(String username, String password) {
+    public User(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo) {
         this.username = username;
         this.password = password;
+        this.emailAddress = emailAddress;
+        this.phoneNumber = phoneNumber;
+        this.addressInfo = addressInfo;
+    }
+
+    public User() {
     }
 
     public String getUsername() {
@@ -23,6 +30,30 @@ public abstract class User {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public String getEmailAddress() {
+        return emailAddress;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public int getPhoneNumber() {
+        return phoneNumber;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public AddressInfo getAddressInfo() {
+        return addressInfo;
+    }
+
+    public void SetHomeAddress(AddressInfo addressInfo) {
+        this.addressInfo = addressInfo;
     }
 
 }

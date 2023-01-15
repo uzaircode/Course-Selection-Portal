@@ -1,14 +1,19 @@
-import java.util.ArrayList;
-
 public class Student extends User {
 
     private int studentId;
     private MediumStudy mediumStudy;
+    private String faculty;
 
-    public Student(String username, String password, int studentId, MediumStudy mediumStudy) {
-        super(username, password);
-        this.studentId = studentId;
+    public Student(String username, String password, String emailAddress, int phoneNumber, int studentId,
+            AddressInfo addressInfo, MediumStudy mediumStudy, String faculty) {
+        super(username, password, emailAddress, phoneNumber, addressInfo);
+        this.studentId = (int) (Math.random() * 9000000) + 1000000;
         this.mediumStudy = mediumStudy;
+        this.faculty = faculty;
+    }
+
+    public Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo) {
+        super(username, password, emailAddress, phoneNumber, addressInfo);
     }
 
     public int getStudentId() {
@@ -16,6 +21,7 @@ public class Student extends User {
     }
 
     public void setStudentId(int studentId) {
+        studentId = (int) (Math.random() * 9000000) + 1000000;
         this.studentId = studentId;
     }
 
@@ -25,5 +31,13 @@ public class Student extends User {
 
     public void setMediumStudy(MediumStudy mediumStudy) {
         this.mediumStudy = mediumStudy;
+    }
+
+    public String getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(String faculty) {
+        this.faculty = faculty;
     }
 }
