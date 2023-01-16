@@ -1,9 +1,3 @@
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.*;
 
 public class Registration {
@@ -12,134 +6,175 @@ public class Registration {
         int phoneNumber, studentId;
 
         AddressInfo theAddress = new AddressInfo();
-        Student stud1 = new Student(username, password, emailAddress, phoneNumber, theAddress);
+        List<Student> listOfUsers = new ArrayList<>();
+        User loggedInUser = null;
 
         public void displayLogin() {
-                try (Scanner scan = new Scanner(new File("output.txt"))) {
-                        Scanner keyboard = new Scanner(System.in);
-                        String user = scan.nextLine();
-                        String pass = scan.nextLine(); // looks at selected file in scan
+                System.out.print("\033[H\033[2J");
 
+                // listOfUsers.add(new Student("user2", "password2"));
+                // listOfUsers.add(new Student("user3", "password3"));
+
+                try (Scanner keyboard = new Scanner(System.in)) {
                         System.out.print("Enter username: ");
                         String inpUser = keyboard.nextLine();
                         System.out.print("Enter password: ");
                         String inpPass = keyboard.nextLine(); // gets input from user
 
-                        if (inpUser.equals(user) && inpPass.equals(pass)) {
-                                System.out.print("Correct");
-                                // menu();
-                        } else {
-                                System.out.print("Incorrect");
+                        for (Student user : listOfUsers) {
+                                if (user.getUsername().equals(inpUser)) {
+                                        if (user.getPassword().equals(inpPass)) {
+                                                loggedInUser = user;
+                                                // when a user is found, "break" stops iterating through the
+                                                // list
+                                                dashboard();
+                                        }
+                                }
                         }
-                } catch (FileNotFoundException e) {
-                        e.printStackTrace();
+
+                        // if loggedInUser was changed from null, it was successful
+                        if (loggedInUser != null) {
+                                dashboard();
+                        } else {
+                                System.out.println("Invalid username/password combination\n");
+                                displayLogin();
+                        }
+
+                        // while (scan.hasNext()) {
+                        // String user = scan.nextLine();
+                        // String pass = scan.nextLine();
+
+                        // if (inpUser.equals(user) && inpPass.equals(pass)) {
+                        // // System.out.print("Correct");
+                        // dashboard();
+                        // } else {
+                        // System.out.print("Incorrect");
+                        // }
+                        // }
                 }
         }
 
         public void displayRegister() {
                 System.out.print("\033[H\033[2J");
                 try (Scanner input = new Scanner(System.in)) {
-                        try {
-                                BufferedWriter writer = new BufferedWriter(new FileWriter("output.txt"));
 
-                                System.out.println("===== REGISTER =====");
-                                System.out.print("Enter username: ");
+                        System.out.println("===== REGISTER =====");
+                        System.out.print("Enter username: ");
+                        String username = input.nextLine();
 
-                                username = input.nextLine();
-                                stud1.setUsername(username);
-                                writer.write("\n" + username);
+                        System.out.print("Enter password: ");
+                        password = input.nextLine();
 
-                                System.out.print("Enter password: ");
-                                password = input.nextLine();
-                                stud1.setPassword(password);
-                                writer.write("\n" + password);
+                        System.out.print("Enter email address: ");
+                        emailAddress = input.nextLine();
 
-                                System.out.print("Enter email address: ");
-                                emailAddress = input.nextLine();
-                                stud1.setEmailAddress(emailAddress);
-                                writer.write("\n" + emailAddress);
+                        System.out.print("Enter phone number: ");
+                        phoneNumber = Integer.parseInt(input.nextLine());
 
-                                System.out.print("Enter phone number: ");
-                                phoneNumber = Integer.parseInt(input.nextLine());
-                                stud1.setPhoneNumber(phoneNumber);
-                                writer.write("\n" + phoneNumber);
+                        // stud1.setStudentId(studentId);
 
-                                stud1.setStudentId(studentId);
-                                writer.write("\n" + studentId);
+                        System.out.print("Enter street: ");
+                        String street = input.nextLine();
+                        theAddress.setStreet(street);
 
-                                System.out.print("Enter street: ");
-                                String street = input.nextLine();
-                                theAddress.setStreet(street);
-                                writer.write("\n" + street);
+                        System.out.print("Enter city: ");
+                        String city = input.nextLine();
+                        theAddress.setCity(city);
 
-                                System.out.print("Enter city: ");
-                                String city = input.nextLine();
-                                theAddress.setCity(city);
-                                writer.write("\n" + city);
+                        System.out.print("Enter state: ");
+                        String state = input.nextLine();
+                        theAddress.setState(state);
 
-                                System.out.print("Enter state: ");
-                                String state = input.nextLine();
-                                theAddress.setState(state);
-                                writer.write("\n" + state);
+                        System.out.print("Enter postalCode: ");
+                        String postalCode = input.nextLine();
+                        theAddress.setPostalCode(postalCode);
 
-                                System.out.print("Enter postalCode: ");
-                                String postalCode = input.nextLine();
-                                theAddress.setPostalCode(postalCode);
-                                writer.write("\n" + postalCode);
+                        System.out.print("Enter country: ");
+                        String country = input.nextLine();
+                        theAddress.setCountry(country);
 
-                                System.out.print("Enter country: ");
-                                String country = input.nextLine();
-                                theAddress.setCountry(country);
-                                writer.write("\n" + country);
+                        listOfUsers.add(new Student(username, password, emailAddress, phoneNumber,
+                                        studentId, theAddress, null,
+                                        emailAddress));
 
-                                writer.close();
-
-                        } catch (IOException e) {
-                                e.printStackTrace();
-                        }
+                        displayOption();
                 } catch (NumberFormatException e) {
-                        // TODO Auto-generated catch block
                         e.printStackTrace();
                 }
         }
 
         public void displayOption() {
-                Scanner input = new Scanner(System.in);
+                System.out.print("\033[H\033[2J");
+                try (Scanner input = new Scanner(System.in)) {
+                        System.out.println("(1) LOGIN");
+                        System.out.println("(2) REGISTER");
 
-                System.out.println("(1) LOGIN");
-                System.out.println("(2) REGISTER");
-
-                System.out.print("\nChoose 1 : ");
-                int selection = input.nextInt();
-                if (selection == 1) {
-                        displayLogin();
-                } else if (selection == 2) {
-                        displayRegister();
+                        System.out.print("\nChoose 1 : ");
+                        int selection = input.nextInt();
+                        if (selection == 1) {
+                                displayLogin();
+                        } else if (selection == 2) {
+                                displayRegister();
+                        }
                 }
         }
 
-        public void menu() {
+        public void dashboard() {
+                System.out.print("\033[H\033[2J");
+                try (Scanner input = new Scanner(System.in)) {
+                        System.out.println("===== DASHBOARD =====");
+                        System.out.println("Welcome " + loggedInUser.getUsername() + "!");
+                        System.out.println("\n1. STUDENT INFORMATION");
+                        System.out.println("2. COURSE ENROLLMENT");
+                        System.out.println("3. LOGOUT");
 
-                displayOption();
+                        System.out.print("\nChoose 1 : ");
+                        int selection = input.nextInt();
+                        if (selection == 1) {
+                                userInformation();
+                        } else if (selection == 2) {
+                                displayCourseList();
+                        } else if (selection == 3) {
+                                displayOption();
+                        }
+                }
 
-                // System.out.print("\033[H\033[2J");
-                // System.out.println("===== STUDENT INFORMATION =====");
-                // System.out.println("Student Name : " + stud1.getUsername());
-                // System.out.println("Password : " + stud1.getPassword());
-                // System.out.println("Student ID : " + stud1.getStudentId());
-                // System.out.println("Email Address : " + stud1.getEmailAddress());
-                // System.out.println("Phone Number : " + stud1.getPhoneNumber());
-                // System.out.println("Faculty : " + stud1.getFaculty());
-                // System.out.println("Home Address : " + stud1.getAddressInfo().toString() +
-                // "\n\n");
+        }
 
-                // System.out.println("===== DASHBOARD =====");
-                // System.out.println("Welcome " + stud1.getUsername() + "!");
-                // System.out.println("\n1. COURSE ENROLLMENT");
-                // System.out.print("\nChoose 1 : ");
+        public void userInformation() {
+                try (Scanner input = new Scanner(System.in)) {
+                        System.out.print("\033[H\033[2J");
+                        System.out.println("===== STUDENT INFORMATION =====");
+                        System.out.println("Student Name : " + loggedInUser.getUsername());
+                        System.out.println("Password : " + loggedInUser.getPassword());
+                        System.out.println("Student ID : ");
+                        // System.out.println("Student ID : " + loggedInUser.getStudentId());
+                        System.out.println("Email Address : " + loggedInUser.getEmailAddress());
+                        System.out.println("Phone Number : " + loggedInUser.getPhoneNumber());
+                        System.out.println("Student ID : ");
+                        // System.out.println("Faculty : " + loggedInUser.getFaculty());
+                        System.out.println("Home Address : " + loggedInUser.getAddressInfo().toString() +
+                                        "\n\n");
 
-                // Course c = new Course();
+                        System.out.print("\nPress 0 to return : ");
+                        int selection = input.nextInt();
+                        if (selection == 0)
+                                dashboard();
+                }
 
-                // c.displayCourseList();
+        }
+
+        public void displayCourseList() {
+                System.out.print("\033[H\033[2J");
+                try (Scanner input = new Scanner(System.in)) {
+                        Course c = new Course();
+
+                        c.displayCourseList();
+
+                        System.out.print("\nPress 0 to return : ");
+                        int selection = input.nextInt();
+                        if (selection == 0)
+                                dashboard();
+                }
         }
 }
