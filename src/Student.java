@@ -16,6 +16,13 @@ public class Student extends User {
         super(username, password, emailAddress, phoneNumber, addressInfo);
     }
 
+    public Student(String username, String password) {
+        super(username, password);
+    }
+
+    public Student() {
+    }
+
     public int getStudentId() {
         return studentId;
     }
