@@ -1,4 +1,3 @@
-// AddressInfo is part of Composition.
 // Definition : Composition Like Aggregation but the owned object is not
 // independent from the owner which means by deleting owner the owned object
 // will also be deleted.
