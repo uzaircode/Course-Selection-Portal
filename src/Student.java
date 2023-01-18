@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+import java.util.List;
+
 public class Student extends User {
 
     private int studentId;
     private MediumStudy mediumStudy;
     private String faculty;
+    private List<Course> courses;
 
     public Student(String username, String password, String emailAddress, int phoneNumber, int studentId,
             AddressInfo addressInfo, MediumStudy mediumStudy, String faculty) {
@@ -10,6 +14,7 @@ public class Student extends User {
         this.studentId = (int) (Math.random() * 9000000) + 1000000;
         this.mediumStudy = mediumStudy;
         this.faculty = faculty;
+        this.courses = new ArrayList<>();
     }
 
     public Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo) {
@@ -18,9 +23,12 @@ public class Student extends User {
 
     public Student(String username, String password) {
         super(username, password);
+        this.courses = new ArrayList<>();
     }
 
-    public Student() {
+    public Student(String string) {
+        this.courses = new ArrayList<>();
+
     }
 
     public int getStudentId() {
@@ -46,5 +54,28 @@ public class Student extends User {
 
     public void setFaculty(String faculty) {
         this.faculty = faculty;
+    }
+
+    public void addCourse(Course course) {
+        courses.add(course);
+    }
+
+    public void removeCourse(Course course) {
+        courses.remove(course);
+    }
+
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void printRegisteredCourses() {
+        if (courses.isEmpty()) {
+            System.out.println("No registered courses found");
+        } else {
+            System.out.println("Registered Courses:");
+            for (Course course : courses) {
+                System.out.println(course.getCourseName());
+            }
+        }
     }
 }
