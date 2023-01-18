@@ -1,33 +1,104 @@
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
+enum MediumOfStudy {
+    FOUNDATION,
+    DIPLOMA,
+    UNDERGRADUATE,
+    POSTGRADUATE,
+    PHD;
+}
 
 public class Course {
     private String courseId;
     private String courseName;
+    private String[] subjectTaught;
     private int courseDuration;
+    private String[] employmentOpportunities;
+    private String[] scopeForFutherStudies;
+    private boolean scholarshipFacilities;
+    private int feeStructure;
+
+    // Additional
     private int maximumStudent;
-    private MediumStudy mediumStudy;
+    private MediumOfStudy mediumStudy;
     private Programme programme; // Composition
 
-    // initialize empty constructor
-    public Course() {
-    }
+    ArrayList<Course> courses = new ArrayList<>();
 
-    Course(String courseId, String courseName, int maximumStudent, int courseDuration, MediumStudy mediumStudy,
-            Programme programme) {
+    public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
+            String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities,
+            int feeStructure, int maximumStudent, MediumOfStudy mediumStudy) {
         this.courseId = courseId;
         this.courseName = courseName;
-        this.maximumStudent = maximumStudent;
+        this.subjectTaught = subjectTaught;
         this.courseDuration = courseDuration;
+        this.employmentOpportunities = employmentOpportunities;
+        this.scopeForFutherStudies = scopeForFutherStudies;
+        this.scholarshipFacilities = scholarshipFacilities;
+        this.feeStructure = feeStructure;
+        this.maximumStudent = maximumStudent;
         this.mediumStudy = mediumStudy;
-        this.programme = programme;
+    }
+
+    public Course() {
+        Course science = new Course("ODN3829", "Bachelor of Science (Hons.) Intelligent Robotics",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+        Course electronicEngineering = new Course("ODN3329", "Bachelor of Engineering (Hons.) Electronics",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+        Course computerScience = new Course("ODN3329", "Bachelor of Computer Science (Hons.)",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+        Course accounting = new Course("ODN3329", "Bachelor of Accounting (Hons.)",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+        Course businessManagement = new Course("ODN3329", "Bachelor of Business Management (Hons.)",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+
+        courses.add(science);
+        courses.add(electronicEngineering);
+        courses.add(computerScience);
+        courses.add(accounting);
+        courses.add(businessManagement);
+    }
+
+    public Course(String courseName) {
+        this.courseName = courseName;
     }
 
     @Override
     public String toString() {
-        return "Course Name : " + this.getCourseName() + "\n" + "Maximum Student : " + this.getMaximumStudent() + "\n"
-                + "Medium Study : " + this.getMediumStudy() + "\n" + "Course Duration : " + this.getCourseDuration()
-                + "Programme : " + this.getProgramme()
-                + "\n";
+        return "courseId : " + courseId + "\ncourseName : " + courseName + "\nsubjectTaught : "
+                + Arrays.toString(subjectTaught) + "\ncourseDuration : " + courseDuration
+                + "\nemploymentOpportunities : "
+                + Arrays.toString(employmentOpportunities) + "\nscopeForFutherStudies : "
+                + Arrays.toString(scopeForFutherStudies) + "\nscholarshipFacilities : " + scholarshipFacilities
+                + "\nfeeStructure : " + feeStructure + "\nmaximumStudent : " + maximumStudent + "\nmediumStudy : "
+                + mediumStudy + "\nprogramme : " + programme;
     }
 
     public void addCourse() {
@@ -42,66 +113,60 @@ public class Course {
         return courseId;
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-
     public String getCourseName() {
         return courseName;
-    }
-
-    public void setCourseName(String courseName) {
-        this.courseName = courseName;
     }
 
     public int getMaximumStudent() {
         return maximumStudent;
     }
 
-    public void setMaximumStudent(int maximumStudent) {
-        this.maximumStudent = maximumStudent;
-    }
-
     public int getCourseDuration() {
         return courseDuration;
     }
 
-    public void setCourseDuration(int courseDuration) {
-        this.courseDuration = courseDuration;
-    }
-
-    public MediumStudy getMediumStudy() {
+    public MediumOfStudy getMediumOfStudy() {
         return mediumStudy;
-    }
-
-    public void setMediumStudy(MediumStudy mediumStudy) {
-        this.mediumStudy = mediumStudy;
     }
 
     public Programme getProgramme() {
         return programme;
     }
 
-    public void setProgramme(Programme programme) {
-        this.programme = programme;
+    public String[] getSubjectsTaught() {
+        return subjectTaught;
     }
 
     public void displayCourseList() {
-        ArrayList<Course> course = new ArrayList<Course>();
 
-        Programme prg1 = new Programme("12345", "Calculus");
-        Programme prg2 = new Programme("123456", "Programming Fundamental");
+        // Course firstCourse = course.get(0);
+        // System.out.println("Name of the first course: " +
+        // firstCourse.getSubjectsTaught()[1]);
 
-        course.add(new Course("ODN3829", "Foundation in Arts ", 120, 14, MediumStudy.FOUNDATION, prg1));
-        course.add(new Course("MPU1293", "Master of Computer Science (Software Engineering) ",
-                80, 14, MediumStudy.POSTGRADUATE, prg2));
-
-        System.out.print("\033[H\033[2J");
-        System.out.println("\n===== COURSE INFORMATION =====\n");
-        System.out.println("Elements of ArrayList are:\n");
-        for (int i = 0; i < course.size(); i++) {
-            System.out.println(course.get(i).toString() + " ");
-        }
-        System.out.println("\n");
+        // System.out.println("\n===== COURSE INFORMATION =====\n");
+        // System.out.println("Elements of ArrayList are:\n");
+        // for (int i = 0; i < course.size(); i++) {
+        // System.out.println(course.get(i).toString() + " ");
+        // System.out.println("\n");
+        // }
+        // System.out.println("\n");
     }
+
+    public List<Course> getAllCourses() {
+        return courses;
+    }
+
+    public static void printCourses(List<Course> courses) {
+        if (courses.isEmpty()) {
+            System.out.println("Student has no courses yet.");
+        } else {
+
+            int i = 1;
+            for (Course course : courses) {
+                System.out.println("(" + i + ") " + course.getCourseName());
+                i++;
+            }
+        }
+    }
+
 }
