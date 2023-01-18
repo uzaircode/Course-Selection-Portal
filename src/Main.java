@@ -4,5 +4,6 @@ public class Main {
         Registration res = new Registration();
 
         res.displayOption();
+
     }
 }
