@@ -43,14 +43,35 @@ public class Course {
     }
 
     public Course() {
-        Course computerScience = new Course("ODN3829", "Foundation in Arts ",
+        Course science = new Course("ODN3829", "Bachelor of Science (Hons.) Intelligent Robotics",
                 new String[] { "Data Structures", "Algorithms", "Programming Languages" },
                 120,
                 new String[] { "Masters in Computer Science",
                         "MBA in IT" },
                 new String[] { "hello" },
                 true, 14, 120, MediumOfStudy.FOUNDATION);
-        Course mechanicalEngineering = new Course("ODN3329", "Foundation in Engineering ",
+        Course electronicEngineering = new Course("ODN3329", "Bachelor of Engineering (Hons.) Electronics",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+        Course computerScience = new Course("ODN3329", "Bachelor of Computer Science (Hons.)",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+        Course accounting = new Course("ODN3329", "Bachelor of Accounting (Hons.)",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+        Course businessManagement = new Course("ODN3329", "Bachelor of Business Management (Hons.)",
                 new String[] { "Data Structures", "Algorithms", "Programming Languages" },
                 120,
                 new String[] { "Masters in Computer Science",
@@ -58,8 +79,11 @@ public class Course {
                 new String[] { "hello" },
                 true, 14, 120, MediumOfStudy.FOUNDATION);
 
+        courses.add(science);
+        courses.add(electronicEngineering);
         courses.add(computerScience);
-        courses.add(mechanicalEngineering);
+        courses.add(accounting);
+        courses.add(businessManagement);
     }
 
     public Course(String courseName) {
@@ -136,8 +160,11 @@ public class Course {
         if (courses.isEmpty()) {
             System.out.println("Student has no courses yet.");
         } else {
+
+            int i = 1;
             for (Course course : courses) {
-                System.out.println(course.getCourseName());
+                System.out.println("(" + i + ") " + course.getCourseName());
+                i++;
             }
         }
     }
