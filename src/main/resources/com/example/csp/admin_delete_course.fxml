@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.AdminAddCourse">
+    <children>
+        <ImageView fitHeight="85.0" fitWidth="960.0" pickOnBounds="true">
+            <image>
+                <Image url="@../imgs/campus_admin_navi.png" />
+            </image>
+            <effect>
+                <Lighting diffuseConstant="0.6">
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant />
+                    </light>
+                </Lighting>
+            </effect>
+        </ImageView>
+        <Label fx:id="label_faculty_name" layoutX="39.0" layoutY="25.0" text="Faculty of Engineering" textFill="WHITE" underline="true">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <AnchorPane layoutX="330.0" layoutY="29.0">
+            <children>
+                <Button fx:id="btn_add_course" layoutX="60.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="ADD COURSE" textFill="WHITE" />
+                <Button fx:id="btn_update_course" layoutX="194.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="UPDATE COURSE" textFill="WHITE" />
+                <Button fx:id="btn_delete_course" layoutX="327.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="DELETE COURSE" textFill="WHITE" />
+                <Button fx:id="btn_view_course" layoutX="459.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE" />
+            </children>
+        </AnchorPane>
+      <Label layoutX="286.0" layoutY="109.0" text="Choose level of study and course name to be deleted : ">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+      <AnchorPane layoutX="250.0" layoutY="146.0">
+         <children>
+              <ChoiceBox fx:id="choicebox_LOS" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-border-radius: 3;" />
+              <ChoiceBox fx:id="choicebox_coursename" layoutX="163.0" prefHeight="27.0" prefWidth="226.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-border-radius: 3;" />
+            <Button fx:id="btn_add_course1" layoutX="411.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" style="-fx-background-color: #6CA74B;" text="FIND" textFill="WHITE" />
+         </children>
+      </AnchorPane>
+      <Pane layoutX="232.0" layoutY="211.0" prefHeight="259.0" prefWidth="496.0" style="-fx-background-color: #DDDDDD; -fx-background-radius: 10;">
+         <children>
+            <Button fx:id="btn_add_course11" layoutX="105.0" layoutY="202.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: red;" text="DELETE COURSE" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="btn_add_course111" layoutX="261.0" layoutY="202.0" mnemonicParsing="false" prefHeight="35.0" prefWidth="130.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <GridPane layoutX="48.0" layoutY="22.0">
+              <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="125.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" maxWidth="85.4" minWidth="8.599999999999994" prefWidth="10.199999999999989" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="277.0" minWidth="10.0" prefWidth="276.20000000000005" />
+              </columnConstraints>
+              <rowConstraints>
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Course Name " GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Course Code" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text="Level of Study" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label text=":" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Label alignment="CENTER" prefHeight="26.0" prefWidth="441.0" text="Course Full Name Here" underline="true" GridPane.columnIndex="0" GridPane.columnSpan="3" GridPane.rowIndex="0">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="course_name" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="course_code" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                  <Label fx:id="LOS" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+               </children>
+            </GridPane>
+         </children></Pane>
+      <Line endX="555.0" layoutX="173.0" layoutY="270.0" startX="59.000030517578125" stroke="#ffffffd7" strokeWidth="3.0" />
+
+
+    </children>
+</AnchorPane>

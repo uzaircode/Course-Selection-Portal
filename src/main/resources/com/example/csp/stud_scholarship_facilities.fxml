@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csp.SceneController">
+    <children>
+        <ImageView fitHeight="540.0" fitWidth="189.0" pickOnBounds="true">
+            <image>
+                <Image url="C:\Users\addin\IdeaProjects\CSP\src\main\resources\imgs\campus_navi.png" />
+            </image>
+            <effect>
+                <Lighting diffuseConstant="0.6">
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant />
+                    </light>
+                </Lighting>
+            </effect>
+        </ImageView>
+        <Pane layoutX="231.0" layoutY="54.0" prefHeight="441.0" prefWidth="690.0" style="-fx-background-color: #f2f2f2; -fx-background-radius: 10.0;">
+            <children>
+                <Line endX="589.3999633789062" layoutX="101.0" layoutY="26.0" startX="-100.0" stroke="WHITE" strokeWidth="3.0" />
+                <TableView fx:id="table" layoutX="83.0" layoutY="70.0" prefHeight="200.0" prefWidth="378.0">
+                    <columns>
+                        <TableColumn fx:id="index" prefWidth="75.0" text="Index" />
+                        <TableColumn fx:id="status" prefWidth="75.0" text="Status" />
+                        <TableColumn fx:id="names" prefWidth="75.0" text="Name" />
+                        <TableColumn fx:id="types" prefWidth="75.0" text="Types" />
+                  <TableColumn fx:id="level" prefWidth="75.0" text="Level" />
+
+                    </columns>
+                </TableView>
+            </children>
+        </Pane>
+        <Label layoutX="487.0" layoutY="36.0" text="Scholarship Facilities" underline="true">
+            <font>
+                <Font size="20.0" />
+            </font>
+        </Label>
+        <AnchorPane layoutX="17.0" layoutY="23.0">
+            <children>
+                <GridPane prefHeight="380.0" prefWidth="156.0">
+                    <columnConstraints>
+                        <ColumnConstraints />
+                        <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="20.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="10.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                    <children>
+                        <Hyperlink alignment="CENTER" onAction="#switchToStudentDashboard" prefHeight="35.0" prefWidth="223.0" text="HOME" textFill="WHITE" GridPane.columnIndex="1">
+                            <font>
+                                <Font name="System Bold" size="18.0" />
+                            </font>
+                        </Hyperlink>
+                        <Hyperlink onAction="#switchToStudentInformation" prefHeight="39.0" prefWidth="213.0" text="Student Information" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <padding>
+                                <Insets top="10.0" />
+                            </padding>
+                        </Hyperlink>
+                        <Hyperlink layoutX="10.0" layoutY="87.0" onAction="#switchToCourseInfo" prefHeight="38.0" prefWidth="196.0" text="Course Enrolment" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="4">
+                            <font>
+                                <Font name="System Bold" size="14.0" />
+                            </font>
+                            <padding>
+                                <Insets top="10.0" />
+                            </padding>
+                        </Hyperlink>
+                        <Hyperlink layoutX="10.0" layoutY="184.0" onAction="#switchToFeeStructure" prefHeight="38.0" prefWidth="189.0" text="Finance" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="8">
+                            <font>
+                                <Font size="14.0" />
+                            </font>
+                            <padding>
+                                <Insets top="10.0" />
+                            </padding>
+                        </Hyperlink>
+                        <Hyperlink onAction="#switchToCourseInfo" prefHeight="20.0" prefWidth="174.0" text="• Course Information" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="5">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Hyperlink>
+                        <Hyperlink onAction="#switchToEditCourseInfo" prefHeight="20.0" prefWidth="156.0" text="• Edit Course Enrolment" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="6">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Hyperlink>
+                        <Hyperlink onAction="#switchToFuturePlanning" prefHeight="20.0" prefWidth="199.0" text="• Future Planning" textFill="WHITE" underline="true" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="7">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="10.0" layoutY="263.0" onAction="#switchToStudentInformation" prefHeight="20.0" prefWidth="171.0" text="• Student Information" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="10.0" layoutY="263.0" onAction="#switchToEditStudInfo" prefHeight="45.0" prefWidth="156.0" text="• Edit Student Information" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="3">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="10.0" layoutY="263.0" onAction="#switchToScholarshipFacilities" prefHeight="55.0" prefWidth="156.0" text="• Scholarship Facilities" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="9">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Hyperlink>
+                        <Hyperlink layoutX="10.0" layoutY="263.0" onAction="#switchToFuturePlanning" prefHeight="20.0" prefWidth="207.0" text="• Fee Structure" textFill="WHITE" wrapText="true" GridPane.columnIndex="1" GridPane.rowIndex="10">
+                            <padding>
+                                <Insets left="15.0" />
+                            </padding>
+                            <font>
+                                <Font size="13.0" />
+                            </font>
+                        </Hyperlink>
+
+                    </children>
+                </GridPane>
+            </children>
+        </AnchorPane>
+        <Button layoutX="50.0" layoutY="455.0" mnemonicParsing="false" prefHeight="34.0" prefWidth="87.0" style="-fx-padding: 10;" text="LOG OUT">
+            <font>
+                <Font size="14.0" />
+            </font>
+        </Button>
+    </children>
+</AnchorPane>

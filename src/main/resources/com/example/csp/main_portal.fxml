@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.csp.SceneController">
+   <children>
+      <AnchorPane prefHeight="62.0" prefWidth="960.0" style="-fx-border-color: black;">
+         <children>
+            <Button layoutX="779.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: navy;" text="STUDENT" textFill="WHITE" onAction="#switchToRegister">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font></Button>
+            <Label layoutX="47.0" layoutY="17.0" text="MAIN PORTAL">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <Button layoutX="862.0" layoutY="18.0" mnemonicParsing="false" style="-fx-background-color: navy;" text="FACILITY" textFill="WHITE" onAction="#switchToRegister">
+               <font>
+                  <Font name="System Bold" size="12.0" />
+               </font>
+            </Button>
+         </children></AnchorPane>
+      <AnchorPane layoutX="64.0" layoutY="90.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="128.0" fitWidth="224.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@img_ece.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutY="122.0" prefHeight="27.0" prefWidth="224.0" style="-fx-background-color: white;" text="Electrical Computer Engineering">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="149.0" prefWidth="224.0" style="-fx-border-color: black; -fx-border-width: 0.5;" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="167.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightgreen;" text="Diploma" />
+                  <Button layoutX="79.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightblue;" text="Degree" />
+                  <Button layoutX="158.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightpink;" text="Master" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="210.0">
+               <children>
+                  <AnchorPane>
+                     <children>
+                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="98.0">
+                     <children>
+                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="373.0" layoutY="90.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="128.0" fitWidth="224.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@img_cs.jpg" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutY="122.0" prefHeight="27.0" prefWidth="224.0" style="-fx-background-color: white;" text="Computer Science">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="149.0" prefWidth="224.0" style="-fx-border-color: black; -fx-border-width: 0.5;" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="167.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightgreen;" text="Diploma" />
+                  <Button layoutX="79.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightblue;" text="Degree" />
+                  <Button layoutX="158.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightpink;" text="Master" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="210.0">
+               <children>
+                  <AnchorPane>
+                     <children>
+                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="98.0">
+                     <children>
+                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="682.0" layoutY="90.0">
+         <children>
+            <AnchorPane>
+               <children>
+                  <ImageView fitHeight="128.0" fitWidth="224.0" pickOnBounds="true">
+                     <image>
+                        <Image url="@img_ce.jpeg" />
+                     </image>
+                  </ImageView>
+                  <Label alignment="CENTER" layoutY="122.0" prefHeight="27.0" prefWidth="224.0" style="-fx-background-color: white;" text="Civil Engineering">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Label>
+                  <Pane prefHeight="149.0" prefWidth="224.0" style="-fx-border-color: black; -fx-border-width: 0.5;" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="167.0">
+               <children>
+                  <Button mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightgreen;" text="Diploma" />
+                  <Button layoutX="79.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightblue;" text="Degree" />
+                  <Button layoutX="158.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="65.0" style="-fx-background-color: lightpink;" text="Master" />
+               </children>
+            </AnchorPane>
+            <AnchorPane layoutY="210.0">
+               <children>
+                  <AnchorPane>
+                     <children>
+                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane layoutY="98.0">
+                     <children>
+                        <Label prefHeight="62.0" prefWidth="224.0" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin scelerisque cursus odio eget finibus." textAlignment="JUSTIFY" wrapText="true" />
+                        <Label layoutX="165.0" layoutY="62.0" text="- John Doe" />
+                     </children>
+                  </AnchorPane>
+               </children>
+            </AnchorPane>
+         </children>
+      </AnchorPane>
+      <Button onAction="#switchToMainPortal2" layoutX="922.0" layoutY="285.0" mnemonicParsing="false" prefHeight="11.0"
+              prefWidth="31.0"
+              style="-fx-shape: &quot;M150 0 L75 200 L225 200 Z&quot;; -fx-rotate: 90; -fx-background-color: lightgrey;"/>
+   </children>
+</AnchorPane>
