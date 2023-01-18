@@ -1,8 +1,0 @@
-# STUDENT DASHBOARD :
-
-- Manage personal information: Students can update their personal information, such as contact details and preferred medium of study.
-- View academic credentials: Students can view their academic credentials, such as their transcripts and test scores, which are required for course selection.
-- View available courses: Students can view a list of available courses and filter them by subject, level of study, or other criteria.
-- View selected courses: Students can view the courses they have selected and the order of preference, and make changes as needed.
-- Select courses: Students can select one or more courses to register for, and provide an order of preference for the selected courses.
-- View video briefings: Students can view video briefings, which provide information about the courses and the entry level requirements.
