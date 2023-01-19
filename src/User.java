@@ -16,6 +16,8 @@ public abstract class User {
     public User() {
     }
 
+    abstract void displayInformation(User loggedInUser);
+
     public User(String username, String password) {
         this.username = username;
         this.password = password;
