@@ -6,18 +6,9 @@ public class Registration {
         int phoneNumber;
 
         AddressInfo theAddress = new AddressInfo();
-        List<Student> listOfUsers = new ArrayList<>();
-        Student loggedInUser = null;
+        List<User> listOfUsers = new ArrayList<>();
+        User loggedInUser = null;
         Scanner input = new Scanner(System.in);
-
-        // Student student = new Student("JohnDoe", 12345);
-        Course course = new Course("ODN3329", "Foundation in Arts ",
-                        new String[] { "Data Structures", "Algorithms", "Programming Languages" },
-                        120,
-                        new String[] { "Masters in Computer Science",
-                                        "MBA in IT" },
-                        new String[] { "hello" },
-                        true, 14, 120, MediumOfStudy.FOUNDATION);
 
         public void displayStudentPortal() {
                 System.out.print("\033[H\033[2J");
@@ -39,6 +30,8 @@ public class Registration {
                 System.out.print("\033[H\033[2J");
 
                 listOfUsers.add(new Student("uzair", "123"));
+                listOfUsers.add(new Admin("dina", "123"));
+
                 try (Scanner input = new Scanner(System.in)) {
                         System.out.println("===== STUDENT LOGIN =====");
                         System.out.print("\nEnter username: ");
@@ -47,16 +40,23 @@ public class Registration {
                         String inpPass = input.nextLine();
 
                         // check if student is exist
-                        for (Student user : listOfUsers) {
+                        for (User user : listOfUsers) {
                                 if (user.getUsername().equals(inpUser)) {
                                         if (user.getPassword().equals(inpPass)) {
                                                 loggedInUser = user;
-                                                dashboard();
-                                                return;
+                                                // check if loggedInUser is instance of Student or Admin
+                                                if (loggedInUser instanceof Student) {
+                                                        dashboard();
+                                                } else if (loggedInUser instanceof Admin) {
+                                                        adminDashboard();
+                                                }
+                                                break;
                                         }
                                 }
                         }
-                        System.out.println("Invalid username/password combination\n");
+                        if (loggedInUser == null) {
+                                System.out.println("Invalid username/password combination\n");
+                        }
 
                 }
         }
@@ -129,7 +129,6 @@ public class Registration {
                         choice = input.nextInt();
                 } catch (InputMismatchException e) {
                         System.out.println("Invalid input, please enter a number.");
-                        dashboard();
                         return;
                 }
 
@@ -154,12 +153,17 @@ public class Registration {
 
         }
 
+        public void adminDashboard() {
+                System.out.print("\033[H\033[2J");
+                System.out.println("Working!");
+        }
+
         public void studentInformation() {
                 System.out.print("\033[H\033[2J");
                 System.out.println("===== STUDENT INFORMATION =====");
                 System.out.println("Student Name  : " + loggedInUser.getUsername());
                 System.out.println("Password      : " + loggedInUser.getPassword());
-                System.out.println("Student ID    : " + loggedInUser.getStudentId());
+                System.out.println("Student ID    : " + ((Student) loggedInUser).getStudentId());
                 System.out.println("Email Address : " + loggedInUser.getEmailAddress());
                 System.out.println("Phone Number  : " + loggedInUser.getPhoneNumber());
                 // System.out.println("Faculty : " + loggedInUser.getFaculty());
@@ -253,7 +257,7 @@ public class Registration {
                 int choice = input.nextInt();
 
                 Course selectedCourse = availableCourses.get(choice - 1);
-                loggedInUser.addCourse(selectedCourse);
+                ((Student) loggedInUser).addCourse(selectedCourse);
 
                 System.out.println("\nYou have been registered to " + selectedCourse.getCourseName());
 
@@ -266,7 +270,7 @@ public class Registration {
         public void unregisterFromCourse() {
                 System.out.print("\033[H\033[2J");
 
-                List<Course> registeredCourses = loggedInUser.getCourses();
+                List<Course> registeredCourses = ((Student) loggedInUser).getCourses();
 
                 System.out.println("=====  UNREGISTERED COURSES =====");
 
@@ -285,7 +289,7 @@ public class Registration {
                         choice = input.nextInt();
                         if (choice > 0 && choice <= registeredCourses.size()) {
                                 Course courseToUnregister = registeredCourses.get(choice - 1);
-                                loggedInUser.removeCourse(courseToUnregister);
+                                ((Student) loggedInUser).removeCourse(courseToUnregister);
                                 System.out.println("You have been unregistered from "
                                                 + courseToUnregister.getCourseName());
                                 System.out.print("\nPress 0 to return : ");
@@ -303,7 +307,7 @@ public class Registration {
                 System.out.print("\033[H\033[2J");
                 System.out.println("=====  REGISTERED COURSES =====\n");
 
-                List<Course> studentCourses = loggedInUser.getCourses();
+                List<Course> studentCourses = ((Student) loggedInUser).getCourses();
                 Course.printCourses(studentCourses);
 
                 System.out.print("\nPress 0 to return : ");
