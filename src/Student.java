@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Student extends User {
+public class Student extends User implements Dashboard {
 
     private int studentId;
     private MediumStudy mediumStudy;
@@ -76,5 +76,10 @@ public class Student extends User {
                 System.out.println(course.getCourseName());
             }
         }
+    }
+
+    @Override
+    public void addCourse() {
+        System.out.println("student add course is working...");
     }
 }

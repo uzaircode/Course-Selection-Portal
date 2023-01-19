@@ -240,31 +240,39 @@ public class Registration {
         }
 
         public void displayCourseSelection() {
-                System.out.print("\033[H\033[2J");
-                System.out.println("===== BROWSE THE PROGRAMMES =====\n");
-
-                // display all available course
-                Course courseList = new Course();
-                List<Course> availableCourses = courseList.getAllCourses();
-
-                int i = 1;
-                for (Course course : availableCourses) {
-                        System.out.println("(" + i + ") " + course.getCourseName());
-                        i++;
+                if (loggedInUser instanceof Student) {
+                        ((Student) loggedInUser).addCourse();
+                } else if (loggedInUser instanceof Admin) {
+                        ((Admin) loggedInUser).addCourse();
                 }
 
-                System.out.print("\nSelect a course to register for : ");
-                int choice = input.nextInt();
+                // System.out.print("\033[H\033[2J");
+                // System.out.println("===== BROWSE THE PROGRAMMES =====\n");
 
-                Course selectedCourse = availableCourses.get(choice - 1);
-                ((Student) loggedInUser).addCourse(selectedCourse);
+                // // display all available course
+                // Course courseList = new Course();
+                // List<Course> availableCourses = courseList.getAllCourses();
 
-                System.out.println("\nYou have been registered to " + selectedCourse.getCourseName());
+                // int i = 1;
+                // for (Course course : availableCourses) {
+                // System.out.println("(" + i + ") " + course.getCourseName());
+                // i++;
+                //
 
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                        displayCourseOffered();
+                // System.out.print("\nSelect a course to register for : ");
+                // int choice = input.nextInt();
+
+                // Course selectedCourse = availableCourses.get(choice - 1);
+                // ((Student) loggedInUser).addCourse(selectedCourse);
+
+                // System.out.println("\nYou have been registered to " +
+                // selectedCourse.getCourseName());
+
+                //
+                // System.out.print("\nPress 0 to return : ");
+                // int selection = input.nextInt();
+                // if (selection == 0)
+                // displayCourseOffered();
         }
 
         public void unregisterFromCourse() {

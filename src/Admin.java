@@ -18,10 +18,15 @@ public class Admin extends User implements Dashboard {
         return adminId;
     }
 
+    // @Override
+    // public void displayDashboard(User loggedInUser) {
+    // System.out.print("\033[H\033[2J");
+    // System.out.println("Hello");
+    // }
+
     @Override
-    public void displayDashboard(User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        System.out.println("Hello");
+    public void addCourse() {
+        System.out.println("admin add course is working...");
     }
 
 }
