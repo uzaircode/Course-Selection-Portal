@@ -8,6 +8,7 @@ public class Registration {
         AddressInfo theAddress = new AddressInfo();
         List<User> listOfUsers = new ArrayList<>();
         User loggedInUser = null;
+        Course selectedCourse = new Course();
         Scanner input = new Scanner(System.in);
 
         public void displayStudentPortal() {
@@ -46,7 +47,7 @@ public class Registration {
                                                 loggedInUser = user;
                                                 // check if loggedInUser is instance of Student or Admin
                                                 if (loggedInUser instanceof Student) {
-                                                        dashboard();
+                                                        studentDashboard(loggedInUser);
                                                 } else if (loggedInUser instanceof Admin) {
                                                         adminDashboard();
                                                 }
@@ -110,7 +111,7 @@ public class Registration {
                 }
         }
 
-        public void dashboard() {
+        public void studentDashboard(User loggedInUser) {
                 System.out.print("\033[H\033[2J");
                 System.out.println("===== DASHBOARD =====");
                 System.out.println("Welcome " + loggedInUser.getUsername() + "!");
@@ -119,7 +120,6 @@ public class Registration {
                 System.out.println("2. VIEW ACADEMIC CREDENTIALS");
                 System.out.println("3. VIEW AVAILABLE COURSES");
                 System.out.println("4. VIEW SELECTED COURSES");
-                System.out.println("5. VIEW VIDEO BRIEFINGS");
                 System.out.println("6. LOGOUT");
 
                 System.out.print("\nChoose 1 : ");
@@ -134,55 +134,37 @@ public class Registration {
 
                 switch (choice) {
                         case 1:
-                                studentInformation();
+                                studentInformation(loggedInUser);
                                 break;
                         case 2:
                                 // academicCredential();
                                 break;
                         case 3:
-                                displayCourseOffered();
+                                displayCourseOffered(loggedInUser);
                                 break;
                         case 4:
-                                displaySelectedCourse();
+                                displaySelectedCourse(loggedInUser);
+                                break;
+                        case 5:
+                                logout(loggedInUser);
                                 break;
                         default:
                                 System.out.println("Invalid option, please try again.");
-                                dashboard();
+                                studentDashboard(loggedInUser);
                                 return;
                 }
 
         }
 
         public void adminDashboard() {
-                System.out.print("\033[H\033[2J");
-                System.out.println("Working!");
+                loggedInUser.displayInformation(loggedInUser);
         }
 
-        public void studentInformation() {
-                System.out.print("\033[H\033[2J");
-                System.out.println("===== STUDENT INFORMATION =====");
-                System.out.println("Student Name  : " + loggedInUser.getUsername());
-                System.out.println("Password      : " + loggedInUser.getPassword());
-                System.out.println("Student ID    : " + ((Student) loggedInUser).getStudentId());
-                System.out.println("Email Address : " + loggedInUser.getEmailAddress());
-                System.out.println("Phone Number  : " + loggedInUser.getPhoneNumber());
-                // System.out.println("Faculty : " + loggedInUser.getFaculty());
-
-                System.out.println("\n===== STUDENT ADDRESS INFORMATION =====");
-                System.out.println("Street       : " + loggedInUser.getAddressInfo().getStreet());
-                System.out.println("City         : " + loggedInUser.getAddressInfo().getCity());
-                System.out.println("State        : " + loggedInUser.getAddressInfo().getState());
-                System.out.println("Postal Code  : " + loggedInUser.getAddressInfo().getPostalCode());
-                System.out.println("Country      : " + loggedInUser.getAddressInfo().getCountry());
-
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                        dashboard();
-
+        public void studentInformation(User loggedInUser) {
+                loggedInUser.displayInformation(loggedInUser);
         }
 
-        public void displayCourseOffered() {
+        public void displayCourseOffered(User loggedInUser) {
                 System.out.print("\033[H\033[2J");
                 System.out.println("===== BROWSE THE PROGRAMMES =====\n");
 
@@ -203,11 +185,11 @@ public class Registration {
                 System.out.print("\nChoose 1 : ");
                 int selection = input.nextInt();
                 if (selection == 1) {
-                        displayCourseSelection();
+                        displayAddCourses(selectedCourse, loggedInUser);
                 } else if (selection == 2) {
-                        unregisterFromCourse();
+                        unregisterFromCourse(loggedInUser);
                 } else if (selection == 3) {
-                        dashboard();
+                        studentDashboard(loggedInUser);
                 }
 
                 System.out.print("\nChoose 1 : ");
@@ -217,112 +199,51 @@ public class Registration {
                         choice = input.nextInt();
                 } catch (InputMismatchException e) {
                         System.out.println("Invalid input, please enter a number.");
-                        dashboard();
+                        studentDashboard(loggedInUser);
                         return;
                 }
 
                 switch (choice) {
                         case 1:
-                                displayCourseSelection();
+                                displayAddCourses(selectedCourse, loggedInUser);
                                 break;
                         case 2:
-                                unregisterFromCourse();
+                                unregisterFromCourse(loggedInUser);
                                 break;
                         case 3:
-                                dashboard();
+                                studentDashboard(loggedInUser);
                                 break;
                         default:
                                 System.out.println("Invalid option, please try again.");
-                                dashboard();
+                                studentDashboard(loggedInUser);
                                 return;
                 }
 
         }
 
-        public void displayCourseSelection() {
+        public void displayAddCourses(Course selectedCourse, User loggedInUser) {
                 if (loggedInUser instanceof Student) {
-                        ((Student) loggedInUser).addCourse();
+                        ((Student) loggedInUser).addCourse(selectedCourse, loggedInUser);
                 } else if (loggedInUser instanceof Admin) {
-                        ((Admin) loggedInUser).addCourse();
+                        ((Admin) loggedInUser).addCourse(selectedCourse, loggedInUser);
                 }
-
-                // System.out.print("\033[H\033[2J");
-                // System.out.println("===== BROWSE THE PROGRAMMES =====\n");
-
-                // // display all available course
-                // Course courseList = new Course();
-                // List<Course> availableCourses = courseList.getAllCourses();
-
-                // int i = 1;
-                // for (Course course : availableCourses) {
-                // System.out.println("(" + i + ") " + course.getCourseName());
-                // i++;
-                //
-
-                // System.out.print("\nSelect a course to register for : ");
-                // int choice = input.nextInt();
-
-                // Course selectedCourse = availableCourses.get(choice - 1);
-                // ((Student) loggedInUser).addCourse(selectedCourse);
-
-                // System.out.println("\nYou have been registered to " +
-                // selectedCourse.getCourseName());
-
-                //
-                // System.out.print("\nPress 0 to return : ");
-                // int selection = input.nextInt();
-                // if (selection == 0)
-                // displayCourseOffered();
         }
 
-        public void unregisterFromCourse() {
-                System.out.print("\033[H\033[2J");
-
-                List<Course> registeredCourses = ((Student) loggedInUser).getCourses();
-
-                System.out.println("=====  UNREGISTERED COURSES =====");
-
-                if (registeredCourses.isEmpty()) {
-                        System.out.println("You haven't registered for any courses yet.");
-                        return;
+        public void unregisterFromCourse(User loggedInUser) {
+                if (loggedInUser instanceof Student) {
+                        ((Student) loggedInUser).unregisteredFromCourse(selectedCourse, loggedInUser);
+                } else if (loggedInUser instanceof Admin) {
+                        ((Admin) loggedInUser).unregisteredFromCourse(selectedCourse, loggedInUser);
                 }
-
-                for (int i = 0; i < registeredCourses.size(); i++) {
-                        System.out.println("(" + (i + 1) + ") " + registeredCourses.get(i).getCourseName());
-                }
-
-                try (Scanner input = new Scanner(System.in)) {
-                        int choice = 0;
-                        System.out.print("\nSelect a course to unregister from :");
-                        choice = input.nextInt();
-                        if (choice > 0 && choice <= registeredCourses.size()) {
-                                Course courseToUnregister = registeredCourses.get(choice - 1);
-                                ((Student) loggedInUser).removeCourse(courseToUnregister);
-                                System.out.println("You have been unregistered from "
-                                                + courseToUnregister.getCourseName());
-                                System.out.print("\nPress 0 to return : ");
-                                int selection = input.nextInt();
-                                if (selection == 0)
-                                        displayCourseOffered();
-                        } else {
-                                System.out.println("Invalid choice.");
-                        }
-                }
-
         }
 
-        public void displaySelectedCourse() {
-                System.out.print("\033[H\033[2J");
-                System.out.println("=====  REGISTERED COURSES =====\n");
+        public void displaySelectedCourse(User loggedInUser) {
 
-                List<Course> studentCourses = ((Student) loggedInUser).getCourses();
-                Course.printCourses(studentCourses);
-
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                        dashboard();
-
+                if (loggedInUser instanceof Student) {
+                        ((Student) loggedInUser).printRegisteredCourses();
+                } else if (loggedInUser instanceof Admin) {
+                        // ((Admin) loggedInUser).printAllCourse();
+                }
         }
 
         // public void displayAcademicCredentials() {
@@ -337,5 +258,11 @@ public class Registration {
         // credentials.");
         // }
         // }
+
+        public void logout(User loggedInUser) {
+                System.out.println("User " + loggedInUser.getUsername() + " has been logout.");
+                loggedInUser = null;
+                displayStudentPortal();
+        }
 
 }
