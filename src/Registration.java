@@ -6,18 +6,10 @@ public class Registration {
         int phoneNumber;
 
         AddressInfo theAddress = new AddressInfo();
-        List<Student> listOfUsers = new ArrayList<>();
-        Student loggedInUser = null;
+        List<User> listOfUsers = new ArrayList<>();
+        User loggedInUser = null;
+        Course selectedCourse = new Course();
         Scanner input = new Scanner(System.in);
-
-        // Student student = new Student("JohnDoe", 12345);
-        Course course = new Course("ODN3329", "Foundation in Arts ",
-                        new String[] { "Data Structures", "Algorithms", "Programming Languages" },
-                        120,
-                        new String[] { "Masters in Computer Science",
-                                        "MBA in IT" },
-                        new String[] { "hello" },
-                        true, 14, 120, MediumOfStudy.FOUNDATION);
 
         public void displayStudentPortal() {
                 System.out.print("\033[H\033[2J");
@@ -32,31 +24,54 @@ public class Registration {
                 } else if (selection == 2) {
                         displayRegister();
                 }
+        }
 
+        public void displayAdminPortal() {
+                System.out.print("\033[H\033[2J");
+                System.out.println("===== WELCOME TO ADMIN PORTAL =====");
+                System.out.println("\n(1) LOGIN");
+                System.out.println("(2) REGISTER");
+
+                System.out.print("\nChoose 1 : ");
+                int selection = input.nextInt();
+                if (selection == 1) {
+                        displayLogin();
+                } else if (selection == 2) {
+                        displayRegister();
+                }
         }
 
         public void displayLogin() {
                 System.out.print("\033[H\033[2J");
 
                 listOfUsers.add(new Student("uzair", "123"));
+                listOfUsers.add(new Admin("dina", "123"));
+
                 try (Scanner input = new Scanner(System.in)) {
-                        System.out.println("===== STUDENT LOGIN =====");
+                        System.out.println("===== USER LOGIN =====");
                         System.out.print("\nEnter username: ");
                         String inpUser = input.nextLine();
                         System.out.print("Enter password: ");
                         String inpPass = input.nextLine();
 
                         // check if student is exist
-                        for (Student user : listOfUsers) {
+                        for (User user : listOfUsers) {
                                 if (user.getUsername().equals(inpUser)) {
                                         if (user.getPassword().equals(inpPass)) {
                                                 loggedInUser = user;
-                                                dashboard();
-                                                return;
+                                                // check if loggedInUser is instance of Student or Admin
+                                                if (loggedInUser instanceof Student) {
+                                                        studentDashboard(loggedInUser);
+                                                } else if (loggedInUser instanceof Admin) {
+                                                        adminDashboard(loggedInUser);
+                                                }
+                                                break;
                                         }
                                 }
                         }
-                        System.out.println("Invalid username/password combination\n");
+                        if (loggedInUser == null) {
+                                System.out.println("Invalid username/password combination\n");
+                        }
 
                 }
         }
@@ -110,17 +125,16 @@ public class Registration {
                 }
         }
 
-        public void dashboard() {
+        public void studentDashboard(User loggedInUser) {
                 System.out.print("\033[H\033[2J");
-                System.out.println("===== DASHBOARD =====");
+                System.out.println("===== STUDENT DASHBOARD =====");
                 System.out.println("Welcome " + loggedInUser.getUsername() + "!");
 
                 System.out.println("\n1. MANAGE PERSONAL INFORMATION");
                 System.out.println("2. VIEW ACADEMIC CREDENTIALS");
                 System.out.println("3. VIEW AVAILABLE COURSES");
                 System.out.println("4. VIEW SELECTED COURSES");
-                System.out.println("5. VIEW VIDEO BRIEFINGS");
-                System.out.println("6. LOGOUT");
+                System.out.println("5. LOGOUT");
 
                 System.out.print("\nChoose 1 : ");
 
@@ -129,82 +143,42 @@ public class Registration {
                         choice = input.nextInt();
                 } catch (InputMismatchException e) {
                         System.out.println("Invalid input, please enter a number.");
-                        dashboard();
                         return;
                 }
 
                 switch (choice) {
                         case 1:
-                                studentInformation();
+                                userInformation(loggedInUser);
                                 break;
                         case 2:
                                 // academicCredential();
                                 break;
                         case 3:
-                                displayCourseOffered();
+                                manageCourse(loggedInUser);
                                 break;
                         case 4:
-                                displaySelectedCourse();
+                                displaySelectedCourse(loggedInUser);
+                                break;
+                        case 5:
+                                logout(loggedInUser);
                                 break;
                         default:
                                 System.out.println("Invalid option, please try again.");
-                                dashboard();
+                                studentDashboard(loggedInUser);
                                 return;
                 }
 
         }
 
-        public void studentInformation() {
+        public void adminDashboard(User loggedInUser) {
                 System.out.print("\033[H\033[2J");
-                System.out.println("===== STUDENT INFORMATION =====");
-                System.out.println("Student Name  : " + loggedInUser.getUsername());
-                System.out.println("Password      : " + loggedInUser.getPassword());
-                System.out.println("Student ID    : " + loggedInUser.getStudentId());
-                System.out.println("Email Address : " + loggedInUser.getEmailAddress());
-                System.out.println("Phone Number  : " + loggedInUser.getPhoneNumber());
-                // System.out.println("Faculty : " + loggedInUser.getFaculty());
+                System.out.println("===== ADMIN DASHBOARD =====");
+                System.out.println("Welcome " + loggedInUser.getUsername() + "!");
 
-                System.out.println("\n===== STUDENT ADDRESS INFORMATION =====");
-                System.out.println("Street       : " + loggedInUser.getAddressInfo().getStreet());
-                System.out.println("City         : " + loggedInUser.getAddressInfo().getCity());
-                System.out.println("State        : " + loggedInUser.getAddressInfo().getState());
-                System.out.println("Postal Code  : " + loggedInUser.getAddressInfo().getPostalCode());
-                System.out.println("Country      : " + loggedInUser.getAddressInfo().getCountry());
-
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                        dashboard();
-
-        }
-
-        public void displayCourseOffered() {
-                System.out.print("\033[H\033[2J");
-                System.out.println("===== BROWSE THE PROGRAMMES =====\n");
-
-                // display all available course
-                Course courseList = new Course();
-                List<Course> courses = courseList.getAllCourses();
-
-                int i = 1;
-                for (Course course : courses) {
-                        System.out.println("(" + i + ") " + course.getCourseName());
-                        i++;
-                }
-
-                System.out.println("\n\n(1) ADD COURSE");
-                System.out.println("(2) DELETE COURSE");
-                System.out.println("(3) RETURN TO DASHBOARD");
-
-                System.out.print("\nChoose 1 : ");
-                int selection = input.nextInt();
-                if (selection == 1) {
-                        displayCourseSelection();
-                } else if (selection == 2) {
-                        unregisterFromCourse();
-                } else if (selection == 3) {
-                        dashboard();
-                }
+                System.out.println("\n1. MANAGE PERSONAL INFORMATION");
+                System.out.println("2. VIEW STUDENT LIST");
+                System.out.println("3. MANAGE COURSES");
+                System.out.println("4. LOGOUT");
 
                 System.out.print("\nChoose 1 : ");
 
@@ -213,104 +187,65 @@ public class Registration {
                         choice = input.nextInt();
                 } catch (InputMismatchException e) {
                         System.out.println("Invalid input, please enter a number.");
-                        dashboard();
                         return;
                 }
 
                 switch (choice) {
                         case 1:
-                                displayCourseSelection();
+                                userInformation(loggedInUser);
                                 break;
                         case 2:
-                                unregisterFromCourse();
+                                // view student list;
                                 break;
                         case 3:
-                                dashboard();
+                                manageCourse(loggedInUser);
+                                break;
+                        case 4:
+                                logout(loggedInUser);
                                 break;
                         default:
                                 System.out.println("Invalid option, please try again.");
-                                dashboard();
+                                adminDashboard(loggedInUser);
                                 return;
                 }
-
         }
 
-        public void displayCourseSelection() {
-                System.out.print("\033[H\033[2J");
-                System.out.println("===== BROWSE THE PROGRAMMES =====\n");
-
-                // display all available course
-                Course courseList = new Course();
-                List<Course> availableCourses = courseList.getAllCourses();
-
-                int i = 1;
-                for (Course course : availableCourses) {
-                        System.out.println("(" + i + ") " + course.getCourseName());
-                        i++;
-                }
-
-                System.out.print("\nSelect a course to register for : ");
-                int choice = input.nextInt();
-
-                Course selectedCourse = availableCourses.get(choice - 1);
-                loggedInUser.addCourse(selectedCourse);
-
-                System.out.println("\nYou have been registered to " + selectedCourse.getCourseName());
-
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                        displayCourseOffered();
+        public void userInformation(User loggedInUser) {
+                loggedInUser.displayInformation(loggedInUser);
         }
 
-        public void unregisterFromCourse() {
-                System.out.print("\033[H\033[2J");
+        public void manageCourse(User loggedInUser) {
 
-                List<Course> registeredCourses = loggedInUser.getCourses();
-
-                System.out.println("=====  UNREGISTERED COURSES =====");
-
-                if (registeredCourses.isEmpty()) {
-                        System.out.println("You haven't registered for any courses yet.");
-                        return;
+                if (loggedInUser instanceof Student) {
+                        ((Student) loggedInUser).manageCourse(selectedCourse, loggedInUser);
+                } else if (loggedInUser instanceof Admin) {
+                        ((Admin) loggedInUser).manageCourse(selectedCourse, loggedInUser);
                 }
-
-                for (int i = 0; i < registeredCourses.size(); i++) {
-                        System.out.println("(" + (i + 1) + ") " + registeredCourses.get(i).getCourseName());
-                }
-
-                try (Scanner input = new Scanner(System.in)) {
-                        int choice = 0;
-                        System.out.print("\nSelect a course to unregister from :");
-                        choice = input.nextInt();
-                        if (choice > 0 && choice <= registeredCourses.size()) {
-                                Course courseToUnregister = registeredCourses.get(choice - 1);
-                                loggedInUser.removeCourse(courseToUnregister);
-                                System.out.println("You have been unregistered from "
-                                                + courseToUnregister.getCourseName());
-                                System.out.print("\nPress 0 to return : ");
-                                int selection = input.nextInt();
-                                if (selection == 0)
-                                        displayCourseOffered();
-                        } else {
-                                System.out.println("Invalid choice.");
-                        }
-                }
-
         }
 
-        public void displaySelectedCourse() {
-                System.out.print("\033[H\033[2J");
-                System.out.println("=====  REGISTERED COURSES =====\n");
+        public void displayAddCourses(Course selectedCourse, User loggedInUser) {
+                if (loggedInUser instanceof Student) {
+                        ((Student) loggedInUser).addCourse(selectedCourse, loggedInUser);
+                } else if (loggedInUser instanceof Admin) {
+                        ((Admin) loggedInUser).addCourse(selectedCourse, loggedInUser);
+                }
+        }
 
-                List<Course> studentCourses = loggedInUser.getCourses();
-                Course.printCourses(studentCourses);
+        public void unregisterFromCourse(User loggedInUser) {
+                if (loggedInUser instanceof Student) {
+                        ((Student) loggedInUser).unregisteredFromCourse(selectedCourse, loggedInUser);
+                } else if (loggedInUser instanceof Admin) {
+                        ((Admin) loggedInUser).unregisteredFromCourse(selectedCourse, loggedInUser);
+                }
+        }
 
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                        dashboard();
+        public void displaySelectedCourse(User loggedInUser) {
 
+                if (loggedInUser instanceof Student) {
+                        ((Student) loggedInUser).printRegisteredCourses(loggedInUser);
+                } else if (loggedInUser instanceof Admin) {
+                        // ((Admin) loggedInUser).printAllCourse();
+                }
         }
 
         // public void displayAcademicCredentials() {
@@ -325,5 +260,56 @@ public class Registration {
         // credentials.");
         // }
         // }
+
+        public void logout(User loggedInUser) {
+                System.out.println("User " + loggedInUser.getUsername() + " has been logout.");
+                loggedInUser = null;
+                displayStudentPortal();
+        }
+
+        public void displayMMUPortal() {
+                System.out.print("\033[H\033[2J");
+                System.out.println("===== WELCOME TO MMU PORTAL =====");
+                System.out.println("\n(1) VIEW ALL COURSES ");
+                System.out.println("(2) VIEW COURSE BRIEFING");
+
+                System.out.print("\nChoose 1 : ");
+                int selection = input.nextInt();
+                if (selection == 1) {
+                        viewAllCourses();
+                } else if (selection == 2) {
+                        viewCourseBriefing();
+                }
+        }
+
+        public void viewCourseBriefing() {
+                System.out.print("\033[H\033[2J");
+                System.out.println("===== COURSE BRIEFING VIDEO =====");
+                System.out.println("\nDisplay course briefing...");
+
+                System.out.print("\nPress 0 to return : ");
+                int selection = input.nextInt();
+                if (selection == 0)
+                        displayMMUPortal();
+        }
+
+        public void viewAllCourses() {
+                System.out.print("\033[H\033[2J");
+                System.out.println("===== BROWSE THE PROGRAMMES =====\n");
+                Course courseList = new Course();
+                List<Course> courses = courseList.getAllCourses();
+
+                int i = 1;
+                for (Course course : courses) {
+                        System.out.println("(" + i + ") " + course.getCourseName());
+                        i++;
+                }
+
+                System.out.print("\nPress 0 to return : ");
+                int selection = input.nextInt();
+                if (selection == 0)
+                        displayMMUPortal();
+
+        }
 
 }

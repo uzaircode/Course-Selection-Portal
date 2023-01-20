@@ -16,9 +16,9 @@ public class Main {
             if (selection == 1) {
                 res.displayStudentPortal();
             } else if (selection == 2) {
-                // adminPortal
+                res.displayAdminPortal();
             } else if (selection == 3) {
-                // mmuPortal
+                res.displayMMUPortal();
             }
         }
 
