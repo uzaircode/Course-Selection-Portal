@@ -225,9 +225,9 @@ public class Registration {
 
         public void displayAddCourses(Course selectedCourse, User loggedInUser) {
                 if (loggedInUser instanceof Student) {
-                        ((Student) loggedInUser).addCourse(selectedCourse, loggedInUser);
+                        ((Student) loggedInUser).displayAddCourses(selectedCourse, loggedInUser);
                 } else if (loggedInUser instanceof Admin) {
-                        ((Admin) loggedInUser).addCourse(selectedCourse, loggedInUser);
+                        ((Admin) loggedInUser).displayAddCourses(selectedCourse, loggedInUser);
                 }
         }
 
