@@ -1,5 +1,6 @@
+import java.util.List;
+
 public interface Dashboard {
     // public void displayDashboard(User loggedInUser);
-
-    public void addCourse();
+    // public void addCourse(List<Course> Course, User loggedInUser);
 }
