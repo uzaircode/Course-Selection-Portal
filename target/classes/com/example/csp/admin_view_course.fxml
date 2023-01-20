@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="540.0" prefWidth="960.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="admin.AdminAddCourse">
+    <children>
+        <ImageView fitHeight="85.0" fitWidth="960.0" pickOnBounds="true">
+            <image>
+                <Image url="@../../../imgs/campus_admin_navi.png" />
+            </image>
+            <effect>
+                <Lighting diffuseConstant="0.6">
+                    <bumpInput>
+                        <Shadow />
+                    </bumpInput>
+                    <light>
+                        <Light.Distant />
+                    </light>
+                </Lighting>
+            </effect>
+        </ImageView>
+        <Label fx:id="label_faculty_name" layoutX="39.0" layoutY="25.0" text="Faculty of Engineering" textFill="WHITE" underline="true">
+            <font>
+                <Font size="24.0" />
+            </font>
+        </Label>
+        <AnchorPane layoutX="330.0" layoutY="29.0">
+            <children>
+                <Button fx:id="btn_add_course" layoutX="60.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="ADD COURSE" textFill="WHITE" />
+                <Button fx:id="btn_update_course" layoutX="194.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="UPDATE COURSE" textFill="WHITE" />
+                <Button fx:id="btn_delete_course" layoutX="327.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="DELETE COURSE" textFill="WHITE" />
+                <Button fx:id="btn_view_course" layoutX="459.0" mnemonicParsing="false" prefHeight="20.0" prefWidth="120.0" style="-fx-background-color: #6CA74B;" text="VIEW COURSE" textFill="WHITE" />
+            </children>
+        </AnchorPane>
+        <AnchorPane layoutX="250.0" layoutY="146.0">
+            <children>
+                <ChoiceBox fx:id="choicebox_LOS" prefHeight="27.0" prefWidth="150.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-border-radius: 3;" />
+                <ChoiceBox fx:id="choicebox_coursename" layoutX="163.0" prefHeight="27.0" prefWidth="226.0" style="-fx-background-color: white; -fx-border-color: grey; -fx-border-radius: 3;" />
+                <Button fx:id="btn_add_course1" layoutX="411.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="49.0" style="-fx-background-color: #6CA74B;" text="FIND" textFill="WHITE" />
+            </children>
+        </AnchorPane>
+      <Label layoutX="330.0" layoutY="262.0" text="View :">
+         <font>
+            <Font size="16.0" />
+         </font>
+      </Label>
+    </children>
+</AnchorPane>
