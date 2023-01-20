@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -102,12 +103,10 @@ public class Student extends User implements Dashboard, ICourseOperation {
                 System.out.println("\nYou are already registered for " + selectedCourse.getCourseName());
             }
 
-            printRegisteredCourses();
-
             System.out.print("\nPress 0 to return : ");
             int selection = input.nextInt();
             if (selection == 0)
-                res.displayCourseOffered(loggedInUser);
+                res.manageCourse(loggedInUser);
         }
 
     }
@@ -141,22 +140,29 @@ public class Student extends User implements Dashboard, ICourseOperation {
                 System.out.print("\nPress 0 to return : ");
                 int selection = input.nextInt();
                 if (selection == 0)
-                    res.displayCourseOffered(loggedInUser);
+                    res.manageCourse(loggedInUser);
             } else {
                 System.out.println("Invalid choice.");
             }
         }
     }
 
-    public void printRegisteredCourses() {
+    public void printRegisteredCourses(User loggedInUser) {
         System.out.print("\033[H\033[2J");
-        if (courses.isEmpty()) {
-            System.out.println("No registered courses found");
-        } else {
-            System.out.println("Registered Courses:");
-            for (Course course : courses) {
-                System.out.println(course.getCourseName());
+        Registration res = new Registration();
+        try (Scanner input = new Scanner(System.in)) {
+            if (courses.isEmpty()) {
+                System.out.println("No registered courses found");
+            } else {
+                System.out.println("Registered Courses:");
+                for (Course course : courses) {
+                    System.out.println(course.getCourseName());
+                }
             }
+            System.out.print("\nPress 0 to return : ");
+            int selection = input.nextInt();
+            if (selection == 0)
+                res.studentDashboard(loggedInUser);
         }
     }
 
@@ -184,6 +190,66 @@ public class Student extends User implements Dashboard, ICourseOperation {
             int selection = input.nextInt();
             if (selection == 0)
                 res.studentDashboard(loggedInUser);
+        }
+    }
+
+    @Override
+    public void manageCourse(Course selectedCourse, User loggedInUser) {
+        System.out.print("\033[H\033[2J");
+        Registration res = new Registration();
+        try (Scanner input = new Scanner(System.in)) {
+            System.out.println("===== BROWSE THE PROGRAMMES =====\n");
+
+            // display all available course
+            Course courseList = new Course();
+            List<Course> courses = courseList.getAllCourses();
+
+            int i = 1;
+            for (Course course : courses) {
+                System.out.println("(" + i + ") " + course.getCourseName());
+                i++;
+            }
+
+            System.out.println("\n\n(1) ADD COURSE");
+            System.out.println("(2) DELETE COURSE");
+            System.out.println("(3) RETURN TO DASHBOARD");
+
+            System.out.print("\nChoose 1 : ");
+            int selection = input.nextInt();
+            if (selection == 1) {
+                res.displayAddCourses(selectedCourse, loggedInUser);
+            } else if (selection == 2) {
+                res.unregisterFromCourse(loggedInUser);
+            } else if (selection == 3) {
+                res.studentDashboard(loggedInUser);
+            }
+
+            System.out.print("\nChoose 1 : ");
+
+            int choice = 0;
+            try {
+                choice = input.nextInt();
+            } catch (InputMismatchException e) {
+                System.out.println("Invalid input, please enter a number.");
+                res.studentDashboard(loggedInUser);
+                return;
+            }
+
+            switch (choice) {
+                case 1:
+                    res.displayAddCourses(selectedCourse, loggedInUser);
+                    break;
+                case 2:
+                    res.unregisterFromCourse(loggedInUser);
+                    break;
+                case 3:
+                    res.studentDashboard(loggedInUser);
+                    break;
+                default:
+                    System.out.println("Invalid option, please try again.");
+                    res.studentDashboard(loggedInUser);
+                    return;
+            }
         }
     }
 }
