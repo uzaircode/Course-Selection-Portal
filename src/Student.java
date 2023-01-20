@@ -10,6 +10,15 @@ public class Student extends User implements Dashboard, ICourseOperation {
     private MediumStudy mediumStudy;
     private String faculty;
     private List<Course> courses;
+    private StudentOperation studentOperation;
+
+    public Student() {
+        this.studentOperation = new StudentOperation();
+    }
+
+    public void displayAddCourses(Course selectedCourse, User loggedInUser) {
+        studentOperation.addCourse(selectedCourse, loggedInUser);
+    }
 
     public Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo,
             MediumStudy mediumStudy, String faculty) {
@@ -64,49 +73,53 @@ public class Student extends User implements Dashboard, ICourseOperation {
         courses.remove(course);
     }
 
-    @Override
-    public void addCourse(Course selectedCourse, User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        Registration res = new Registration();
+    private class StudentOperation extends CourseOperation {
 
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== BROWSE THE PROGRAMMES =====\n");
+        @Override
+        public void addCourse(Course selectedCourse, User loggedInUser) {
+            System.out.print("\033[H\033[2J");
+            Registration res = new Registration();
 
-            // display all available course
-            Course courseList = new Course();
-            List<Course> availableCourses = courseList.getAllCourses();
-            List<Course> studentCourses = ((Student) loggedInUser).getCourses();
+            try (Scanner input = new Scanner(System.in)) {
+                System.out.println("===== BROWSE THE PROGRAMMES =====\n");
 
-            int i = 1;
-            for (Course course : availableCourses) {
-                System.out.println("(" + i + ") " + course.getCourseName());
-                i++;
-            }
+                // display all available course
+                Course courseList = new Course();
+                List<Course> availableCourses = courseList.getAllCourses();
+                List<Course> studentCourses = ((Student) loggedInUser).getCourses();
 
-            System.out.print("\nSelect a course to register for : ");
-            int choice = input.nextInt();
-
-            selectedCourse = availableCourses.get(choice - 1);
-
-            boolean isRegistered = false;
-            for (Course c : studentCourses) {
-                if (c.getCourseName().equalsIgnoreCase(selectedCourse.getCourseName())) {
-                    isRegistered = true;
-                    break;
+                int i = 1;
+                for (Course course : availableCourses) {
+                    System.out.println("(" + i + ") " + course.getCourseName());
+                    i++;
                 }
+
+                System.out.print("\nSelect a course to register for : ");
+                int choice = input.nextInt();
+
+                selectedCourse = availableCourses.get(choice - 1);
+
+                boolean isRegistered = false;
+                for (Course c : studentCourses) {
+                    if (c.getCourseName().equalsIgnoreCase(selectedCourse.getCourseName())) {
+                        isRegistered = true;
+                        break;
+                    }
+                }
+
+                if (!isRegistered) {
+                    ((Student) loggedInUser).addCourses(selectedCourse);
+                    System.out.println("\nYou have been registered to " + selectedCourse.getCourseName());
+                } else {
+                    System.out.println("\nYou are already registered for " + selectedCourse.getCourseName());
+                }
+
+                System.out.print("\nPress 0 to return : ");
+                int selection = input.nextInt();
+                if (selection == 0)
+                    res.manageCourse(loggedInUser);
             }
 
-            if (!isRegistered) {
-                ((Student) loggedInUser).addCourses(selectedCourse);
-                System.out.println("\nYou have been registered to " + selectedCourse.getCourseName());
-            } else {
-                System.out.println("\nYou are already registered for " + selectedCourse.getCourseName());
-            }
-
-            System.out.print("\nPress 0 to return : ");
-            int selection = input.nextInt();
-            if (selection == 0)
-                res.manageCourse(loggedInUser);
         }
 
     }
