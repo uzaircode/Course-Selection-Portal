@@ -13,9 +13,6 @@ public abstract class User {
         this.addressInfo = addressInfo;
     }
 
-    public User() {
-    }
-
     abstract void displayInformation(User loggedInUser);
 
     public User(String username, String password) {
@@ -42,4 +39,8 @@ public abstract class User {
     public AddressInfo getAddressInfo() {
         return addressInfo;
     }
+
+    abstract void addOfferedCourse(Course selectedCourse, User loggedInUser);
+
+    abstract void updateOfferedCourse(Course selectedCourse, User loggedInUser);
 }
