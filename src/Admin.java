@@ -1,126 +1,85 @@
+import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
-public class Admin extends User implements Dashboard, ICourseOperation {
+public class Admin extends User implements ICourseOperation {
     private String adminId;
-    private AdminOperation adminOperation;
-
-    public Admin() {
-        this.adminOperation = new AdminOperation();
-    }
+    Scanner input = new Scanner(System.in);
 
     public Admin(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo,
             String adminId) {
         super(username, password, emailAddress, phoneNumber, addressInfo);
         this.adminId = adminId;
-        this.adminOperation = new AdminOperation();
-    }
-
-    public Admin(String username, String password) {
-        super(username, password);
-        this.adminOperation = new AdminOperation();
     }
 
     public String getAdminId() {
         return adminId;
     }
 
-    public void displayAddCourses(Course selectedCourse, User loggedInUser) {
-        adminOperation.execute(selectedCourse, loggedInUser);
-    }
+    @Override
+    public void addOfferedCourse(Course selectedCourse, User loggedInUser) {
+        System.out.print("\033[H\033[2J");
+        try (Scanner input = new Scanner(System.in)) {
+            System.out.println("===== CREATE NEW COURSE =====\n");
 
-    private class AdminOperation extends CourseOperation {
-        @Override
-        public void addCourse(Course selectedCourse, User loggedInUser) {
-            System.out.print("\033[H\033[2J");
-            try (Scanner input = new Scanner(System.in)) {
-                System.out.println("===== CREATE NEW COURSE =====\n");
-                System.out.print("Enter course name : ");
-                String courseName = input.nextLine();
+            System.out.print("Enter course name : ");
+            String name = input.nextLine();
 
-                // System.out.print("Enter course description: ");
-                // String courseDescription = input.nextLine();
-                // System.out.println("Enter the number of programme : ");
-                // int arraySize = input.nextInt();
+            System.out.print("Enter course id : ");
+            String id = input.nextLine();
 
-                // String[] programme = new String[arraySize];
+            System.out.print("Enter subjects taught (separated by commas) : ");
+            String[] subjects = input.nextLine().split(",");
 
-                // System.out.println("Enter the name of the programme : ");
-                // for (int i = 0; i < arraySize; i++) {
-                // programme[i] = input.next();
-                // }
+            System.out.print("Enter course duration: ");
+            int duration = input.nextInt();
+            input.nextLine(); // consume the remaining newline character
 
-                // System.out.print("Enter course duration : ");
-                // int courseDuration = input.nextInt();
+            System.out.print("Enter employment opportunities (separated by commas) : ");
+            String[] employmentOpportunities = input.nextLine().split(",");
 
-                // String[] dd = new String[arraySize];
+            System.out.print("Enter scope for further studies (separated by commas) : ");
+            String[] scopeForFurtherStudies = input.nextLine().split(",");
 
-                // System.out.println("Enter the name of the programme : ");
-                // for (int i = 0; i < arraySize; i++) {
-                // dd[i] = input.next();
-                // }
+            System.out.print("Does the course offer scholarship facilities? (true/false) ");
+            boolean scholarshipFacilities = input.nextBoolean();
 
-                // String[] ee = new String[arraySize];
+            System.out.print("Enter fee structure : ");
+            int feeStructure = input.nextInt();
 
-                // System.out.println("Enter the name of the programme : ");
-                // for (int i = 0; i < arraySize; i++) {
-                // ee[i] = input.next();
-                // }
+            System.out.print("Enter maximum number of students : ");
+            int maxStudents = input.nextInt();
 
-                // System.out.print("Enter Fee Structure : ");
-                // int feeStructure = input.nextInt();
+            System.out.print("Enter medium of study (FOUNDATION, DIPLOMA, UNDERGRADUATE, POSTGRADUATE, PHD) : ");
+            MediumOfStudy medium = MediumOfStudy.valueOf(input.next().toUpperCase());
 
-                // System.out.print("Enter maximum student : ");
-                // int maximumStudent = input.nextInt();
+            Course newCourse = new Course(id, name, subjects, duration, employmentOpportunities, scopeForFurtherStudies,
+                    scholarshipFacilities, feeStructure, maxStudents, medium);
+            Course.addCourse(newCourse);
 
-                // System.out.println("Scholarship Facilities : ");
-                // boolean scholarshipFacilities = input.nextBoolean();
+            System.out.println("\nCourse " + newCourse.getCourseName() + " has been created successfully.");
 
-                // Course c = new Course("2121212", courseName, programme, courseDuration, dd,
-                // ee, true, feeStructure,
-                // maximumStudent, MediumOfStudy.FOUNDATION);
-                // Course science = new Course("ODN3829", "Bachelor of Science (Hons.)
-                // Intelligent Robotics",
-                // new String[] { "Data Structures", "Algorithms", "Programming Languages" },
-                // 120,
-                // new String[] { "Masters in Computer Science",
-                // "MBA in IT" },
-                // new String[] { "hello" },
-                // true, 14, 120, MediumOfStudy.FOUNDATION);
+            System.out.print("\nPress 0 to return : ");
+            int selection = input.nextInt();
+            if (selection == 0)
+                manageCourse(selectedCourse, loggedInUser);
+        } catch (
 
-                Course c = new Course(courseName);
-                Course.addCourse(c);
-
-                List<Course> allCourses = Course.getAllCourses();
-
-                for (Course course : allCourses) {
-                    System.out.println(course.getCourseName());
-                }
-                System.out.println("\nCourse " + c.getCourseName() + " has been created successfdeully.");
-
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                    manageCourse(c, loggedInUser);
-            } catch (
-
-            NumberFormatException e) {
-                e.printStackTrace();
-            }
+        NumberFormatException e) {
+            e.printStackTrace();
         }
-
     }
 
     @Override
     void displayInformation(User loggedInUser) {
         System.out.print("\033[H\033[2J");
-        Registration res = new Registration();
+        AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("===== ADMIN INFORMATION =====");
-            System.out.println("Student Name  : " + loggedInUser.getUsername());
+            System.out.println("Admin Name  : " + loggedInUser.getUsername());
             System.out.println("Password      : " + loggedInUser.getPassword());
-            System.out.println("Student ID    : " + ((Admin) loggedInUser).getAdminId());
+            System.out.println("Admin ID    : " + ((Admin) loggedInUser).getAdminId());
             System.out.println("Email Address : " + loggedInUser.getEmailAddress());
             System.out.println("Phone Number  : " + loggedInUser.getPhoneNumber());
             // System.out.println("Faculty : " + loggedInUser.getFaculty());
@@ -135,28 +94,48 @@ public class Admin extends User implements Dashboard, ICourseOperation {
             System.out.print("\nPress 0 to return : ");
             int selection = input.nextInt();
             if (selection == 0)
-                res.studentDashboard(loggedInUser);
+                adminStrategy.adminDashboard(loggedInUser);
         }
     }
 
     @Override
-    public void unregisteredFromCourse(Course course, User loggedInUser) {
-        System.out.println("unregisteredFromCourse admin is working...");
+    public void removeOfferedCourse(Course c, User loggedInUser) {
+        AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
+        List<Course> courses = Course.getAllCourses();
 
+        System.out.print("\033[H\033[2J");
+        System.out.println("Enter the name of the course to remove:");
+        String courseName = input.nextLine();
+
+        for (Course course : courses) {
+            if (course.getCourseName().equalsIgnoreCase(courseName)) {
+                courses.remove(course);
+                System.out.println("Course removed successfully");
+                return;
+            }
+        }
+        System.out.println("Course not found");
+
+        System.out.print("\nPress 0 to return : ");
+        int selection = input.nextInt();
+        if (selection == 0)
+            adminStrategy.adminDashboard(loggedInUser);
     }
 
     @Override
     public void manageCourse(Course selectedCourse, User loggedInUser) {
         System.out.print("\033[H\033[2J");
-        Registration res = new Registration();
+        AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("===== BROWSE THE PROGRAMMES =====\n");
 
             // display all available course
             List<Course> allCourses = Course.getAllCourses();
 
+            int i = 1;
             for (Course course : allCourses) {
-                System.out.println(course.getCourseName());
+                System.out.println("(" + i + ") " + course.getCourseName());
+                i++;
             }
 
             System.out.println("\n\n(1) ADD COURSE");
@@ -165,42 +144,95 @@ public class Admin extends User implements Dashboard, ICourseOperation {
             System.out.println("(4) RETURN TO DASHBOARD");
 
             System.out.print("\nChoose 1 : ");
-            int selection = input.nextInt();
-            if (selection == 1) {
-                res.displayAddCourses(selectedCourse, loggedInUser);
-            } else if (selection == 2) {
-                res.unregisterFromCourse(loggedInUser);
-            } else if (selection == 3) {
-                res.studentDashboard(loggedInUser);
-            }
-
-            System.out.print("\nChoose 1 : ");
 
             int choice = 0;
             try {
                 choice = input.nextInt();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input, please enter a number.");
-                res.studentDashboard(loggedInUser);
                 return;
             }
 
             switch (choice) {
                 case 1:
-                    res.displayAddCourses(selectedCourse, loggedInUser);
+                    adminStrategy.displayAddOfferedCourses(selectedCourse, loggedInUser);
                     break;
                 case 2:
-                    res.unregisterFromCourse(loggedInUser);
+                    adminStrategy.displayUpdateOfferedCourses(loggedInUser);
                     break;
                 case 3:
-                    res.studentDashboard(loggedInUser);
+                    adminStrategy.displayRemoveOfferedCourse(loggedInUser);
                     break;
+                case 4:
+                    adminStrategy.adminDashboard(loggedInUser);
                 default:
                     System.out.println("Invalid option, please try again.");
-                    res.studentDashboard(loggedInUser);
+                    // studStrategy.studentDashboard(loggedInUser);
                     return;
             }
         }
     }
 
+    @Override
+    public void updateOfferedCourse(Course selectedCourse, User loggedInUser) {
+        System.out.print("\033[H\033[2J");
+        try (Scanner input = new Scanner(System.in)) {
+            System.out.println("===== UPDATE COURSE =====\n");
+
+            System.out.println("Enter course name: ");
+            String name = input.nextLine();
+
+            System.out.println("Enter course id: ");
+            String id = input.nextLine();
+
+            List<Course> allCourses = Course.getAllCourses();
+
+            for (Course course : allCourses) {
+                if (course.getCourseName().equalsIgnoreCase(name) && course.getCourseId().equalsIgnoreCase(id)) {
+                    System.out.println("Enter new course name: ");
+                    course.setCourseName(input.nextLine());
+
+                    System.out.println("Enter new course id: ");
+                    course.setCourseId(input.nextLine());
+
+                    System.out.println("Enter new subjects taught (separated by commas): ");
+                    course.setSubjectTaught(input.nextLine().split(","));
+
+                    System.out.println("Enter new course duration: ");
+                    course.setCourseDuration(input.nextInt());
+                    input.nextLine(); // consume the remaining newline character
+
+                    System.out.println("Enter new employment opportunities (separated by commas): ");
+                    course.setEmploymentOpportunities(input.nextLine().split(","));
+
+                    System.out.println("Enter new scope for further studies (separated by commas): ");
+                    course.setScopeForFutherStudies(input.nextLine().split(","));
+
+                    System.out.println("Does the course offer scholarship facilities? (true/false) ");
+                    course.setScholarshipFacilities(input.nextBoolean());
+
+                    System.out.println("Enter new fee structure: ");
+                    course.setFeeStructure(input.nextInt());
+
+                    System.out.println("Enter new maximum number of students: ");
+                    course.setMaximumStudent(input.nextInt());
+
+                    System.out.println(
+                            "Enter new medium of study (FOUNDATION, DIPLOMA, UNDERGRADUATE, POSTGRADUATE, PHD): ");
+                    course.setMediumStudy(MediumOfStudy.valueOf(input.next().toUpperCase()));
+
+                    System.out.println("\nCourse " + course.getCourseName() + " has been updated successfully.");
+
+                    System.out.print("\nPress 0 to return : ");
+                    int selection = input.nextInt();
+                    if (selection == 0)
+                        manageCourse(course, loggedInUser);
+                    return;
+                }
+            }
+            System.out.println("Course not found.");
+        } catch (NumberFormatException e) {
+            e.printStackTrace();
+        }
+    }
 }

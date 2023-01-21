@@ -40,19 +40,51 @@ public class Course {
         this.mediumStudy = mediumStudy;
     }
 
-    public Course(String courseName) {
-        this.courseName = courseName;
+    public Course() {
     }
 
-    public Course() {
-        // Course businessManagement = new Course("ODN3329", "Bachelor of Business
-        // Management (Hons.)",
-        // new String[] { "Data Structures", "Algorithms", "Programming Languages" },
-        // 120,
-        // new String[] { "Masters in Computer Science",
-        // "MBA in IT" },
-        // new String[] { "hello" },
-        // true, 14, 120, MediumOfStudy.FOUNDATION);
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
+    }
+
+    public void setSubjectTaught(String[] subjectTaught) {
+        this.subjectTaught = subjectTaught;
+    }
+
+    public void setCourseDuration(int courseDuration) {
+        this.courseDuration = courseDuration;
+    }
+
+    public void setEmploymentOpportunities(String[] employmentOpportunities) {
+        this.employmentOpportunities = employmentOpportunities;
+    }
+
+    public void setScopeForFutherStudies(String[] scopeForFutherStudies) {
+        this.scopeForFutherStudies = scopeForFutherStudies;
+    }
+
+    public void setScholarshipFacilities(boolean scholarshipFacilities) {
+        this.scholarshipFacilities = scholarshipFacilities;
+    }
+
+    public void setFeeStructure(int feeStructure) {
+        this.feeStructure = feeStructure;
+    }
+
+    public void setMaximumStudent(int maximumStudent) {
+        this.maximumStudent = maximumStudent;
+    }
+
+    public void setMediumStudy(MediumOfStudy mediumStudy) {
+        this.mediumStudy = mediumStudy;
+    }
+
+    public void setProgramme(Programme programme) {
+        this.programme = programme;
+    }
+
+    public static void setCourses(List<Course> courses) {
+        Course.courses = courses;
     }
 
     @Override
@@ -71,11 +103,14 @@ public class Course {
     }
 
     public void withdrawCourse() {
-
     }
 
     public String getCourseId() {
         return courseId;
+    }
+
+    public void setCourseName(String newName) {
+        this.courseName = newName;
     }
 
     public String getCourseName() {
@@ -100,6 +135,18 @@ public class Course {
 
     public String[] getSubjectsTaught() {
         return subjectTaught;
+    }
+
+    public void createCourses() {
+        Course businessManagement = new Course("ODN3329", "Bachelor of Business Management (Hons.)",
+                new String[] { "Data Structures", "Algorithms", "Programming Languages" },
+                120,
+                new String[] { "Masters in Computer Science",
+                        "MBA in IT" },
+                new String[] { "hello" },
+                true, 14, 120, MediumOfStudy.FOUNDATION);
+
+        courses.add(businessManagement);
     }
 
     public void displayCourseList() {
@@ -136,8 +183,7 @@ public class Course {
 
     public void displayAllCourse() {
         // display all available course
-        Course courseList = new Course();
-        List<Course> courses = courseList.getAllCourses();
+        List<Course> courses = Course.getAllCourses();
 
         int i = 1;
         for (Course course : courses) {
