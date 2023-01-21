@@ -54,16 +54,12 @@ public class Main {
     }
 
     public static void viewAllCourses() {
+
         System.out.print("\033[H\033[2J");
         System.out.println("===== BROWSE THE PROGRAMMES =====\n");
-        Course courseList = new Course();
-        List<Course> courses = courseList.getAllCourses();
 
-        int i = 1;
-        for (Course course : courses) {
-            System.out.println("(" + i + ") " + course.getCourseName());
-            i++;
-        }
+        Course course = new Course();
+        course.displayAllCourse();
 
         System.out.print("\nPress 0 to return : ");
         int selection = input.nextInt();
