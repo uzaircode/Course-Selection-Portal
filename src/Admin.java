@@ -1,4 +1,3 @@
-import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -7,9 +6,15 @@ public class Admin extends User implements ICourseOperation {
     private String adminId;
     Scanner input = new Scanner(System.in);
 
-    public Admin(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo,
-            String adminId) {
+    public Admin(String username, String password, String emailAddress, int phoneNumber,
+            AddressInfo addressInfo) {
         super(username, password, emailAddress, phoneNumber, addressInfo);
+    }
+
+    // this one is for dummy
+    public Admin(String adminId, String string, String string2, String string3, int i,
+            AddressInfo address) {
+        super(string, string2, string3, i, address);
         this.adminId = adminId;
     }
 

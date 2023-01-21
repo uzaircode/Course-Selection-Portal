@@ -43,50 +43,6 @@ public class Course {
     public Course() {
     }
 
-    public void setCourseId(String courseId) {
-        this.courseId = courseId;
-    }
-
-    public void setSubjectTaught(String[] subjectTaught) {
-        this.subjectTaught = subjectTaught;
-    }
-
-    public void setCourseDuration(int courseDuration) {
-        this.courseDuration = courseDuration;
-    }
-
-    public void setEmploymentOpportunities(String[] employmentOpportunities) {
-        this.employmentOpportunities = employmentOpportunities;
-    }
-
-    public void setScopeForFutherStudies(String[] scopeForFutherStudies) {
-        this.scopeForFutherStudies = scopeForFutherStudies;
-    }
-
-    public void setScholarshipFacilities(boolean scholarshipFacilities) {
-        this.scholarshipFacilities = scholarshipFacilities;
-    }
-
-    public void setFeeStructure(int feeStructure) {
-        this.feeStructure = feeStructure;
-    }
-
-    public void setMaximumStudent(int maximumStudent) {
-        this.maximumStudent = maximumStudent;
-    }
-
-    public void setMediumStudy(MediumOfStudy mediumStudy) {
-        this.mediumStudy = mediumStudy;
-    }
-
-    public void setProgramme(Programme programme) {
-        this.programme = programme;
-    }
-
-    public static void setCourses(List<Course> courses) {
-        Course.courses = courses;
-    }
-
     @Override
     public String toString() {
         return "courseId : " + courseId + "\ncourseName : " + courseName + "\nsubjectTaught : "
@@ -98,43 +54,107 @@ public class Course {
                 + mediumStudy + "\nprogramme : " + programme;
     }
 
-    public static void addCourse(Course course) {
-        courses.add(course);
-    }
-
-    public void withdrawCourse() {
-    }
-
     public String getCourseId() {
         return courseId;
     }
 
-    public void setCourseName(String newName) {
-        this.courseName = newName;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
     public String getCourseName() {
         return courseName;
     }
 
-    public int getMaximumStudent() {
-        return maximumStudent;
+    public void setCourseName(String courseName) {
+        this.courseName = courseName;
+    }
+
+    public String[] getSubjectTaught() {
+        return subjectTaught;
+    }
+
+    public void setSubjectTaught(String[] subjectTaught) {
+        this.subjectTaught = subjectTaught;
     }
 
     public int getCourseDuration() {
         return courseDuration;
     }
 
-    public MediumOfStudy getMediumOfStudy() {
+    public void setCourseDuration(int courseDuration) {
+        this.courseDuration = courseDuration;
+    }
+
+    public String[] getEmploymentOpportunities() {
+        return employmentOpportunities;
+    }
+
+    public void setEmploymentOpportunities(String[] employmentOpportunities) {
+        this.employmentOpportunities = employmentOpportunities;
+    }
+
+    public String[] getScopeForFutherStudies() {
+        return scopeForFutherStudies;
+    }
+
+    public void setScopeForFutherStudies(String[] scopeForFutherStudies) {
+        this.scopeForFutherStudies = scopeForFutherStudies;
+    }
+
+    public boolean isScholarshipFacilities() {
+        return scholarshipFacilities;
+    }
+
+    public void setScholarshipFacilities(boolean scholarshipFacilities) {
+        this.scholarshipFacilities = scholarshipFacilities;
+    }
+
+    public int getFeeStructure() {
+        return feeStructure;
+    }
+
+    public void setFeeStructure(int feeStructure) {
+        this.feeStructure = feeStructure;
+    }
+
+    public int getMaximumStudent() {
+        return maximumStudent;
+    }
+
+    public void setMaximumStudent(int maximumStudent) {
+        this.maximumStudent = maximumStudent;
+    }
+
+    public MediumOfStudy getMediumStudy() {
         return mediumStudy;
+    }
+
+    public void setMediumStudy(MediumOfStudy mediumStudy) {
+        this.mediumStudy = mediumStudy;
     }
 
     public Programme getProgramme() {
         return programme;
     }
 
-    public String[] getSubjectsTaught() {
-        return subjectTaught;
+    public void setProgramme(Programme programme) {
+        this.programme = programme;
+    }
+
+    public static List<Course> getCourses() {
+        return courses;
+    }
+
+    public static void setCourses(List<Course> courses) {
+        Course.courses = courses;
+    }
+
+    public static void addCourse(Course course) {
+        courses.add(course);
+    }
+
+    public void withdrawCourse() {
     }
 
     public void createCourses() {

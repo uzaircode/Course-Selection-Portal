@@ -1,8 +1,15 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
+
+enum MediumStudy {
+    FOUNDATION,
+    DIPLOMA,
+    UNDERGRADUATE,
+    POSTGRADUATE,
+    PHD;
+}
 
 public class Student extends User implements ICourseOperation {
 

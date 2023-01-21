@@ -35,7 +35,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         System.out.print("\033[H\033[2J");
 
         AddressInfo address = new AddressInfo("123 Main St", "Anytown", "USA", "12345", "Malaysia");
-        listOfUsers.add(new Admin("admin", "123", "admin@example.com", 123456789, address, "A12345"));
+        listOfUsers.add(new Admin("A12345", "admin", "123", "admin@example.com", 123456789, address));
 
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("===== USER LOGIN =====");
@@ -101,11 +101,9 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
             String country = input.nextLine();
             theAddress.setCountry(country);
 
-            // Student newStudent = new Student(username, password, emailAddress,
-            // phoneNumber, theAddress,
-            // null,
-            // emailAddress);
-            // listOfUsers.add(newStudent);
+            Admin registeredAdmin = new Admin(username, password, emailAddress, phoneNumber, theAddress);
+            listOfUsers.add(registeredAdmin);
+            adminDashboard(registeredAdmin);
 
             // displayStudentPortal();
         } catch (NumberFormatException e) {
