@@ -11,7 +11,7 @@ enum MediumStudy {
     PHD;
 }
 
-public class Student extends User implements ICourseOperation {
+public class Student extends User {
 
     private int studentId;
     private MediumStudy mediumStudy;
@@ -66,87 +66,92 @@ public class Student extends User implements ICourseOperation {
         courses.remove(course);
     }
 
-    @Override
-    public void addOfferedCourse(Course selectedCourse, User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
+    // @Override
+    // public void addOfferedCourse(Course selectedCourse, User loggedInUser) {
+    // System.out.print("\033[H\033[2J");
+    // StudentDashboardDisplayStrategy studStrategy = new
+    // StudentDashboardDisplayStrategy();
 
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== BROWSE THE PROGRAMMES =====\n");
+    // try (Scanner input = new Scanner(System.in)) {
+    // System.out.println("===== BROWSE THE PROGRAMMES =====\n");
 
-            // display all available course
-            List<Course> availableCourses = Course.getAllCourses();
-            List<Course> studentCourses = ((Student) loggedInUser).getCourses();
+    // // display all available course
+    // List<Course> availableCourses = Course.getAllCourses();
+    // List<Course> studentCourses = ((Student) loggedInUser).getCourses();
 
-            int i = 1;
-            for (Course course : availableCourses) {
-                System.out.println("(" + i + ") " + course.getCourseName());
-                i++;
-            }
+    // int i = 1;
+    // for (Course course : availableCourses) {
+    // System.out.println("(" + i + ") " + course.getCourseName());
+    // i++;
+    // }
 
-            System.out.print("\nSelect a course to register for : ");
-            int choice = input.nextInt();
+    // System.out.print("\nSelect a course to register for : ");
+    // int choice = input.nextInt();
 
-            selectedCourse = availableCourses.get(choice - 1);
+    // selectedCourse = availableCourses.get(choice - 1);
 
-            boolean isRegistered = false;
-            for (Course c : studentCourses) {
-                if (c.getCourseName().equalsIgnoreCase(selectedCourse.getCourseName())) {
-                    isRegistered = true;
-                    break;
-                }
-            }
+    // boolean isRegistered = false;
+    // for (Course c : studentCourses) {
+    // if (c.getCourseName().equalsIgnoreCase(selectedCourse.getCourseName())) {
+    // isRegistered = true;
+    // break;
+    // }
+    // }
 
-            if (!isRegistered) {
-                ((Student) loggedInUser).addCourses(selectedCourse);
-                System.out.println("\nYou have been registered to " + selectedCourse.getCourseName());
-            } else {
-                System.out.println("\nYou are already registered for " + selectedCourse.getCourseName());
-            }
+    // if (!isRegistered) {
+    // ((Student) loggedInUser).addCourses(selectedCourse);
+    // System.out.println("\nYou have been registered to " +
+    // selectedCourse.getCourseName());
+    // } else {
+    // System.out.println("\nYou are already registered for " +
+    // selectedCourse.getCourseName());
+    // }
 
-            System.out.print("\nPress 0 to return : ");
-            int selection = input.nextInt();
-            if (selection == 0)
-                studStrategy.manageCourse(loggedInUser);
-        }
+    // System.out.print("\nPress 0 to return : ");
+    // int selection = input.nextInt();
+    // if (selection == 0)
+    // studStrategy.manageCourse(loggedInUser);
+    // }
 
-    }
+    // }
 
-    @Override
-    public void removeOfferedCourse(Course course, User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
-        List<Course> registeredCourses = ((Student) loggedInUser).getCourses();
+    // @Override
+    // public void removeOfferedCourse(User loggedInUser) {
+    // System.out.print("\033[H\033[2J");
+    // StudentDashboardDisplayStrategy studStrategy = new
+    // StudentDashboardDisplayStrategy();
+    // List<Course> registeredCourses = ((Student) loggedInUser).getCourses();
 
-        System.out.println("=====  UNREGISTERED COURSES =====");
+    // System.out.println("===== UNREGISTERED COURSES =====");
 
-        if (registeredCourses.isEmpty()) {
-            System.out.println("You haven't registered for any courses yet.");
-            return;
-        }
+    // if (registeredCourses.isEmpty()) {
+    // System.out.println("You haven't registered for any courses yet.");
+    // return;
+    // }
 
-        for (int i = 0; i < registeredCourses.size(); i++) {
-            System.out.println("(" + (i + 1) + ") " + registeredCourses.get(i).getCourseName());
-        }
+    // for (int i = 0; i < registeredCourses.size(); i++) {
+    // System.out.println("(" + (i + 1) + ") " +
+    // registeredCourses.get(i).getCourseName());
+    // }
 
-        try (Scanner input = new Scanner(System.in)) {
-            int choice = 0;
-            System.out.print("\nSelect a course to unregister from : ");
-            choice = input.nextInt();
-            if (choice > 0 && choice <= registeredCourses.size()) {
-                Course courseToUnregister = registeredCourses.get(choice - 1);
-                ((Student) loggedInUser).removeCourse(courseToUnregister);
-                System.out.println("You have been unregistered from "
-                        + courseToUnregister.getCourseName());
-                System.out.print("\nPress 0 to return : ");
-                int selection = input.nextInt();
-                if (selection == 0)
-                    studStrategy.manageCourse(loggedInUser);
-            } else {
-                System.out.println("Invalid choice.");
-            }
-        }
-    }
+    // try (Scanner input = new Scanner(System.in)) {
+    // int choice = 0;
+    // System.out.print("\nSelect a course to unregister from : ");
+    // choice = input.nextInt();
+    // if (choice > 0 && choice <= registeredCourses.size()) {
+    // Course courseToUnregister = registeredCourses.get(choice - 1);
+    // ((Student) loggedInUser).removeCourse(courseToUnregister);
+    // System.out.println("You have been unregistered from "
+    // + courseToUnregister.getCourseName());
+    // System.out.print("\nPress 0 to return : ");
+    // int selection = input.nextInt();
+    // if (selection == 0)
+    // studStrategy.manageCourse(loggedInUser);
+    // } else {
+    // System.out.println("Invalid choice.");
+    // }
+    // }
+    // }
 
     public void printRegisteredCourses(User loggedInUser) {
         System.out.print("\033[H\033[2J");
@@ -194,8 +199,7 @@ public class Student extends User implements ICourseOperation {
         }
     }
 
-    @Override
-    public void manageCourse(Course selectedCourse, User loggedInUser) {
+    public void manageCourse() {
         System.out.print("\033[H\033[2J");
         StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
         try (Scanner input = new Scanner(System.in)) {
@@ -213,13 +217,13 @@ public class Student extends User implements ICourseOperation {
             int choice = 0;
             switch (choice) {
                 case 1:
-                    studStrategy.displayAddOfferedCourses(selectedCourse, loggedInUser);
+                    // studStrategy.displayAddOfferedCourses(loggedInUser);
                     break;
                 case 2:
-                    studStrategy.displayRemoveOfferedCourse(loggedInUser);
+                    // studStrategy.displayRemoveOfferedCourse(loggedInUser);
                     break;
                 case 3:
-                    studStrategy.studentDashboard(loggedInUser);
+                    // studStrategy.studentDashboard(loggedInUser);
                     break;
                 default:
                     System.out.println("Invalid option, please try again.");
@@ -227,11 +231,5 @@ public class Student extends User implements ICourseOperation {
                     return;
             }
         }
-    }
-
-    @Override
-    void updateOfferedCourse(Course selectedCourse, User loggedInUser) {
-        // TODO Auto-generated method stub
-
     }
 }

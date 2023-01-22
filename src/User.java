@@ -40,7 +40,4 @@ public abstract class User {
         return addressInfo;
     }
 
-    abstract void addOfferedCourse(Course selectedCourse, User loggedInUser);
-
-    abstract void updateOfferedCourse(Course selectedCourse, User loggedInUser);
 }

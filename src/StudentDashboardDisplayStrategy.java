@@ -10,7 +10,6 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     AddressInfo theAddress = new AddressInfo();
     List<Student> listOfStudents = new ArrayList<Student>();
     Student loggedInStudent = null;
-    Course selectedCourse = new Course();
     Scanner input = new Scanner(System.in);
 
     public void display() {
@@ -175,21 +174,21 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
 
     // This way of implement method follows both template pattern and the
     // open-closed principle.
-    public void displayAddOfferedCourses(Course selectedCourse, User loggedInUser) {
+    public void displayAddOfferedCourses(User loggedInUser) {
         ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.addOfferedCourse(selectedCourse, loggedInUser);
+        operation.addOfferedCourse();
     }
 
     // This way of implement method follows both template pattern and the
     // open-closed principle.
     public void displayRemoveOfferedCourse(User loggedInUser) {
         ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.removeOfferedCourse(selectedCourse, loggedInUser);
+        operation.removeOfferedCourse();
     }
 
     public void manageCourse(User loggedInUser) {
         ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.manageCourse(selectedCourse, loggedInUser);
+        operation.manageCourse();
     }
 
     public void displayRegisteredCourse(User loggedInUser) {

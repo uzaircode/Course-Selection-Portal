@@ -12,6 +12,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     Admin loggedInUser = null;
     Course selectedCourse = new Course();
     Scanner input = new Scanner(System.in);
+    private Course course = new Course();
 
     public void display() {
         // logic to display admin dashboard
@@ -116,7 +117,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         System.out.println("===== ADMIN DASHBOARD =====");
         System.out.println("Welcome " + loggedInUser.getUsername() + "!");
 
-        System.out.println("\n1. MANAGE PERSONAL INFORMATION");
+        System.out.println("\n1. MANAGE PERSONAL INFdedORMATION");
         System.out.println("2. VIEW STUDENT LIST");
         System.out.println("3. MANAGE COURSES");
         System.out.println("4. LOGOUT");
@@ -139,7 +140,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
                 // view student list;
                 break;
             case 3:
-                manageCourse(loggedInUser);
+                manageCourse();
                 break;
             case 4:
                 userLogout(loggedInUser);
@@ -155,27 +156,20 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         loggedInUser.displayInformation(loggedInUser);
     }
 
-    // This way of implement method follows both template pattern and the
-    // open-closed principle.
-    public void displayAddOfferedCourses(Course selectedCourse, User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.addOfferedCourse(selectedCourse, loggedInUser);
+    public void displayAddOfferedCourses(User loggedInUser) {
+        course.addOfferedCourse(loggedInUser);
     }
 
     public void displayUpdateOfferedCourses(User loggedInUser) {
-        loggedInUser.updateOfferedCourse(selectedCourse, loggedInUser);
+        course.updateOfferedCourse(loggedInUser);
     }
 
-    // This way of implement method follows both template pattern and the
-    // open-closed principle.
     public void displayRemoveOfferedCourse(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.removeOfferedCourse(selectedCourse, loggedInUser);
+        course.removeOfferedCourse(loggedInUser);
     }
 
-    public void manageCourse(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.manageCourse(selectedCourse, loggedInUser);
+    public void manageCourse() {
+        course.manageCourse(loggedInUser);
     }
 
     public void userLogout(User loggedInUser) {

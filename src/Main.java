@@ -12,9 +12,9 @@ public class Main {
                 System.out.println("===== WELCOME TO MMU PORTAL =====");
                 System.out.println("\n(1) VIEW ALL COURSES ");
                 System.out.println("(2) VIEW COURSE BRIEFING");
-                System.out.println("(3) STUDENT PORTAL");
+                System.out.println("\n(3) STUDENT PORTAL");
                 System.out.println("(4) ADMIN PORTAL");
-                System.out.println("(5) EXIT PORTAL");
+                System.out.println("\n(5) EXIT PORTAL");
 
                 System.out.print("\nChoose 1 : ");
                 int selection = input.nextInt();
