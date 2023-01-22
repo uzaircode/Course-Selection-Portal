@@ -9,8 +9,9 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     int phoneNumber;
     AddressInfo theAddress = new AddressInfo();
     List<Student> listOfStudents = new ArrayList<Student>();
-    Student loggedInStudent = null;
+    Student loggedInUser = null;
     Scanner input = new Scanner(System.in);
+    private Course course = new Course();
 
     public void display() {
         // logic to display student dashboard
@@ -48,8 +49,8 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
             for (Student user : listOfStudents) {
                 if (user.getUsername().equals(inpUser)) {
                     if (user.getPassword().equals(inpPass)) {
-                        loggedInStudent = user;
-                        studentDashboard(loggedInStudent);
+                        loggedInUser = user;
+                        studentDashboard(loggedInUser);
                         break;
                     }
                 } else {
@@ -139,7 +140,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
                 // academicCredential();
                 break;
             case 3:
-                manageCourse(loggedInUser);
+                manageCourse();
                 break;
             case 4:
                 displayRegisteredCourse(loggedInUser);
@@ -172,23 +173,20 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
         loggedInUser.displayInformation(loggedInUser);
     }
 
-    // This way of implement method follows both template pattern and the
-    // open-closed principle.
     public void displayAddOfferedCourses(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.addOfferedCourse();
+        course.addOfferedCourse(loggedInUser);
     }
 
-    // This way of implement method follows both template pattern and the
-    // open-closed principle.
+    public void displayUpdateOfferedCourses(User loggedInUser) {
+        course.updateOfferedCourse(loggedInUser);
+    }
+
     public void displayRemoveOfferedCourse(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.removeOfferedCourse();
+        course.removeOfferedCourse(loggedInUser);
     }
 
-    public void manageCourse(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.manageCourse();
+    public void manageCourse() {
+        course.manageCourse(loggedInUser);
     }
 
     public void displayRegisteredCourse(User loggedInUser) {
