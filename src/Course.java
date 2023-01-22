@@ -12,7 +12,7 @@ enum MediumOfStudy {
     PHD;
 }
 
-public class Course {
+public class Course extends CourseDelegation {
     private String courseId;
     private String courseName;
     private String[] subjectTaught;
@@ -26,6 +26,8 @@ public class Course {
     private Programme programme; // Composition
 
     private static List<Course> courses = new ArrayList<>();
+    private CourseDelegation delegation = new CourseDelegation();
+
     Scanner input = new Scanner(System.in);
 
     public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
@@ -230,7 +232,7 @@ public class Course {
                 i++;
             }
 
-            System.out.println("\n\n(1) ADD COcdcURSE");
+            System.out.println("\n\n(1) ADD COURSE");
             System.out.println("(2) UPDATE COURSE");
             System.out.println("(3) DELETE COURSE");
             System.out.println("(4) RETURN TO DASHBOARD");
@@ -266,139 +268,14 @@ public class Course {
     }
 
     public void addOfferedCourse(User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== CREATE NEW COURSE =====\n");
-
-            System.out.print("Enter course name : ");
-            String name = input.nextLine();
-
-            System.out.print("Enter course id : ");
-            String id = input.nextLine();
-
-            System.out.print("Enter subjects taught (separated by commas) : ");
-            String[] subjects = input.nextLine().split(",");
-
-            System.out.print("Enter course duration: ");
-            int duration = input.nextInt();
-            input.nextLine(); // consume the remaining newline character
-
-            System.out.print("Enter employment opportunities (separated by commas) : ");
-            String[] employmentOpportunities = input.nextLine().split(",");
-
-            System.out.print("Enter scope for further studies (separated by commas) : ");
-            String[] scopeForFurtherStudies = input.nextLine().split(",");
-
-            System.out.print("Does the course offer scholarship facilities? (true/false) ");
-            boolean scholarshipFacilities = input.nextBoolean();
-
-            System.out.print("Enter fee structure : ");
-            int feeStructure = input.nextInt();
-
-            System.out.print("Enter maximum number of students : ");
-            int maxStudents = input.nextInt();
-
-            System.out.print("Enter medium of study (FOUNDATION, DIPLOMA, UNDERGRADUATE, POSTGRADUATE, PHD) : ");
-            MediumOfStudy medium = MediumOfStudy.valueOf(input.next().toUpperCase());
-
-            Course newCourse = new Course(id, name, subjects, duration, employmentOpportunities, scopeForFurtherStudies,
-                    scholarshipFacilities, feeStructure, maxStudents, medium);
-            Course.addCourse(newCourse);
-
-            System.out.println("\nCourse " + newCourse.getCourseName() + " has been created successfully.");
-
-            System.out.print("\nPress 0 to return : ");
-            int selection = input.nextInt();
-            if (selection == 0)
-                manageCourse(loggedInUser);
-        } catch (
-
-        NumberFormatException e) {
-            e.printStackTrace();
-        }
+        delegation.addOfferedCourse(loggedInUser, this);
     }
 
     public void updateOfferedCourse(User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== UPDATE COURSE =====\n");
-
-            System.out.print("Enter course name : ");
-            String name = input.nextLine();
-
-            System.out.println("Enter course id : ");
-            String id = input.nextLine();
-
-            List<Course> allCourses = Course.getAllCourses();
-
-            for (Course course : allCourses) {
-                if (course.getCourseName().equalsIgnoreCase(name) && course.getCourseId().equalsIgnoreCase(id)) {
-                    System.out.print("Enter new course name : ");
-                    course.setCourseName(input.nextLine());
-
-                    System.out.print("Enter new course id : ");
-                    course.setCourseId(input.nextLine());
-
-                    System.out.print("Enter new subjects taught (separated by commas) : ");
-                    course.setSubjectTaught(input.nextLine().split(","));
-
-                    System.out.print("Enter new course duration : ");
-                    course.setCourseDuration(input.nextInt());
-                    input.nextLine(); // consume the remaining newline character
-
-                    System.out.print("Enter new employment opportunities (separated by commas) : ");
-                    course.setEmploymentOpportunities(input.nextLine().split(","));
-
-                    System.out.print("Enter new scope for further studies (separated by commas) : ");
-                    course.setScopeForFutherStudies(input.nextLine().split(","));
-
-                    System.out.print("Does the course offer scholarship facilities? (true/false) ");
-                    course.setScholarshipFacilities(input.nextBoolean());
-
-                    System.out.print("Enter new fee structure : ");
-                    course.setFeeStructure(input.nextInt());
-
-                    System.out.print("Enter new maximum number of students : ");
-                    course.setMaximumStudent(input.nextInt());
-
-                    System.out.print(
-                            "Enter new medium of study (FOUNDATION, DIPLOMA, UNDERGRADUATE, POSTGRADUATE, PHD) : ");
-                    course.setMediumStudy(MediumOfStudy.valueOf(input.next().toUpperCase()));
-
-                    System.out.print("\nCourse " + course.getCourseName() + " has been updated successfully.");
-
-                    System.out.print("\nPress 0 to return : ");
-                    int selection = input.nextInt();
-                    if (selection == 0)
-                        manageCourse(loggedInUser);
-                    return;
-                }
-            }
-            System.out.println("Course not found.");
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        delegation.updateOfferedCourse(loggedInUser);
     }
 
     public void removeOfferedCourse(User loggedInUser) {
-        List<Course> courses = Course.getAllCourses();
-
-        System.out.print("\033[H\033[2J");
-        System.out.println("Enter the name of the course to remove :");
-        String courseName = input.nextLine();
-
-        for (Course course : courses) {
-            if (course.getCourseName().equalsIgnoreCase(courseName)) {
-                courses.remove(course);
-                System.out.println("Course removed successfully");
-                return;
-            }
-        }
-        System.out.println("Course not found");
-
-        System.out.print("\nPress 0 to return : ");
-        int selection = input.nextInt();
-        if (selection == 0)
-            manageCourse(loggedInUser);
+        delegation.removeOfferedCourse(loggedInUser);
     }
 }
