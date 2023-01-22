@@ -4,39 +4,37 @@ public class Main {
     private static Scanner input = new Scanner(System.in);
 
     public static void main(String[] args) {
-        try (Scanner input = new Scanner(System.in)) {
-            while (true) {
-                DashboardDisplayStrategy strategy = null;
+        while (true) {
+            DashboardDisplayStrategy strategy = null;
 
-                System.out.print("\033[H\033[2J");
-                System.out.println("===== WELCOME TO MMU PORTAL =====");
-                System.out.println("\n(1) VIEW ALL COURSES ");
-                System.out.println("(2) VIEW COURSE BRIEFING");
-                System.out.println("(3) STUDENT PORTAL");
-                System.out.println("(4) ADMIN PORTAL");
-                System.out.println("(5) EXIT PORTAL");
+            System.out.print("\033[H\033[2J");
+            System.out.println("===== WELCOME TO MMU PORTAL =====");
+            System.out.println("\n(1) VIEW ALL COURSES ");
+            System.out.println("(2) VIEW COURSE BRIEFING");
+            System.out.println("\n(3) STUDENT PORTAL");
+            System.out.println("(4) ADMIN PORTAL");
+            System.out.println("\n(5) EXIT PORTAL");
 
-                System.out.print("\nChoose 1 : ");
-                int selection = input.nextInt();
-                switch (selection) {
-                    case 1:
-                        viewAllCourses();
-                        break;
-                    case 2:
-                        viewCourseBriefing();
-                        break;
-                    case 3:
-                        strategy = new StudentDashboardDisplayStrategy();
-                        break;
-                    case 4:
-                        strategy = new AdminDashboardDisplayStrategy();
-                        break;
-                    case 5:
-                        return;
-                }
-                if (strategy != null) {
-                    strategy.display();
-                }
+            System.out.print("\nChoose 1 : ");
+            int selection = input.nextInt();
+            switch (selection) {
+                case 1:
+                    viewAllCourses();
+                    break;
+                case 2:
+                    viewCourseBriefing();
+                    break;
+                case 3:
+                    strategy = new StudentDashboardDisplayStrategy();
+                    break;
+                case 4:
+                    strategy = new AdminDashboardDisplayStrategy();
+                    break;
+                case 5:
+                    return;
+            }
+            if (strategy != null) {
+                strategy.display();
             }
         }
     }

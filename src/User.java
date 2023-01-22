@@ -13,6 +13,29 @@ public abstract class User {
         this.addressInfo = addressInfo;
     }
 
+    public User() {
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmailAddress(String emailAddress) {
+        this.emailAddress = emailAddress;
+    }
+
+    public void setPhoneNumber(int phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public void setAddressInfo(AddressInfo addressInfo) {
+        this.addressInfo = addressInfo;
+    }
+
     abstract void displayInformation(User loggedInUser);
 
     public User(String username, String password) {
@@ -40,7 +63,4 @@ public abstract class User {
         return addressInfo;
     }
 
-    abstract void addOfferedCourse(Course selectedCourse, User loggedInUser);
-
-    abstract void updateOfferedCourse(Course selectedCourse, User loggedInUser);
 }

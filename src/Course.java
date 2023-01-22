@@ -1,6 +1,7 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 enum MediumOfStudy {
     FOUNDATION,
@@ -10,7 +11,7 @@ enum MediumOfStudy {
     PHD;
 }
 
-public class Course {
+public class Course extends CourseDelegation {
     private String courseId;
     private String courseName;
     private String[] subjectTaught;
@@ -24,6 +25,9 @@ public class Course {
     private Programme programme; // Composition
 
     private static List<Course> courses = new ArrayList<>();
+    private CourseDelegation delegation = new CourseDelegation();
+
+    private static Scanner input = new Scanner(System.in);
 
     public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
             String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities,
@@ -212,4 +216,19 @@ public class Course {
         }
     }
 
+    public void manageCourse(User loggedInUser) {
+        delegation.manageCourse(loggedInUser);
+    }
+
+    public void addOfferedCourse(User loggedInUser) {
+        delegation.addOfferedCourse(loggedInUser, this);
+    }
+
+    public void updateOfferedCourse(User loggedInUser) {
+        delegation.updateOfferedCourse(loggedInUser);
+    }
+
+    public void removeOfferedCourse(User loggedInUser) {
+        delegation.removeOfferedCourse(loggedInUser);
+    }
 }

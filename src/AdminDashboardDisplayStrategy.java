@@ -5,12 +5,11 @@ import java.util.Scanner;
 
 public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
 
-    String username, password, emailAddress;
-    int phoneNumber;
     AddressInfo theAddress = new AddressInfo();
-    List<Admin> listOfUsers = new ArrayList<Admin>();
+    private static List<Admin> ListOfAdmins = new ArrayList<Admin>();
     Admin loggedInUser = null;
     Course selectedCourse = new Course();
+    private Course course = new Course();
     Scanner input = new Scanner(System.in);
 
     public void display() {
@@ -26,7 +25,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
             if (selection == 1) {
                 displayLogin();
             } else if (selection == 2) {
-                // displayRegister();
+                displayRegister();
             }
         }
     }
@@ -35,17 +34,17 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         System.out.print("\033[H\033[2J");
 
         AddressInfo address = new AddressInfo("123 Main St", "Anytown", "USA", "12345", "Malaysia");
-        listOfUsers.add(new Admin("A12345", "admin", "123", "admin@example.com", 123456789, address));
+        ListOfAdmins.add(new Admin("A12345", "admin", "123", "admin@example.com", 123456789, address));
 
         try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== USER LOGIN =====");
+            System.out.println("===== ADMIN LOGIN =====");
             System.out.print("\nEnter username: ");
             String inpUser = input.nextLine();
             System.out.print("Enter password: ");
             String inpPass = input.nextLine();
 
             // check if admin is exist
-            for (Admin user : listOfUsers) {
+            for (Admin user : ListOfAdmins) {
                 if (user.getUsername().equals(inpUser)) {
                     if (user.getPassword().equals(inpPass)) {
                         loggedInUser = user;
@@ -65,50 +64,41 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
 
     public void displayRegister() {
         System.out.print("\033[H\033[2J");
-        try (Scanner input = new Scanner(System.in)) {
 
-            System.out.println("===== STUDENT REGISTRATION =====");
-            System.out.print("\nEnter username      : ");
-            String username = input.nextLine();
+        System.out.println("===== ADMIN REGISTRATION =====");
+        System.out.print("\nEnter username      : ");
+        String username = input.nextLine();
 
-            System.out.print("Enter password      : ");
-            password = input.nextLine();
+        System.out.print("Enter password      : ");
+        String password = input.nextLine();
 
-            System.out.print("Enter email address : ");
-            emailAddress = input.nextLine();
+        System.out.print("Enter email address : ");
+        String emailAddress = input.nextLine();
 
-            System.out.print("Enter phone number  : ");
-            phoneNumber = Integer.parseInt(input.nextLine());
+        System.out.print("Enter phone number  : ");
+        int phoneNumber = Integer.parseInt(input.nextLine());
 
-            System.out.println("\n===== ADDRESS INFORMATION =====");
-            System.out.print("\nEnter street     : ");
-            String street = input.nextLine();
-            theAddress.setStreet(street);
+        System.out.println("\n===== ADDRESS INFORMATION =====");
+        System.out.print("\nEnter street : ");
+        String street = input.nextLine();
 
-            System.out.print("Enter city       : ");
-            String city = input.nextLine();
-            theAddress.setCity(city);
+        System.out.print("Enter city : ");
+        String city = input.nextLine();
 
-            System.out.print("Enter state      : ");
-            String state = input.nextLine();
-            theAddress.setState(state);
+        System.out.print("Enter state : ");
+        String state = input.nextLine();
 
-            System.out.print("Enter postalCode : ");
-            String postalCode = input.nextLine();
-            theAddress.setPostalCode(postalCode);
+        System.out.print("Enter postalCode : ");
+        String postalCode = input.nextLine();
 
-            System.out.print("Enter country    : ");
-            String country = input.nextLine();
-            theAddress.setCountry(country);
+        System.out.print("Enter country : ");
+        String country = input.nextLine();
 
-            Admin registeredAdmin = new Admin(username, password, emailAddress, phoneNumber, theAddress);
-            listOfUsers.add(registeredAdmin);
-            adminDashboard(registeredAdmin);
+        AddressInfo theAddress = new AddressInfo(street, city, state, postalCode, country);
+        Admin registeredAdmin = Admin.getInstance(username, password, emailAddress, phoneNumber, theAddress);
 
-            // displayStudentPortal();
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        ListOfAdmins.add(registeredAdmin);
+        adminDashboard(registeredAdmin);
     }
 
     public void adminDashboard(User loggedInUser) {
@@ -155,27 +145,20 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         loggedInUser.displayInformation(loggedInUser);
     }
 
-    // This way of implement method follows both template pattern and the
-    // open-closed principle.
-    public void displayAddOfferedCourses(Course selectedCourse, User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.addOfferedCourse(selectedCourse, loggedInUser);
+    public void displayAddOfferedCourses(User loggedInUser) {
+        course.addOfferedCourse(loggedInUser);
     }
 
     public void displayUpdateOfferedCourses(User loggedInUser) {
-        loggedInUser.updateOfferedCourse(selectedCourse, loggedInUser);
+        course.updateOfferedCourse(loggedInUser);
     }
 
-    // This way of implement method follows both template pattern and the
-    // open-closed principle.
     public void displayRemoveOfferedCourse(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.removeOfferedCourse(selectedCourse, loggedInUser);
+        course.removeOfferedCourse(loggedInUser);
     }
 
     public void manageCourse(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.manageCourse(selectedCourse, loggedInUser);
+        course.manageCourse(loggedInUser);
     }
 
     public void userLogout(User loggedInUser) {

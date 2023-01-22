@@ -5,38 +5,39 @@ import java.util.Scanner;
 
 public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy {
 
-    String username, password, emailAddress;
-    int phoneNumber;
     AddressInfo theAddress = new AddressInfo();
-    List<Student> listOfStudents = new ArrayList<Student>();
-    Student loggedInStudent = null;
-    Course selectedCourse = new Course();
+    private static List<Student> listOfStudents = new ArrayList<Student>();
+    Student loggedInUser = null;
     Scanner input = new Scanner(System.in);
+    Course selectedCourse = new Course();
+    private Course course = new Course();
 
     public void display() {
         // logic to display student dashboard
         System.out.print("\033[H\033[2J");
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== WELCOME TO STUDENT PORTAL =====");
-            System.out.println("\n(1) LOGIN");
-            System.out.println("(2) REGISTER");
+        System.out.println("===== WELCOME TO STUDENT PORTAL =====");
+        System.out.println("\n(1) LOGIN");
+        System.out.println("(2) REGISTER");
 
-            System.out.print("\nChoose 1 : ");
-            int selection = input.nextInt();
-            if (selection == 1) {
-                displayLogin();
-            } else if (selection == 2) {
-                displayRegister();
-            }
+        System.out.print("\nChoose 1 : ");
+        int selection = input.nextInt();
+        if (selection == 1) {
+            displayLogin();
+        } else if (selection == 2) {
+            displayRegister();
         }
     }
 
     public void displayLogin() {
         System.out.print("\033[H\033[2J");
 
-        AddressInfo address = new AddressInfo("123 Main St", "Anytown", "Anystate", "12345", "USA");
-        listOfStudents.add(new Student("johndoe", "123", "johndoe@example.com", 555 - 555 - 5555, address,
-                MediumStudy.UNDERGRADUATE, "Computer Science"));
+        AddressInfo address = new AddressInfo("123 Main St", "Anytown", "Anystate",
+                "12345", "USA");
+
+        Student registeredStudent = Student.getInstance("johndoe", "123", "johndoe@example.com", 555 -
+                555 - 5555, address,
+                MediumStudy.UNDERGRADUATE, "Computer Science");
+        listOfStudents.add(registeredStudent);
 
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("===== STUDENT LOGIN =====");
@@ -49,8 +50,8 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
             for (Student user : listOfStudents) {
                 if (user.getUsername().equals(inpUser)) {
                     if (user.getPassword().equals(inpPass)) {
-                        loggedInStudent = user;
-                        studentDashboard(loggedInStudent);
+                        loggedInUser = user;
+                        studentDashboard(loggedInUser);
                         break;
                     }
                 } else {
@@ -63,64 +64,58 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     }
 
     public void displayRegister() {
+
         System.out.print("\033[H\033[2J");
-        try (Scanner input = new Scanner(System.in)) {
 
-            System.out.println("===== STUDENT REGISTRATION =====");
-            System.out.print("\nEnter username      : ");
-            String username = input.nextLine();
+        System.out.println("===== STUDENT REGISTRATION =====");
+        System.out.print("\nEnter username      : ");
+        String username = input.nextLine();
 
-            System.out.print("Enter password      : ");
-            password = input.nextLine();
+        System.out.print("Enter password      : ");
+        String password = input.nextLine();
 
-            System.out.print("Enter email address : ");
-            emailAddress = input.nextLine();
+        System.out.print("Enter email address : ");
+        String emailAddress = input.nextLine();
 
-            System.out.print("Enter phone number  : ");
-            phoneNumber = Integer.parseInt(input.nextLine());
+        System.out.print("Enter phone number  : ");
+        int phoneNumber = Integer.parseInt(input.nextLine());
 
-            System.out.println("\n===== ADDRESS INFORMATION =====");
-            System.out.print("\nEnter street     : ");
-            String street = input.nextLine();
-            theAddress.setStreet(street);
+        System.out.println("\n===== ADDRESS INFORMATION =====");
+        System.out.print("\nEnter street : ");
+        String street = input.nextLine();
 
-            System.out.print("Enter city       : ");
-            String city = input.nextLine();
-            theAddress.setCity(city);
+        System.out.print("Enter city : ");
+        String city = input.nextLine();
 
-            System.out.print("Enter state      : ");
-            String state = input.nextLine();
-            theAddress.setState(state);
+        System.out.print("Enter state : ");
+        String state = input.nextLine();
 
-            System.out.print("Enter postalCode : ");
-            String postalCode = input.nextLine();
-            theAddress.setPostalCode(postalCode);
+        System.out.print("Enter postalCode : ");
+        String postalCode = input.nextLine();
 
-            System.out.print("Enter country    : ");
-            String country = input.nextLine();
-            theAddress.setCountry(country);
+        System.out.print("Enter country : ");
+        String country = input.nextLine();
 
-            Student registeredStudent = new Student(username, password, emailAddress, phoneNumber, theAddress,
-                    MediumStudy.UNDERGRADUATE, "Computer Science");
-            listOfStudents.add(registeredStudent);
-            studentDashboard(registeredStudent);
+        AddressInfo theAddress = new AddressInfo(street, city, state, postalCode, country);
+        MediumStudy medium = MediumStudy.valueOf("UNDERGRADUATE");
 
-        } catch (NumberFormatException e) {
-            e.printStackTrace();
-        }
+        Student registeredStudent = Student.getInstance(username, password,
+                emailAddress, phoneNumber, theAddress, medium,
+                "Computer Science");
+
+        listOfStudents.add(registeredStudent);
+        studentDashboard(registeredStudent);
     }
 
     public void studentDashboard(User loggedInUser) {
-
         System.out.print("\033[H\033[2J");
         System.out.println("===== STUDENT DASHBOARD =====");
         System.out.println("Welcome " + loggedInUser.getUsername() + "!");
 
         System.out.println("\n1. MANAGE PERSONAL INFORMATION");
-        System.out.println("2. VIEW ACADEMIC CREDENTIALS");
-        System.out.println("3. VIEW AVAILABLE COURSES");
-        System.out.println("4. VIEW SELECTED COURSES");
-        System.out.println("5. LOGOUT");
+        System.out.println("2. VIEW AVAILABLE COURSES");
+        System.out.println("3. VIEW SELECTED COURSES");
+        System.out.println("4. LOGOUT");
 
         System.out.print("\nChoose 1 : ");
 
@@ -137,15 +132,12 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
                 userInformation(loggedInUser);
                 break;
             case 2:
-                // academicCredential();
-                break;
-            case 3:
                 manageCourse(loggedInUser);
                 break;
-            case 4:
+            case 3:
                 displayRegisteredCourse(loggedInUser);
                 break;
-            case 5:
+            case 4:
                 userLogout(loggedInUser);
                 break;
             default:
@@ -153,7 +145,6 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
                 studentDashboard(loggedInUser);
                 return;
         }
-
     }
 
     public void displayAcademicCredentials() {
@@ -173,23 +164,20 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
         loggedInUser.displayInformation(loggedInUser);
     }
 
-    // This way of implement method follows both template pattern and the
-    // open-closed principle.
-    public void displayAddOfferedCourses(Course selectedCourse, User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.addOfferedCourse(selectedCourse, loggedInUser);
+    public void displayAddOfferedCourses(User loggedInUser) {
+        course.addOfferedCourse(loggedInUser);
     }
 
-    // This way of implement method follows both template pattern and the
-    // open-closed principle.
+    public void displayUpdateOfferedCourses(User loggedInUser) {
+        course.updateOfferedCourse(loggedInUser);
+    }
+
     public void displayRemoveOfferedCourse(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.removeOfferedCourse(selectedCourse, loggedInUser);
+        course.removeOfferedCourse(loggedInUser);
     }
 
     public void manageCourse(User loggedInUser) {
-        ICourseOperation operation = (ICourseOperation) loggedInUser;
-        operation.manageCourse(selectedCourse, loggedInUser);
+        course.manageCourse(loggedInUser);
     }
 
     public void displayRegisteredCourse(User loggedInUser) {
