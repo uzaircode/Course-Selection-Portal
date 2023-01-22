@@ -2,7 +2,6 @@ import java.util.Scanner;
 
 public class Admin extends User {
     private String adminId;
-    Scanner input = new Scanner(System.in);
 
     private Admin(String username, String password, String emailAddress, int phoneNumber,
             AddressInfo addressInfo) {

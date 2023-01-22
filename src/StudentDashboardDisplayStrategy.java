@@ -6,10 +6,11 @@ import java.util.Scanner;
 public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy {
 
     AddressInfo theAddress = new AddressInfo();
+    private static List<Student> listOfStudents = new ArrayList<Student>();
     Student loggedInUser = null;
     Scanner input = new Scanner(System.in);
+    Course selectedCourse = new Course();
     private Course course = new Course();
-    private static List<Student> listOfStudents = new ArrayList<>();
 
     public void display() {
         // logic to display student dashboard
@@ -107,16 +108,14 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     }
 
     public void studentDashboard(User loggedInUser) {
-
         System.out.print("\033[H\033[2J");
         System.out.println("===== STUDENT DASHBOARD =====");
         System.out.println("Welcome " + loggedInUser.getUsername() + "!");
 
         System.out.println("\n1. MANAGE PERSONAL INFORMATION");
-        System.out.println("2. VIEW ACADEMIC CREDENTIALS");
-        System.out.println("3. VIEW AVAILABLE COURSES");
-        System.out.println("4. VIEW SELECTED COURSES");
-        System.out.println("5. LOGOUT");
+        System.out.println("2. VIEW AVAILABLE COURSES");
+        System.out.println("3. VIEW SELECTED COURSES");
+        System.out.println("4. LOGOUT");
 
         System.out.print("\nChoose 1 : ");
 
@@ -133,15 +132,12 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
                 userInformation(loggedInUser);
                 break;
             case 2:
-                // academicCredential();
+                manageCourse(loggedInUser);
                 break;
             case 3:
-                manageCourse();
-                break;
-            case 4:
                 displayRegisteredCourse(loggedInUser);
                 break;
-            case 5:
+            case 4:
                 userLogout(loggedInUser);
                 break;
             default:
@@ -149,7 +145,6 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
                 studentDashboard(loggedInUser);
                 return;
         }
-
     }
 
     public void displayAcademicCredentials() {
@@ -181,7 +176,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
         course.removeOfferedCourse(loggedInUser);
     }
 
-    public void manageCourse() {
+    public void manageCourse(User loggedInUser) {
         course.manageCourse(loggedInUser);
     }
 

@@ -56,34 +56,47 @@ public class CourseDelegation {
         } else if (loggedInUser instanceof Student) {
             System.out.print("\033[H\033[2J");
             StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
-            try (Scanner input = new Scanner(System.in)) {
-                System.out.println("===== BROWSE THE PROGRAMMES =====\n");
+            System.out.println("===== BROWSE THE PROGRAMMES =====\n");
 
-                Course courses = new Course();
-                courses.displayAllCourse();
+            // display all available course
+            List<Course> allCourses = Course.getAllCourses();
 
-                System.out.println("\n\n(1) ADD COURSE");
-                System.out.println("(2) DELETE COURSE");
-                System.out.println("(3) RETURN TO DASHBOARD");
+            int i = 1;
+            for (Course course : allCourses) {
+                System.out.println("(" + i + ") " + course.getCourseName());
+                i++;
+            }
 
-                System.out.print("\nChoose 1 : ");
+            System.out.println("\n\n(1) ADD COURSE");
+            System.out.println("(2) DELETE COURSE");
+            System.out.println("(3) RETURN TO DASHBOARD");
 
-                int choice = 0;
-                switch (choice) {
-                    case 1:
-                        // studStrategy.displayAddOfferedCourses(loggedInUser);
-                        break;
-                    case 2:
-                        // studStrategy.displayRemoveOfferedCourse(loggedInUser);
-                        break;
-                    case 3:
-                        // studStrategy.studentDashboard(loggedInUser);
-                        break;
-                    default:
-                        System.out.println("Invalid option, please try again.");
-                        // studStrategy.studentDashboard(loggedInUser);
-                        return;
-                }
+            System.out.print("\nChoose 1 : ");
+
+            int choice = 0;
+
+            if (input.hasNextInt()) {
+                choice = input.nextInt();
+                input.nextLine(); // move this line here
+            } else {
+                System.out.println("Invalid input, please enter a number.");
+                return;
+            }
+
+            switch (choice) {
+                case 1:
+                    studStrategy.displayAddOfferedCourses(loggedInUser);
+                    break;
+                case 2:
+                    studStrategy.displayRemoveOfferedCourse(loggedInUser);
+                    break;
+                case 3:
+                    studStrategy.studentDashboard(loggedInUser);
+                    break;
+                default:
+                    System.out.println("Invalid option, please try again.");
+                    studStrategy.studentDashboard(loggedInUser);
+                    return;
             }
         }
     }
@@ -178,7 +191,7 @@ public class CourseDelegation {
             System.out.print("\nPress 0 to return : ");
             int selection = input.nextInt();
             if (selection == 0)
-                studStrategy.manageCourse();
+                studStrategy.manageCourse(loggedInUser);
         }
     }
 
@@ -250,6 +263,7 @@ public class CourseDelegation {
 
     public void removeOfferedCourse(User loggedInUser) {
         AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
+        StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
         if (loggedInUser instanceof Admin) {
             // Admin implementation of deleting a course
             Scanner usInput = new Scanner(System.in);
@@ -291,7 +305,6 @@ public class CourseDelegation {
                 adminStrategy.manageCourse(loggedInUser);
         } else if (loggedInUser instanceof Student) {
             // Student implementation of deleting a course
-            StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
             System.out.print("\033[H\033[2J");
             List<Course> registeredCourses = ((Student) loggedInUser).getCourses();
 
@@ -308,7 +321,14 @@ public class CourseDelegation {
             }
             int choice = 0;
             System.out.print("\nSelect a course to unregister from : ");
-            choice = input.nextInt();
+            if (input.hasNextInt()) {
+                choice = input.nextInt();
+                input.nextLine();
+            } else {
+                System.out.println("Invalid input, please enter a number.");
+                return;
+            }
+
             if (choice > 0 && choice <= registeredCourses.size()) {
                 Course courseToUnregister = registeredCourses.get(choice - 1);
                 ((Student) loggedInUser).removeCourse(courseToUnregister);
@@ -317,7 +337,7 @@ public class CourseDelegation {
                 System.out.print("\nPress 0 to return : ");
                 int selection = input.nextInt();
                 if (selection == 0)
-                    studStrategy.manageCourse();
+                    studStrategy.manageCourse(loggedInUser);
             } else {
                 System.out.println("Invalid choice.");
             }

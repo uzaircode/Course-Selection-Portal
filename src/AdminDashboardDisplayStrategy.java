@@ -25,7 +25,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
             if (selection == 1) {
                 displayLogin();
             } else if (selection == 2) {
-                // displayRegister();
+                displayRegister();
             }
         }
     }
@@ -37,7 +37,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         ListOfAdmins.add(new Admin("A12345", "admin", "123", "admin@example.com", 123456789, address));
 
         try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== USER LOGIN =====");
+            System.out.println("===== ADMIN LOGIN =====");
             System.out.print("\nEnter username: ");
             String inpUser = input.nextLine();
             System.out.print("Enter password: ");
