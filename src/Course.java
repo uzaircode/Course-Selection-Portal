@@ -1,6 +1,5 @@
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -28,7 +27,7 @@ public class Course extends CourseDelegation {
     private static List<Course> courses = new ArrayList<>();
     private CourseDelegation delegation = new CourseDelegation();
 
-    Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
 
     public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
             String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities,
@@ -218,53 +217,7 @@ public class Course extends CourseDelegation {
     }
 
     public void manageCourse(User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== BROWSE THE PROGRAMMES =====\n");
-
-            // display all available course
-            List<Course> allCourses = Course.getAllCourses();
-
-            int i = 1;
-            for (Course course : allCourses) {
-                System.out.println("(" + i + ") " + course.getCourseName());
-                i++;
-            }
-
-            System.out.println("\n\n(1) ADD COURSE");
-            System.out.println("(2) UPDATE COURSE");
-            System.out.println("(3) DELETE COURSE");
-            System.out.println("(4) RETURN TO DASHBOARD");
-
-            System.out.print("\nChoose 1 : ");
-
-            int choice = 0;
-            try {
-                choice = input.nextInt();
-            } catch (InputMismatchException e) {
-                System.out.println("Invalid input, please enter a number.");
-                return;
-            }
-
-            switch (choice) {
-                case 1:
-                    adminStrategy.displayAddOfferedCourses(loggedInUser);
-                    break;
-                case 2:
-                    adminStrategy.displayUpdateOfferedCourses(loggedInUser);
-                    break;
-                case 3:
-                    adminStrategy.displayRemoveOfferedCourse(loggedInUser);
-                    break;
-                case 4:
-                    adminStrategy.adminDashboard(loggedInUser);
-                default:
-                    System.out.println("Invalid option, please try again.");
-                    adminStrategy.adminDashboard(loggedInUser);
-                    return;
-            }
-        }
+        delegation.manageCourse(loggedInUser);
     }
 
     public void addOfferedCourse(User loggedInUser) {

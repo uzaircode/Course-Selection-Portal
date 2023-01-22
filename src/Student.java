@@ -11,14 +11,13 @@ enum MediumStudy {
     PHD;
 }
 
-public class Student extends User {
-
+public final class Student extends User {
     private int studentId;
     private MediumStudy mediumStudy;
     private String faculty;
     private List<Course> courses;
 
-    public Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo,
+    private Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo,
             MediumStudy mediumStudy, String faculty) {
         super(username, password, emailAddress, phoneNumber, addressInfo);
         Random rand = new Random();
@@ -26,6 +25,28 @@ public class Student extends User {
         this.mediumStudy = mediumStudy;
         this.faculty = faculty;
         this.courses = new ArrayList<>();
+    }
+
+    private static Student instance;
+
+    public static Student getInstance(String username, String password, String emailAddress, int phoneNumber,
+            AddressInfo theAddress, MediumStudy mediumStudy, String major) {
+        if (instance == null) {
+            instance = new Student(username, password, emailAddress, phoneNumber, theAddress, mediumStudy,
+                    major);
+        }
+        return instance;
+    }
+
+    private Student() {
+        // private constructor
+    }
+
+    public static Student getInstance() {
+        if (instance == null) {
+            instance = new Student();
+        }
+        return instance;
     }
 
     public int getStudentId() {
@@ -112,37 +133,4 @@ public class Student extends User {
         }
     }
 
-    public void manageCourse() {
-        System.out.print("\033[H\033[2J");
-        StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
-        try (Scanner input = new Scanner(System.in)) {
-            System.out.println("===== BROWSE THE PROGRAMMES =====\n");
-
-            Course courses = new Course();
-            courses.displayAllCourse();
-
-            System.out.println("\n\n(1) ADD COURSE");
-            System.out.println("(2) DELETE COURSE");
-            System.out.println("(3) RETURN TO DASHBOARD");
-
-            System.out.print("\nChoose 1 : ");
-
-            int choice = 0;
-            switch (choice) {
-                case 1:
-                    // studStrategy.displayAddOfferedCourses(loggedInUser);
-                    break;
-                case 2:
-                    // studStrategy.displayRemoveOfferedCourse(loggedInUser);
-                    break;
-                case 3:
-                    // studStrategy.studentDashboard(loggedInUser);
-                    break;
-                default:
-                    System.out.println("Invalid option, please try again.");
-                    // studStrategy.studentDashboard(loggedInUser);
-                    return;
-            }
-        }
-    }
 }
