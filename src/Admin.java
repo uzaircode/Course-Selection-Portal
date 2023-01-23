@@ -1,7 +1,11 @@
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// Admin is the subclass of user (Inheritance).
+// It contains specific functionality and privileges related to managing the system.
 public class Admin extends User {
     private String adminId;
+    private static Scanner input = new Scanner(System.in);
 
     private Admin(String username, String password, String emailAddress, int phoneNumber,
             AddressInfo addressInfo) {
@@ -41,6 +45,48 @@ public class Admin extends User {
     }
 
     @Override
+    void displayUserDashboard(User loggedInUser) {
+        AdminDashboardDisplayStrategy adminDashboard = new AdminDashboardDisplayStrategy();
+        System.out.print("\033[H\033[2J");
+        System.out.println("===== ADMIN DASHBOARD =====");
+        System.out.println("Welcome " + loggedInUser.getUsername() + "!");
+
+        System.out.println("\n1. MANAGE PERSONAL INFORMATION");
+        System.out.println("2. VIEW STUDENT LIST");
+        System.out.println("3. MANAGE COURSES");
+        System.out.println("4. LOGOUT");
+
+        System.out.print("\nChoose 1 : ");
+
+        int choice = 0;
+        try {
+            choice = input.nextInt();
+        } catch (InputMismatchException e) {
+            System.out.println("Invalid input, please enter a number.");
+            return;
+        }
+
+        switch (choice) {
+            case 1:
+                adminDashboard.userInformation(loggedInUser);
+                break;
+            case 2:
+                // view student list;
+                break;
+            case 3:
+                adminDashboard.manageCourse(loggedInUser);
+                break;
+            case 4:
+                adminDashboard.userLogout(loggedInUser);
+                break;
+            default:
+                System.out.println("Invalid option, please try again.");
+                adminDashboard.adminDashboard(loggedInUser);
+                return;
+        }
+    }
+
+    @Override
     void displayInformation(User loggedInUser) {
         System.out.print("\033[H\033[2J");
         AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
@@ -51,7 +97,6 @@ public class Admin extends User {
             System.out.println("Admin ID    : " + ((Admin) loggedInUser).getAdminId());
             System.out.println("Email Address : " + loggedInUser.getEmailAddress());
             System.out.println("Phone Number  : " + loggedInUser.getPhoneNumber());
-            // System.out.println("Faculty : " + loggedInUser.getFaculty());
 
             System.out.println("\n===== ADMIN ADDRESS INFORMATION =====");
             System.out.println("Street       : " + loggedInUser.getAddressInfo().getStreet());

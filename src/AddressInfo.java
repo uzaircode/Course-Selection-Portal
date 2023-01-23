@@ -1,7 +1,5 @@
-// Definition : Composition Like Aggregation but the owned object is not
-// independent from the owner which means by deleting owner the owned object
-// will also be deleted.
-
+// The AddressInfo class is a composition class purposely to store user address.
+// For more detailed information, please refer to the document report.
 public class AddressInfo {
     private String street;
     private String city;
@@ -66,8 +64,4 @@ public class AddressInfo {
     public void setCountry(String country) {
         this.country = country;
     }
-
-    public void validate() {
-    }
-
 }
