@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 // The CourseDelegation class uses delegation to handle course add, remove, and update actions for Admin and Student users, keeping the code organized and allowing for easy modification. Developers should use this class for handling course actions for different user types.
-// For more detailed information, please refer to the document report.
+// For more detailed information, please refer to the documentation report.
 public class CourseDelegation {
     private static Scanner input = new Scanner(System.in);
 

@@ -12,7 +12,7 @@ enum MediumOfStudy {
 
 // The Course class is used to store and manage information about a course
 // offered by the university.
-// For more detailed information, please refer to the document report.
+// For more detailed information, please refer to the documentation report.
 public class Course extends CourseDelegation {
     private String courseId;
     private String courseName;

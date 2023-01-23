@@ -3,7 +3,7 @@ import java.util.List;
 import java.util.Scanner;
 
 // The AdminDashboardDisplayStrategy class uses the strategy pattern for flexible and interchangeable handling of the admin dashboard display. Developers can use this class and customize as needed.
-// For more detailed information, please refer to the document report.
+// For more detailed information, please refer to the documentation report.
 public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
 
     AddressInfo theAddress = new AddressInfo();
@@ -13,6 +13,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     private Course course = new Course();
     private static Scanner input = new Scanner(System.in);
 
+    @Override
     public void userDisplayPortal() {
         // logic to display admin dashboard
         System.out.print("\033[H\033[2J");
@@ -31,6 +32,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         }
     }
 
+    @Override
     public void displayLogin() {
         System.out.print("\033[H\033[2J");
 
@@ -63,6 +65,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         }
     }
 
+    @Override
     public void displayRegister() {
         System.out.print("\033[H\033[2J");
 
