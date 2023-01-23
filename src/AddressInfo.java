@@ -1,4 +1,5 @@
 // The AddressInfo class is a composition class purposely to store user address.
+// For more detailed information, please refer to the document report.
 public class AddressInfo {
     private String street;
     private String city;

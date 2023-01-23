@@ -25,9 +25,15 @@ public class Main {
                     viewCourseBriefing();
                     break;
                 case 3:
+                    // The StudentDashboardDisplayStrategy class is assigned to the 'strategy'
+                    // variable.
+                    // This will direct the program to display the student dashboard to the user.
                     strategy = new StudentDashboardDisplayStrategy();
                     break;
                 case 4:
+                    // The AdminDashboardDisplayStrategy class is assigned to the 'strategy'
+                    // variable.
+                    // This will direct the program to display the admin dashboard to the user.
                     strategy = new AdminDashboardDisplayStrategy();
                     break;
                 case 5:

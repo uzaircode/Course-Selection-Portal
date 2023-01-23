@@ -12,6 +12,9 @@ enum MediumStudy {
     PHD;
 }
 
+// Student is the subclass of user (Inheritance).
+// It contains specific properties and methods and ability to add and remove
+// courses from their program of study.
 public final class Student extends User {
     private int studentId;
     private MediumStudy mediumStudy;

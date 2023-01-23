@@ -1,6 +1,8 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
+// Admin is the subclass of user (Inheritance).
+// It contains specific functionality and privileges related to managing the system.
 public class Admin extends User {
     private String adminId;
     private static Scanner input = new Scanner(System.in);

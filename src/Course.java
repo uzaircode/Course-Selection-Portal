@@ -10,12 +10,9 @@ enum MediumOfStudy {
     PHD;
 }
 
-// The Course class represents a course offered by the university.
-// It contains details information regarding on the course.
-// This class is used in conjunction with the courseDelegation class to manage
-// and display course information for students and faculties.
-// The logic to handle action course, add course, update course & delete course
-// is inside courseDelegation class.
+// The Course class is used to store and manage information about a course
+// offered by the university.
+// For more detailed information, please refer to the document report.
 public class Course extends CourseDelegation {
     private String courseId;
     private String courseName;
@@ -27,7 +24,6 @@ public class Course extends CourseDelegation {
     private int feeStructure;
     private int maximumStudent;
     private MediumOfStudy mediumStudy;
-    private Programme programme; // Composition
 
     private static List<Course> courses = new ArrayList<>();
     private CourseDelegation delegation = new CourseDelegation();
@@ -58,7 +54,7 @@ public class Course extends CourseDelegation {
                 + Arrays.toString(employmentOpportunities) + "\nscopeForFutherStudies : "
                 + Arrays.toString(scopeForFutherStudies) + "\nscholarshipFacilities : " + scholarshipFacilities
                 + "\nfeeStructure : " + feeStructure + "\nmaximumStudent : " + maximumStudent + "\nmediumStudy : "
-                + mediumStudy + "\nprogramme : " + programme;
+                + mediumStudy;
     }
 
     public String getCourseId() {
@@ -139,14 +135,6 @@ public class Course extends CourseDelegation {
 
     public void setMediumStudy(MediumOfStudy mediumStudy) {
         this.mediumStudy = mediumStudy;
-    }
-
-    public Programme getProgramme() {
-        return programme;
-    }
-
-    public void setProgramme(Programme programme) {
-        this.programme = programme;
     }
 
     public static List<Course> getCourses() {
