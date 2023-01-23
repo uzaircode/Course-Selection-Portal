@@ -12,7 +12,7 @@ enum MediumStudy {
     PHD;
 }
 
-// Student is the subclass of user (Inheritance).
+// Student is the subclass of user (INHERITANCE).
 // It contains specific properties and methods and ability to add and remove
 // courses from their program of study.
 public final class Student extends User {
@@ -20,8 +20,11 @@ public final class Student extends User {
     private MediumStudy mediumStudy;
     private String faculty;
     private List<Course> courses;
+    private static Student instance; // create instance of student
     private static Scanner input = new Scanner(System.in);
 
+    // set it to private to ensure that only one instance of the Student class is
+    // created.
     private Student(String username, String password, String emailAddress, int phoneNumber, AddressInfo addressInfo,
             MediumStudy mediumStudy, String faculty) {
         super(username, password, emailAddress, phoneNumber, addressInfo);
@@ -32,24 +35,14 @@ public final class Student extends User {
         this.courses = new ArrayList<>();
     }
 
-    private static Student instance;
-
+    // SINGLETON PATTERN is used to ensure that there is only one student object
+    // being manipulated throughout the application, and to prevent multiple
+    // instances of the student object from being created.
     public static Student getInstance(String username, String password, String emailAddress, int phoneNumber,
             AddressInfo theAddress, MediumStudy mediumStudy, String major) {
         if (instance == null) {
             instance = new Student(username, password, emailAddress, phoneNumber, theAddress, mediumStudy,
                     major);
-        }
-        return instance;
-    }
-
-    private Student() {
-        // private constructor
-    }
-
-    public static Student getInstance() {
-        if (instance == null) {
-            instance = new Student();
         }
         return instance;
     }
@@ -154,7 +147,7 @@ public final class Student extends User {
     }
 
     @Override
-    void displayInformation(User loggedInUser) {
+    void displayUserInformation(User loggedInUser) {
         System.out.print("\033[H\033[2J");
         StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
         System.out.println("===== STUDENT INFORMATION =====");

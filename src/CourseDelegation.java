@@ -2,8 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// The CourseDelegation class uses delegation to handle course add, remove, and update actions for Admin and Student users, keeping the code organized and allowing for easy modification. Developers should use this class for handling course actions for different user types.
-// For more detailed information, please refer to the document report.
+// The CourseDelegation class implements the DELEGATION DESIGN PATTERN to separate the responsibilities of handling course add, remove, and update actions for Admin and Student users.
+// This allows for a cleaner and more organized code structure, as well as the ability to easily add or modify functionality for specific user types in the future.
+// Other developers should be aware of this structure and should utilize the delegation methods provided in this class when handling course actions for different user types.
 public class CourseDelegation {
     private static Scanner input = new Scanner(System.in);
 
@@ -40,13 +41,13 @@ public class CourseDelegation {
 
             switch (choice) {
                 case 1:
-                    adminStrategy.displayAddOfferedCourses(loggedInUser);
+                    adminStrategy.addCourse(loggedInUser);
                     break;
                 case 2:
-                    adminStrategy.displayUpdateOfferedCourses(loggedInUser);
+                    adminStrategy.updateCourse(loggedInUser);
                     break;
                 case 3:
-                    adminStrategy.displayRemoveOfferedCourse(loggedInUser);
+                    adminStrategy.removeCourse(loggedInUser);
                     break;
                 case 4:
                     adminStrategy.adminDashboard(loggedInUser);
@@ -87,10 +88,10 @@ public class CourseDelegation {
 
             switch (choice) {
                 case 1:
-                    studStrategy.displayAddOfferedCourses(loggedInUser);
+                    studStrategy.addCourse(loggedInUser);
                     break;
                 case 2:
-                    studStrategy.displayRemoveOfferedCourse(loggedInUser);
+                    studStrategy.removeCourse(loggedInUser);
                     break;
                 case 3:
                     studStrategy.studentDashboard(loggedInUser);
@@ -103,7 +104,7 @@ public class CourseDelegation {
         }
     }
 
-    public void addOfferedCourse(User loggedInUser, Course selectedCourse) {
+    public void handleAddCourse(User loggedInUser, Course selectedCourse) {
         if (loggedInUser instanceof Admin) {
             // Admin implementation of adding a course
             AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
@@ -197,7 +198,7 @@ public class CourseDelegation {
         }
     }
 
-    public void updateOfferedCourse(User user) {
+    public void handleUpdateCourse(User user) {
         if (user instanceof Admin) {
             AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
             input = new Scanner(System.in); // Re-instantiate the input scanner object here
@@ -263,7 +264,7 @@ public class CourseDelegation {
 
     }
 
-    public void removeOfferedCourse(User loggedInUser) {
+    public void handleRemoveCourse(User loggedInUser) {
         AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
         StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
         if (loggedInUser instanceof Admin) {

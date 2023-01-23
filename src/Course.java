@@ -10,9 +10,12 @@ enum MediumOfStudy {
     PHD;
 }
 
-// The Course class is used to store and manage information about a course
-// offered by the university.
-// For more detailed information, please refer to the document report.
+// The Course class represents a course offered by the university.
+// It contains details information regarding on the course.
+// This class is used in conjunction with the courseDelegation class to manage
+// and display course information for students and faculties.
+// The logic to handle action course, add course, update course & delete course
+// is inside courseDelegation class.
 public class Course extends CourseDelegation {
     private String courseId;
     private String courseName;
@@ -202,21 +205,21 @@ public class Course extends CourseDelegation {
     // This method addOfferedCourse uses delegation design pattern by delegating
     // the responsibility of add course actions to the object referenced by the
     // delegation variable.
-    public void addOfferedCourse(User loggedInUser) {
-        delegation.addOfferedCourse(loggedInUser, this);
+    public void handleAddCourse(User loggedInUser) {
+        delegation.handleAddCourse(loggedInUser, this);
     }
 
     // This method updateOfferedCourse uses delegation design pattern by delegating
     // the responsibility of update course actions to the object referenced by the
     // delegation variable.
-    public void updateOfferedCourse(User loggedInUser) {
-        delegation.updateOfferedCourse(loggedInUser);
+    public void handleUpdateCourse(User loggedInUser) {
+        delegation.handleUpdateCourse(loggedInUser);
     }
 
     // This method removeOfferedCourse uses delegation design pattern by delegating
     // the responsibility of delete course actions to the object referenced by the
     // delegation variable.
-    public void removeOfferedCourse(User loggedInUser) {
-        delegation.removeOfferedCourse(loggedInUser);
+    public void handleRemoveCourse(User loggedInUser) {
+        delegation.handleRemoveCourse(loggedInUser);
     }
 }

@@ -2,8 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// The AdminDashboardDisplayStrategy class uses the strategy pattern for flexible and interchangeable handling of the admin dashboard display. Developers can use this class and customize as needed.
-// For more detailed information, please refer to the document report.
+// The AdminDashboardDisplayStrategy class is an implementation of the STRATEGY PATTERN and POLYMORPHISM.
+// It provides a way for the application to handle the display of the admin dashboard in a flexible and interchangeable manner.
+// By implementing the strategy pattern, the application can easily switch between different display strategies (student/admin dashboard) without affecting the rest of the code.
+// Developers should use this class to handle the display of the admin dashboard in their code and can extend or customize the functionality as needed.
 public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
 
     AddressInfo theAddress = new AddressInfo();
@@ -13,7 +15,8 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     private Course course = new Course();
     private static Scanner input = new Scanner(System.in);
 
-    public void userDisplayPortal() {
+    @Override
+    public void displayUserPortal() {
         // logic to display admin dashboard
         System.out.print("\033[H\033[2J");
         try (Scanner input = new Scanner(System.in)) {
@@ -24,14 +27,15 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
             System.out.print("\nChoose 1 : ");
             int selection = input.nextInt();
             if (selection == 1) {
-                displayLogin();
+                displayUserLogin();
             } else if (selection == 2) {
-                displayRegister();
+                displayUserRegister();
             }
         }
     }
 
-    public void displayLogin() {
+    @Override
+    public void displayUserLogin() {
         System.out.print("\033[H\033[2J");
 
         AddressInfo address = new AddressInfo("123 Main St", "Anytown", "USA", "12345", "Malaysia");
@@ -63,7 +67,8 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         }
     }
 
-    public void displayRegister() {
+    @Override
+    public void displayUserRegister() {
         System.out.print("\033[H\033[2J");
 
         System.out.println("===== ADMIN REGISTRATION =====");
@@ -106,20 +111,20 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
         loggedInUser.displayUserDashboard(loggedInUser);
     }
 
-    public void userInformation(User loggedInUser) {
-        loggedInUser.displayInformation(loggedInUser);
+    public void adminInformation(User loggedInUser) {
+        loggedInUser.displayUserInformation(loggedInUser);
     }
 
-    public void displayAddOfferedCourses(User loggedInUser) {
-        course.addOfferedCourse(loggedInUser);
+    public void addCourse(User loggedInUser) {
+        course.handleAddCourse(loggedInUser);
     }
 
-    public void displayUpdateOfferedCourses(User loggedInUser) {
-        course.updateOfferedCourse(loggedInUser);
+    public void updateCourse(User loggedInUser) {
+        course.handleUpdateCourse(loggedInUser);
     }
 
-    public void displayRemoveOfferedCourse(User loggedInUser) {
-        course.removeOfferedCourse(loggedInUser);
+    public void removeCourse(User loggedInUser) {
+        course.handleRemoveCourse(loggedInUser);
     }
 
     public void manageCourse(User loggedInUser) {
@@ -127,6 +132,6 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     }
 
     public void userLogout(User loggedInUser) {
-        loggedInUser.userLogout(loggedInUser);
+        loggedInUser.displayUserLogout(loggedInUser);
     }
 }
