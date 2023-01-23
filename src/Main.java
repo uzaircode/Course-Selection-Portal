@@ -34,7 +34,7 @@ public class Main {
                     return;
             }
             if (strategy != null) {
-                strategy.display();
+                strategy.userDisplayPortal();
             }
         }
     }

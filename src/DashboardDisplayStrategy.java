@@ -1,5 +1,6 @@
+// // implement Interface Segregation Principle (ISP) as both dashboard.
 public interface DashboardDisplayStrategy {
-    void display();
+    void userDisplayPortal();
 
     void displayLogin();
 

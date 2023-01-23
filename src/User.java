@@ -36,8 +36,6 @@ public abstract class User {
         this.addressInfo = addressInfo;
     }
 
-    abstract void displayInformation(User loggedInUser);
-
     public User(String username, String password) {
         this.username = username;
         this.password = password;
@@ -61,6 +59,16 @@ public abstract class User {
 
     public AddressInfo getAddressInfo() {
         return addressInfo;
+    }
+
+    abstract void displayUserDashboard(User loggedInUser);
+
+    abstract void displayInformation(User loggedInUser);
+
+    public void userLogout(User loggedInUser) {
+        System.out.println("User " + loggedInUser.getUsername() + " has been logout.");
+        loggedInUser = null;
+        Main.main(null);
     }
 
 }

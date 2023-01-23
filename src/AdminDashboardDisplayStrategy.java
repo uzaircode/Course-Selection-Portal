@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -10,9 +9,9 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     Admin loggedInUser = null;
     Course selectedCourse = new Course();
     private Course course = new Course();
-    Scanner input = new Scanner(System.in);
+    private static Scanner input = new Scanner(System.in);
 
-    public void display() {
+    public void userDisplayPortal() {
         // logic to display admin dashboard
         System.out.print("\033[H\033[2J");
         try (Scanner input = new Scanner(System.in)) {
@@ -102,43 +101,7 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     }
 
     public void adminDashboard(User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        System.out.println("===== ADMIN DASHBOARD =====");
-        System.out.println("Welcome " + loggedInUser.getUsername() + "!");
-
-        System.out.println("\n1. MANAGE PERSONAL INFORMATION");
-        System.out.println("2. VIEW STUDENT LIST");
-        System.out.println("3. MANAGE COURSES");
-        System.out.println("4. LOGOUT");
-
-        System.out.print("\nChoose 1 : ");
-
-        int choice = 0;
-        try {
-            choice = input.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input, please enter a number.");
-            return;
-        }
-
-        switch (choice) {
-            case 1:
-                userInformation(loggedInUser);
-                break;
-            case 2:
-                // view student list;
-                break;
-            case 3:
-                manageCourse(loggedInUser);
-                break;
-            case 4:
-                userLogout(loggedInUser);
-                break;
-            default:
-                System.out.println("Invalid option, please try again.");
-                adminDashboard(loggedInUser);
-                return;
-        }
+        loggedInUser.displayUserDashboard(loggedInUser);
     }
 
     public void userInformation(User loggedInUser) {
@@ -162,8 +125,6 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     }
 
     public void userLogout(User loggedInUser) {
-        System.out.println("User " + loggedInUser.getUsername() + " has been logout.");
-        loggedInUser = null;
-        Main.main(null);
+        loggedInUser.userLogout(loggedInUser);
     }
 }

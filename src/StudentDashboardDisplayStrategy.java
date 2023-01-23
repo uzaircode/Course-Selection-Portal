@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
 
@@ -12,7 +11,8 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     Course selectedCourse = new Course();
     private Course course = new Course();
 
-    public void display() {
+    @Override
+    public void userDisplayPortal() {
         // logic to display student dashboard
         System.out.print("\033[H\033[2J");
         System.out.println("===== WELCOME TO STUDENT PORTAL =====");
@@ -28,6 +28,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
         }
     }
 
+    @Override
     public void displayLogin() {
         System.out.print("\033[H\033[2J");
 
@@ -63,6 +64,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
         }
     }
 
+    @Override
     public void displayRegister() {
 
         System.out.print("\033[H\033[2J");
@@ -108,43 +110,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     }
 
     public void studentDashboard(User loggedInUser) {
-        System.out.print("\033[H\033[2J");
-        System.out.println("===== STUDENT DASHBOARD =====");
-        System.out.println("Welcome " + loggedInUser.getUsername() + "!");
-
-        System.out.println("\n1. MANAGE PERSONAL INFORMATION");
-        System.out.println("2. VIEW AVAILABLE COURSES");
-        System.out.println("3. VIEW SELECTED COURSES");
-        System.out.println("4. LOGOUT");
-
-        System.out.print("\nChoose 1 : ");
-
-        int choice = 0;
-        try {
-            choice = input.nextInt();
-        } catch (InputMismatchException e) {
-            System.out.println("Invalid input, please enter a number.");
-            return;
-        }
-
-        switch (choice) {
-            case 1:
-                userInformation(loggedInUser);
-                break;
-            case 2:
-                manageCourse(loggedInUser);
-                break;
-            case 3:
-                displayRegisteredCourse(loggedInUser);
-                break;
-            case 4:
-                userLogout(loggedInUser);
-                break;
-            default:
-                System.out.println("Invalid option, please try again.");
-                studentDashboard(loggedInUser);
-                return;
-        }
+        loggedInUser.displayUserDashboard(loggedInUser);
     }
 
     public void displayAcademicCredentials() {
@@ -189,9 +155,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     }
 
     public void userLogout(User loggedInUser) {
-        System.out.println("User " + loggedInUser.getUsername() + " has been logout.");
-        loggedInUser = null;
-        Main.main(null);
+        loggedInUser.userLogout(loggedInUser);
     }
 
 }
