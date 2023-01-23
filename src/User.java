@@ -66,9 +66,9 @@ public abstract class User {
 
     abstract void displayUserDashboard(User loggedInUser);
 
-    abstract void displayInformation(User loggedInUser);
+    abstract void displayUserInformation(User loggedInUser);
 
-    public void userLogout(User loggedInUser) {
+    public void displayUserLogout(User loggedInUser) {
         System.out.println("User " + loggedInUser.getUsername() + " has been logout.");
         loggedInUser = null;
         Main.main(null);

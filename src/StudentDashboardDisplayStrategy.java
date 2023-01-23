@@ -16,7 +16,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     private Course course = new Course();
 
     @Override
-    public void userDisplayPortal() {
+    public void displayUserPortal() {
         // logic to display student dashboard
         System.out.print("\033[H\033[2J");
         System.out.println("===== WELCOME TO STUDENT PORTAL =====");
@@ -26,14 +26,14 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
         System.out.print("\nChoose 1 : ");
         int selection = input.nextInt();
         if (selection == 1) {
-            displayLogin();
+            displayUserLogin();
         } else if (selection == 2) {
-            displayRegister();
+            displayUserRegister();
         }
     }
 
     @Override
-    public void displayLogin() {
+    public void displayUserLogin() {
         System.out.print("\033[H\033[2J");
 
         AddressInfo address = new AddressInfo("123 Main St", "Anytown", "Anystate",
@@ -69,7 +69,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     }
 
     @Override
-    public void displayRegister() {
+    public void displayUserRegister() {
 
         System.out.print("\033[H\033[2J");
 
@@ -131,19 +131,19 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     }
 
     public void userInformation(User loggedInUser) {
-        loggedInUser.displayInformation(loggedInUser);
+        loggedInUser.displayUserInformation(loggedInUser);
     }
 
-    public void displayAddOfferedCourses(User loggedInUser) {
-        course.addOfferedCourse(loggedInUser);
+    public void addCourse(User loggedInUser) {
+        course.handleAddCourse(loggedInUser);
     }
 
-    public void displayUpdateOfferedCourses(User loggedInUser) {
-        course.updateOfferedCourse(loggedInUser);
+    public void updateCourse(User loggedInUser) {
+        course.handleUpdateCourse(loggedInUser);
     }
 
-    public void displayRemoveOfferedCourse(User loggedInUser) {
-        course.removeOfferedCourse(loggedInUser);
+    public void removeCourse(User loggedInUser) {
+        course.handleRemoveCourse(loggedInUser);
     }
 
     public void manageCourse(User loggedInUser) {
@@ -159,7 +159,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     }
 
     public void userLogout(User loggedInUser) {
-        loggedInUser.userLogout(loggedInUser);
+        loggedInUser.displayUserLogout(loggedInUser);
     }
 
 }

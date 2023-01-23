@@ -205,21 +205,21 @@ public class Course extends CourseDelegation {
     // This method addOfferedCourse uses delegation design pattern by delegating
     // the responsibility of add course actions to the object referenced by the
     // delegation variable.
-    public void addOfferedCourse(User loggedInUser) {
-        delegation.addOfferedCourse(loggedInUser, this);
+    public void handleAddCourse(User loggedInUser) {
+        delegation.handleAddCourse(loggedInUser, this);
     }
 
     // This method updateOfferedCourse uses delegation design pattern by delegating
     // the responsibility of update course actions to the object referenced by the
     // delegation variable.
-    public void updateOfferedCourse(User loggedInUser) {
-        delegation.updateOfferedCourse(loggedInUser);
+    public void handleUpdateCourse(User loggedInUser) {
+        delegation.handleUpdateCourse(loggedInUser);
     }
 
     // This method removeOfferedCourse uses delegation design pattern by delegating
     // the responsibility of delete course actions to the object referenced by the
     // delegation variable.
-    public void removeOfferedCourse(User loggedInUser) {
-        delegation.removeOfferedCourse(loggedInUser);
+    public void handleRemoveCourse(User loggedInUser) {
+        delegation.handleRemoveCourse(loggedInUser);
     }
 }

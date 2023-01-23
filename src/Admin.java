@@ -61,7 +61,7 @@ public class Admin extends User {
 
         switch (choice) {
             case 1:
-                adminDashboard.userInformation(loggedInUser);
+                adminDashboard.adminInformation(loggedInUser);
                 break;
             case 2:
                 // view student list;
@@ -80,7 +80,7 @@ public class Admin extends User {
     }
 
     @Override
-    void displayInformation(User loggedInUser) {
+    void displayUserInformation(User loggedInUser) {
         System.out.print("\033[H\033[2J");
         AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
         try (Scanner input = new Scanner(System.in)) {

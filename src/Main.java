@@ -40,7 +40,7 @@ public class Main {
                     return;
             }
             if (strategy != null) {
-                strategy.userDisplayPortal();
+                strategy.displayUserPortal();
             }
         }
     }

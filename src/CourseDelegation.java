@@ -41,13 +41,13 @@ public class CourseDelegation {
 
             switch (choice) {
                 case 1:
-                    adminStrategy.displayAddOfferedCourses(loggedInUser);
+                    adminStrategy.addCourse(loggedInUser);
                     break;
                 case 2:
-                    adminStrategy.displayUpdateOfferedCourses(loggedInUser);
+                    adminStrategy.updateCourse(loggedInUser);
                     break;
                 case 3:
-                    adminStrategy.displayRemoveOfferedCourse(loggedInUser);
+                    adminStrategy.removeCourse(loggedInUser);
                     break;
                 case 4:
                     adminStrategy.adminDashboard(loggedInUser);
@@ -88,10 +88,10 @@ public class CourseDelegation {
 
             switch (choice) {
                 case 1:
-                    studStrategy.displayAddOfferedCourses(loggedInUser);
+                    studStrategy.addCourse(loggedInUser);
                     break;
                 case 2:
-                    studStrategy.displayRemoveOfferedCourse(loggedInUser);
+                    studStrategy.removeCourse(loggedInUser);
                     break;
                 case 3:
                     studStrategy.studentDashboard(loggedInUser);
@@ -104,7 +104,7 @@ public class CourseDelegation {
         }
     }
 
-    public void addOfferedCourse(User loggedInUser, Course selectedCourse) {
+    public void handleAddCourse(User loggedInUser, Course selectedCourse) {
         if (loggedInUser instanceof Admin) {
             // Admin implementation of adding a course
             AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
@@ -198,7 +198,7 @@ public class CourseDelegation {
         }
     }
 
-    public void updateOfferedCourse(User user) {
+    public void handleUpdateCourse(User user) {
         if (user instanceof Admin) {
             AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
             input = new Scanner(System.in); // Re-instantiate the input scanner object here
@@ -264,7 +264,7 @@ public class CourseDelegation {
 
     }
 
-    public void removeOfferedCourse(User loggedInUser) {
+    public void handleRemoveCourse(User loggedInUser) {
         AdminDashboardDisplayStrategy adminStrategy = new AdminDashboardDisplayStrategy();
         StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
         if (loggedInUser instanceof Admin) {

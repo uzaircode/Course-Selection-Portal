@@ -147,7 +147,7 @@ public final class Student extends User {
     }
 
     @Override
-    void displayInformation(User loggedInUser) {
+    void displayUserInformation(User loggedInUser) {
         System.out.print("\033[H\033[2J");
         StudentDashboardDisplayStrategy studStrategy = new StudentDashboardDisplayStrategy();
         System.out.println("===== STUDENT INFORMATION =====");
