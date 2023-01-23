@@ -10,9 +10,12 @@ enum MediumOfStudy {
     PHD;
 }
 
-// The Course class is used to store and manage information about a course
-// offered by the university.
-// For more detailed information, please refer to the documentation report.
+// The Course class represents a course offered by the university.
+// It contains details information regarding on the course.
+// This class is used in conjunction with the courseDelegation class to manage
+// and display course information for students and faculties.
+// The logic to handle action course, add course, update course & delete course
+// is inside courseDelegation class.
 public class Course extends CourseDelegation {
     private String courseId;
     private String courseName;

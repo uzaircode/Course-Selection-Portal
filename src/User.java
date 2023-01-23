@@ -1,4 +1,5 @@
-// The User class serves as an abstract base class for different types of users (e.g. Admin, Student) in the system.
+
+// ABSTRACTION of user class is used to serve as an abstract base class for different types of users (e.g. Admin, Student) in the system.
 // It contains common properties and methods that are shared among all user types.
 public abstract class User {
     private String username;

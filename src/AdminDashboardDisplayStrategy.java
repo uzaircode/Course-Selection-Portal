@@ -2,8 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// The AdminDashboardDisplayStrategy class uses the strategy pattern for flexible and interchangeable handling of the admin dashboard display. Developers can use this class and customize as needed.
-// For more detailed information, please refer to the documentation report.
+// The AdminDashboardDisplayStrategy class is an implementation of the STRATEGY PATTERN and POLYMORPHISM.
+// It provides a way for the application to handle the display of the admin dashboard in a flexible and interchangeable manner.
+// By implementing the strategy pattern, the application can easily switch between different display strategies (student/admin dashboard) without affecting the rest of the code.
+// Developers should use this class to handle the display of the admin dashboard in their code and can extend or customize the functionality as needed.
 public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
 
     AddressInfo theAddress = new AddressInfo();

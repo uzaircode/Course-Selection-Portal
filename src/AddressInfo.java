@@ -1,5 +1,7 @@
-// The AddressInfo class is a composition class purposely to store user address.
+// The AddressInfo class is a COMPOSITION class purposely to store user address.
 // For more detailed information, please refer to the documentation report.
+// It is used to store the street name, city, state, and zip code of an address.
+// It is typically used in conjunction with other classes to provide complete address information of a user.
 public class AddressInfo {
     private String street;
     private String city;

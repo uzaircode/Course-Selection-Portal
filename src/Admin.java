@@ -1,12 +1,15 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-// Admin is the subclass of user (Inheritance).
+// Admin is the subclass of user (INHERITANCE).
 // It contains specific functionality and privileges related to managing the system.
 public class Admin extends User {
     private String adminId;
     private static Scanner input = new Scanner(System.in);
+    private static Admin instance;
 
+    // set it to private to ensure that only one instance of the Admin class is
+    // created.
     private Admin(String username, String password, String emailAddress, int phoneNumber,
             AddressInfo addressInfo) {
         super(username, password, emailAddress, phoneNumber, addressInfo);
@@ -19,23 +22,13 @@ public class Admin extends User {
         this.adminId = adminId;
     }
 
-    private static Admin instance;
-
+    // SINGLETON PATTERN is used to ensure that there is only one admin object
+    // being manipulated throughout the application, and to prevent multiple
+    // instances of the admin object from being created.
     public static Admin getInstance(String username, String password, String emailAddress, int phoneNumber,
             AddressInfo addressInfo) {
         if (instance == null) {
             instance = new Admin(username, password, emailAddress, phoneNumber, addressInfo);
-        }
-        return instance;
-    }
-
-    private Admin() {
-
-    }
-
-    public static Admin getInstance() {
-        if (instance == null) {
-            instance = new Admin();
         }
         return instance;
     }
