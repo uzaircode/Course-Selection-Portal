@@ -1,7 +1,6 @@
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 enum MediumOfStudy {
     FOUNDATION,
@@ -11,6 +10,12 @@ enum MediumOfStudy {
     PHD;
 }
 
+// The Course class represents a course offered by the university.
+// It contains details information regarding on the course.
+// This class is used in conjunction with the courseDelegation class to manage
+// and display course information for students and faculties.
+// The logic to handle action course, add course, update course & delete course
+// is inside courseDelegation class.
 public class Course extends CourseDelegation {
     private String courseId;
     private String courseName;
@@ -26,8 +31,6 @@ public class Course extends CourseDelegation {
 
     private static List<Course> courses = new ArrayList<>();
     private CourseDelegation delegation = new CourseDelegation();
-
-    private static Scanner input = new Scanner(System.in);
 
     public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
             String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities,
@@ -173,21 +176,6 @@ public class Course extends CourseDelegation {
         courses.add(businessManagement);
     }
 
-    public void displayCourseList() {
-
-        // Course firstCourse = course.get(0);
-        // System.out.println("Name of the first course: " +
-        // firstCourse.getSubjectsTaught()[1]);
-
-        // System.out.println("\n===== COURSE INFORMATION =====\n");
-        // System.out.println("Elements of ArrayList are:\n");
-        // for (int i = 0; i < course.size(); i++) {
-        // System.out.println(course.get(i).toString() + " ");
-        // System.out.println("\n");
-        // }
-        // System.out.println("\n");
-    }
-
     public static List<Course> getAllCourses() {
         return courses;
     }
@@ -216,18 +204,30 @@ public class Course extends CourseDelegation {
         }
     }
 
-    public void manageCourse(User loggedInUser) {
-        delegation.manageCourse(loggedInUser);
+    // This method handleCourseActions uses delegation design pattern by delegating
+    // the responsibility of handling course actions to the object referenced by the
+    // delegation variable.
+    public void handleCourseActions(User loggedInUser) {
+        delegation.handleCourseActions(loggedInUser);
     }
 
+    // This method addOfferedCourse uses delegation design pattern by delegating
+    // the responsibility of add course actions to the object referenced by the
+    // delegation variable.
     public void addOfferedCourse(User loggedInUser) {
         delegation.addOfferedCourse(loggedInUser, this);
     }
 
+    // This method updateOfferedCourse uses delegation design pattern by delegating
+    // the responsibility of update course actions to the object referenced by the
+    // delegation variable.
     public void updateOfferedCourse(User loggedInUser) {
         delegation.updateOfferedCourse(loggedInUser);
     }
 
+    // This method removeOfferedCourse uses delegation design pattern by delegating
+    // the responsibility of delete course actions to the object referenced by the
+    // delegation variable.
     public void removeOfferedCourse(User loggedInUser) {
         delegation.removeOfferedCourse(loggedInUser);
     }

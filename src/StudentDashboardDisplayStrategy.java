@@ -2,6 +2,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+// The StudentDashboardDisplayStrategy class is an implementation of the strategy pattern.
+// It provides a way for the application to handle the display of the student dashboard in a flexible and interchangeable manner.
+// By implementing the strategy pattern, the application can easily switch between different display strategies (student/admin dashboard) affecting the rest of the code.
+// Developers should use this class to handle the display of the student dashboard in their code and can extend or customize the functionality as needed.
 public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy {
 
     AddressInfo theAddress = new AddressInfo();
@@ -143,7 +147,7 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     }
 
     public void manageCourse(User loggedInUser) {
-        course.manageCourse(loggedInUser);
+        course.handleCourseActions(loggedInUser);
     }
 
     public void displayRegisteredCourse(User loggedInUser) {

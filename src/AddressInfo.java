@@ -1,3 +1,4 @@
+// The AddressInfo class is a composition class purposely to store user address.
 public class AddressInfo {
     private String street;
     private String city;
@@ -62,8 +63,4 @@ public class AddressInfo {
     public void setCountry(String country) {
         this.country = country;
     }
-
-    public void validate() {
-    }
-
 }

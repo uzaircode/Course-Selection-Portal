@@ -1,4 +1,3 @@
-// ProgrammeInfo is part of Composition.
 public class Programme {
     public String programmeId;
     public String programmeName;
