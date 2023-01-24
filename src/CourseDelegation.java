@@ -2,9 +2,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// The CourseDelegation class implements the DELEGATION DESIGN PATTERN to separate the responsibilities of handling course add, remove, and update actions for Admin and Student users.
-// This allows for a cleaner and more organized code structure, as well as the ability to easily add or modify functionality for specific user types in the future.
-// Other developers should be aware of this structure and should utilize the delegation methods provided in this class when handling course actions for different user types.
+/* The CourseDelegation class implements the DELEGATION DESIGN PATTERN to separate the responsibilities of handling course add, remove, and update actions for Admin and Student users.
+This allows for a cleaner and more organized code structure, as well as the ability to easily add or modify functionality for specific user types in the future.
+Other developers should be aware of this structure and should utilize the delegation methods provided in this class when handling course actions for different user types. */
 public class CourseDelegation {
     private static Scanner input = new Scanner(System.in);
 
@@ -34,6 +34,7 @@ public class CourseDelegation {
 
             if (input.hasNextInt()) {
                 choice = input.nextInt();
+                input.nextLine(); // consume remaining newline character
             } else {
                 System.out.println("Invalid input, please enter a number.");
                 return;
@@ -112,22 +113,23 @@ public class CourseDelegation {
             System.out.println("===== CREATE NEW COURSE =====\n");
 
             System.out.print("Enter course name : ");
-            String name = input.next();
+            String name = input.nextLine();
 
             System.out.print("Enter course id : ");
-            String id = input.next();
+            String id = input.nextLine();
 
             System.out.print("Enter subjects taught (separated by commas) : ");
-            String[] subjects = input.next().split(",");
+            String[] subjects = input.nextLine().split(",");
 
             System.out.print("Enter course duration: ");
             int duration = input.nextInt();
 
             System.out.print("Enter employment opportunities (separated by commas) : ");
-            String[] employmentOpportunities = input.next().split(",");
+            String[] employmentOpportunities = input.nextLine().split(",");
+            input.nextLine();
 
             System.out.print("Enter scope for further studies (separated by commas) : ");
-            String[] scopeForFurtherStudies = input.next().split(",");
+            String[] scopeForFurtherStudies = input.nextLine().split(",");
 
             System.out.print("Does the course offer scholarship facilities? (true/false) ");
             boolean scholarshipFacilities = input.nextBoolean();
@@ -137,11 +139,13 @@ public class CourseDelegation {
 
             System.out.print("Enter maximum number of students : ");
             int maxStudents = input.nextInt();
+            input.nextLine();
 
             System.out.print("Enter medium of study (FOUNDATION, DIPLOMA, UNDERGRADUATE, POSTGRADUATE, PHD) : ");
             MediumOfStudy medium = MediumOfStudy.valueOf(input.next().toUpperCase());
 
-            Course newCourse = new Course(id, name, subjects, duration, employmentOpportunities,
+            Course newCourse = new Course(id, name, subjects, duration,
+                    employmentOpportunities,
                     scopeForFurtherStudies,
                     scholarshipFacilities, feeStructure, maxStudents, medium);
             Course.addCourse(newCourse);

@@ -1,6 +1,8 @@
+import java.util.ArrayList;
+import java.util.List;
 
-// ABSTRACTION of user class is used to serve as an abstract base class for different types of users (e.g. Admin, Student) in the system.
-// It contains common properties and methods that are shared among all user types.
+/* ABSTRACTION of user class is used to serve as an abstract base class for different types of users (e.g. Admin, Student) in the system.
+It contains common properties and methods that are shared among all user types. */
 public abstract class User {
     private String username;
     private String password;
@@ -71,6 +73,11 @@ public abstract class User {
     public void displayUserLogout(User loggedInUser) {
         System.out.println("User " + loggedInUser.getUsername() + " has been logout.");
         loggedInUser = null;
+        Course course = new Course();
+        // DINA, IGNORE THIS PART. IT USE TO STORE DUMMY COURSE OBJECT FOR TERMINAL
+        // DISPLAY
+        // NOT RELATED TO GUI
+        course.removeCourses();
         Main.main(null);
     }
 

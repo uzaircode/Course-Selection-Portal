@@ -36,13 +36,21 @@ public class StudentDashboardDisplayStrategy implements DashboardDisplayStrategy
     public void displayUserLogin() {
         System.out.print("\033[H\033[2J");
 
+        // DINA, IGNORE THIS PART. IT USE TO STORE DUMMY COURSE OBJECT FOR TERMINAL
+        // DISPLAY
+        // NOT RELATED TO GUI
         AddressInfo address = new AddressInfo("123 Main St", "Anytown", "Anystate",
                 "12345", "USA");
-
         Student registeredStudent = Student.getInstance("johndoe", "123", "johndoe@example.com", 555 -
                 555 - 5555, address,
                 MediumStudy.UNDERGRADUATE, "Computer Science");
         listOfStudents.add(registeredStudent);
+
+        // DINA, IGNORE THIS PART. IT USE TO STORE DUMMY COURSE OBJECT FOR TERMINAL
+        // DISPLAY
+        // NOT RELATED TO GUI
+        Course courses = new Course();
+        courses.createCourses();
 
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("===== STUDENT LOGIN =====");
