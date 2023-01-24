@@ -38,8 +38,17 @@ public class AdminDashboardDisplayStrategy implements DashboardDisplayStrategy {
     public void displayUserLogin() {
         System.out.print("\033[H\033[2J");
 
+        // DINA, IGNORE THIS PART. IT USE TO STORE DUMMY COURSE OBJECT FOR TERMINAL
+        // DISPLAY
+        // NOT RELATED TO GUI
         AddressInfo address = new AddressInfo("123 Main St", "Anytown", "USA", "12345", "Malaysia");
         ListOfAdmins.add(new Admin("A12345", "admin", "123", "admin@example.com", 123456789, address));
+
+        // DINA, IGNORE THIS PART. IT USE TO STORE DUMMY COURSE OBJECT FOR TERMINAL
+        // DISPLAY
+        // NOT RELATED TO GUI
+        Course courses = new Course();
+        courses.createCourses();
 
         try (Scanner input = new Scanner(System.in)) {
             System.out.println("===== ADMIN LOGIN =====");

@@ -155,8 +155,11 @@ public class Course extends CourseDelegation {
     public void withdrawCourse() {
     }
 
+    // DINA, IGNORE THIS PART. IT USE TO STORE DUMMY COURSE OBJECT FOR TERMINAL
+    // DISPLAY
+    // NOT RELATED TO GUI
     public void createCourses() {
-        Course businessManagement = new Course("ODN3329", "Bachelor of Business Management (Hons.)",
+        Course businessManagement = new Course("ODN3329", "Bachelor of Computer Science (Hons.)",
                 new String[] { "Data Structures", "Algorithms", "Programming Languages" },
                 120,
                 new String[] { "Masters in Computer Science",
@@ -165,6 +168,20 @@ public class Course extends CourseDelegation {
                 true, 14, 120, MediumOfStudy.FOUNDATION);
 
         courses.add(businessManagement);
+
+    }
+
+    // DINA, IGNORE THIS PART. IT USE TO STORE DUMMY COURSE OBJECT FOR TERMINAL
+    // DISPLAY
+    // NOT RELATED TO GUI
+    public void removeCourses() {
+        for (Course course : courses) {
+            if (course.getCourseName().equals("Bachelor of Computer Science (Hons.)")) {
+                courses.remove(course);
+                return;
+            }
+        }
+
     }
 
     public static List<Course> getAllCourses() {
