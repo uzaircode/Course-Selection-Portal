@@ -1,3 +1,5 @@
+// The relationship between faculty and course can be represented as composition.
+// When a faculty is no longer needed, all of the courses that belong to that faculty will also be discarded.
 public class Faculty {
     private String name;
     private String department;
