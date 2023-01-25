@@ -144,10 +144,13 @@ public class CourseDelegation {
             System.out.print("Enter medium of study (FOUNDATION, DIPLOMA, UNDERGRADUATE, POSTGRADUATE, PHD) : ");
             MediumOfStudy medium = MediumOfStudy.valueOf(input.next().toUpperCase());
 
+            System.out.print("Enter medium of study (CIVIL_ENGINEERING) : ");
+            Faculty faculty = Faculty.valueOf(input.next().toUpperCase());
+
             Course newCourse = new Course(id, name, subjects, duration,
                     employmentOpportunities,
                     scopeForFurtherStudies,
-                    scholarshipFacilities, feeStructure, maxStudents, medium);
+                    scholarshipFacilities, feeStructure, maxStudents, medium, faculty);
             Course.addCourse(newCourse);
 
             System.out.println("\nCourse " + newCourse.getCourseName() + " has been created successfully.");
