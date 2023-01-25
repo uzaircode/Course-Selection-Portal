@@ -63,7 +63,7 @@ public class Course extends CourseDelegation {
                 + Arrays.toString(employmentOpportunities) + "\nscopeForFutherStudies : "
                 + Arrays.toString(scopeForFutherStudies) + "\nscholarshipFacilities : " + scholarshipFacilities
                 + "\nfeeStructure : " + feeStructure + "\nmaximumStudent : " + maximumStudent + "\nmediumStudy : "
-                + mediumStudy;
+                + mediumStudy + faculty + "\nfaculty : ";
     }
 
     public String getCourseId() {
