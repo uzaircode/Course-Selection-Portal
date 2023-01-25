@@ -10,6 +10,10 @@ enum MediumOfStudy {
     PHD;
 }
 
+enum Faculty {
+    CIVIL_ENGINEERING;
+}
+
 // The Course class represents a course offered by the university.
 // It contains details information regarding on the course.
 // This class is used in conjunction with the courseDelegation class to manage
@@ -27,13 +31,14 @@ public class Course extends CourseDelegation {
     private int feeStructure;
     private int maximumStudent;
     private MediumOfStudy mediumStudy;
+    private Faculty faculty;
 
     private static List<Course> courses = new ArrayList<>();
     private CourseDelegation delegation = new CourseDelegation();
 
     public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
             String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities,
-            int feeStructure, int maximumStudent, MediumOfStudy mediumStudy) {
+            int feeStructure, int maximumStudent, MediumOfStudy mediumStudy, Faculty faculty) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.subjectTaught = subjectTaught;
@@ -44,6 +49,7 @@ public class Course extends CourseDelegation {
         this.feeStructure = feeStructure;
         this.maximumStudent = maximumStudent;
         this.mediumStudy = mediumStudy;
+        this.faculty = faculty;
     }
 
     public Course() {
@@ -140,6 +146,14 @@ public class Course extends CourseDelegation {
         this.mediumStudy = mediumStudy;
     }
 
+    public Faculty getFaculty() {
+        return faculty;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
     public static List<Course> getCourses() {
         return courses;
     }
@@ -165,7 +179,7 @@ public class Course extends CourseDelegation {
                 new String[] { "Masters in Computer Science",
                         "MBA in IT" },
                 new String[] { "hello" },
-                true, 14, 120, MediumOfStudy.FOUNDATION);
+                true, 14, 120, MediumOfStudy.FOUNDATION, Faculty.CIVIL_ENGINEERING);
 
         courses.add(businessManagement);
 
