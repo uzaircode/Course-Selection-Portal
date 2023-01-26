@@ -142,9 +142,10 @@ public class CourseDelegation {
             input.nextLine();
 
             System.out.print("Enter medium of study (FOUNDATION, DIPLOMA, UNDERGRADUATE, POSTGRADUATE, PHD) : ");
-            MediumOfStudy medium = MediumOfStudy.valueOf(input.next().toUpperCase());
+            courseLevel medium = courseLevel.valueOf(input.next().toUpperCase());
 
-            System.out.print("Enter medium of study (CIVIL_ENGINEERING) : ");
+            System.out.print(
+                    "Enter Faculty (Please enter shortcut) (Electrical and Electronics Engineering (EEE), Electronics and Communication Engineering (ECE), Computer Science Engineering(CSE), Mechanical Engineering(MECHANICAL), Civil Engineering(CIVIL)) : ");
             Faculty faculty = Faculty.valueOf(input.next().toUpperCase());
 
             Course newCourse = new Course(id, name, subjects, duration,
@@ -254,7 +255,7 @@ public class CourseDelegation {
 
                     System.out.print(
                             "Enter new medium of study (FOUNDATION, DIPLOMA, UNDERGRADUATE, POSTGRADUATE, PHD) : ");
-                    course.setMediumStudy(MediumOfStudy.valueOf(input.next().toUpperCase()));
+                    course.setMediumStudy(courseLevel.valueOf(input.next().toUpperCase()));
 
                     System.out.print("\nCourse " + course.getCourseName() + " has been updated successfully.");
 

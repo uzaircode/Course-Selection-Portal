@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-enum MediumOfStudy {
+enum courseLevel {
     FOUNDATION,
     DIPLOMA,
     UNDERGRADUATE,
@@ -11,7 +11,21 @@ enum MediumOfStudy {
 }
 
 enum Faculty {
-    CIVIL_ENGINEERING;
+    EEE("Electrical and Electronics Engineering"),
+    ECE("Electronics and Communication Engineering"),
+    CSE("Computer Science Engineering"),
+    MECHANICAL("Mechanical Engineering"),
+    CIVIL("Civil Engineering");
+
+    private String fullFacultyName;
+
+    Faculty(String fullFacultyName) {
+        this.fullFacultyName = fullFacultyName;
+    }
+
+    public String getFullFacultyName() {
+        return fullFacultyName;
+    }
 }
 
 // The Course class represents a course offered by the university.
@@ -30,7 +44,7 @@ public class Course extends CourseDelegation {
     private boolean scholarshipFacilities;
     private int feeStructure;
     private int maximumStudent;
-    private MediumOfStudy mediumStudy;
+    private courseLevel mediumStudy;
     private Faculty faculty;
 
     private static List<Course> courses = new ArrayList<>();
@@ -38,7 +52,7 @@ public class Course extends CourseDelegation {
 
     public Course(String courseId, String courseName, String[] subjectTaught, int courseDuration,
             String[] employmentOpportunities, String[] scopeForFutherStudies, boolean scholarshipFacilities,
-            int feeStructure, int maximumStudent, MediumOfStudy mediumStudy, Faculty faculty) {
+            int feeStructure, int maximumStudent, courseLevel mediumStudy, Faculty faculty) {
         this.courseId = courseId;
         this.courseName = courseName;
         this.subjectTaught = subjectTaught;
@@ -138,11 +152,11 @@ public class Course extends CourseDelegation {
         this.maximumStudent = maximumStudent;
     }
 
-    public MediumOfStudy getMediumStudy() {
+    public courseLevel getMediumStudy() {
         return mediumStudy;
     }
 
-    public void setMediumStudy(MediumOfStudy mediumStudy) {
+    public void setMediumStudy(courseLevel mediumStudy) {
         this.mediumStudy = mediumStudy;
     }
 
@@ -179,7 +193,7 @@ public class Course extends CourseDelegation {
                 new String[] { "Masters in Computer Science",
                         "MBA in IT" },
                 new String[] { "hello" },
-                true, 14, 120, MediumOfStudy.FOUNDATION, Faculty.CIVIL_ENGINEERING);
+                true, 14, 120, courseLevel.FOUNDATION, Faculty.EEE);
 
         courses.add(businessManagement);
 

@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-import java.util.List;
 
 /* ABSTRACTION of user class is used to serve as an abstract base class for different types of users (e.g. Admin, Student) in the system.
 It contains common properties and methods that are shared among all user types. */
